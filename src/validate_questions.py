@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
+import argparse
 import json
-import sys
 from pathlib import Path
 from typing import Any
 
@@ -76,10 +76,22 @@ def print_validation_result(
 
 
 def main() -> int:
-    path = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_QUESTION_FILE
-    errors = validate_question_bank(path)
-    print_validation_result(errors, path)
+    args = parse_args()
+    errors = validate_question_bank(args.questions)
+    print_validation_result(errors, args.questions)
     return 1 if errors else 0
+
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Validate a quiz question bank.")
+    parser.add_argument(
+        "questions",
+        nargs="?",
+        type=Path,
+        default=DEFAULT_QUESTION_FILE,
+        help="Path to the question bank JSON file.",
+    )
+    return parser.parse_args(argv)
 
 
 def _read_questions(path: Path) -> list[dict[str, Any]]:

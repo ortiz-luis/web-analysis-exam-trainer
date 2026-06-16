@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 from collections import deque
 from pathlib import Path
 from typing import Any
@@ -19,7 +20,8 @@ AUTOMATIC_TYPES = {"multiple_choice", "true_false", "fill_blank", "predict_outpu
 
 
 def main() -> None:
-    questions = load_questions(QUESTION_FILE)
+    args = parse_args()
+    questions = load_questions(args.questions)
     progress = Progress()
 
     print("Web Analysis Exam Trainer")
@@ -29,6 +31,17 @@ def main() -> None:
         run_training_loop(questions, progress)
     except KeyboardInterrupt:
         print("\nProgress saved. See you next round.")
+
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Run the terminal quiz trainer.")
+    parser.add_argument(
+        "--questions",
+        type=Path,
+        default=QUESTION_FILE,
+        help="Path to the question bank JSON file.",
+    )
+    return parser.parse_args(argv)
 
 
 def run_training_loop(questions: list[dict[str, Any]], progress: Progress) -> None:

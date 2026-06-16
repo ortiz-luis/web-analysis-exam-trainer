@@ -7,4 +7,11 @@ The trainer will focus on repeated practice, recall, and oral-style explanations
 Questions answered incorrectly will be scheduled again later.
 Progress is saved locally in progress.json.
 Questions unlock stage by stage as each available stage is completed.
-Run the minimal trainer with `python -m src.trainer`.
+
+## Commands
+
+- `python -m src.trainer`
+- `python -m src.trainer --questions data/questions_sample.json`
+- `python -m src.validate_questions`
+- `python -m src.validate_questions data/questions_sample.json`
+- `python -m unittest discover`

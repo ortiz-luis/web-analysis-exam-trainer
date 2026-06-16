@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from src.validate_questions import validate_question_bank
+from src.validate_questions import DEFAULT_QUESTION_FILE, parse_args, validate_question_bank
 
 
 class ValidateQuestionsTests(unittest.TestCase):
@@ -75,6 +75,16 @@ class ValidateQuestionsTests(unittest.TestCase):
         errors = validate_question_bank(self.write_bank([question]))
 
         self.assertTrue(any("difficulty must be" in error for error in errors))
+
+    def test_default_question_file_argument(self) -> None:
+        args = parse_args([])
+
+        self.assertEqual(args.questions, DEFAULT_QUESTION_FILE)
+
+    def test_custom_question_file_argument(self) -> None:
+        args = parse_args(["data/real_questions.json"])
+
+        self.assertEqual(args.questions, Path("data/real_questions.json"))
 
     def write_bank(self, questions: list[dict[str, object]]) -> Path:
         directory = tempfile.TemporaryDirectory()
