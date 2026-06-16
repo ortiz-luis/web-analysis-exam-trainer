@@ -476,5 +476,510 @@
       "Identifier que note >= 14 est la première condition vraie.",
       "Expliquer pourquoi les seuils doivent être rangés du plus élevé au plus bas."
     ]
+  },
+  {
+    "id": "l2_q001",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "importing pandas",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "prompt": "Quelle ligne importe Pandas avec l'alias utilisé dans le cours ?",
+    "code": "# Ligne manquante\nventes = pd.DataFrame({'produit': ['Stylo'], 'prix': [2]})",
+    "options": [
+      "import pandas as pd",
+      "import pd as pandas",
+      "from pandas import pd",
+      "import pandas"
+    ],
+    "correct_answer": "import pandas as pd",
+    "explanation": "Le cours importe Pandas avec l'alias pd, ce qui permet ensuite d'écrire pd.DataFrame ou pd.read_csv."
+  },
+  {
+    "id": "l2_q002",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "creating a DataFrame",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "prompt": "Quelle ligne crée correctement un DataFrame à partir du dictionnaire donnees ?",
+    "code": "import pandas as pd\ndonnees = {'nom': ['Alice', 'Bob'], 'age': [25, 30]}\n# Ligne manquante",
+    "options": [
+      "df = pd.DataFrame(donnees)",
+      "df = pd.read_csv(donnees)",
+      "df = DataFrame.pd(donnees)",
+      "df = pd.columns(donnees)"
+    ],
+    "correct_answer": "df = pd.DataFrame(donnees)",
+    "explanation": "Dans le cours, pd.DataFrame(...) sert à construire un DataFrame à partir d'un dictionnaire ou d'une liste."
+  },
+  {
+    "id": "l2_q003",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "reading CSV files",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "prompt": "Quelle ligne lit le fichier ventes_regionales.csv dans un DataFrame ?",
+    "code": "import pandas as pd\n# Ligne manquante",
+    "options": [
+      "df = pd.read_csv('ventes_regionales.csv')",
+      "df = pd.to_csv('ventes_regionales.csv')",
+      "df = pd.DataFrame('ventes_regionales.csv')",
+      "df = pd.open_csv('ventes_regionales.csv')"
+    ],
+    "correct_answer": "df = pd.read_csv('ventes_regionales.csv')",
+    "explanation": "Le cours utilise pd.read_csv pour importer un fichier CSV dans un DataFrame."
+  },
+  {
+    "id": "l2_q004",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "inspecting data with head, shape, columns, dtypes, info",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "prompt": "Quelle ligne affiche les premières lignes du DataFrame ?",
+    "code": "df = pd.DataFrame({'produit': ['A', 'B'], 'prix': [10, 20]})\n# Ligne manquante",
+    "options": [
+      "print(df.head())",
+      "print(df.columns())",
+      "print(df.read_csv())",
+      "print(df.merge())"
+    ],
+    "correct_answer": "print(df.head())",
+    "explanation": "La méthode head() sert à inspecter rapidement les premières lignes d'un DataFrame."
+  },
+  {
+    "id": "l2_q005",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "selecting columns",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "prompt": "Quelle ligne sélectionne seulement la colonne prix ?",
+    "code": "df = pd.DataFrame({'produit': ['A', 'B'], 'prix': [10, 20]})",
+    "options": [
+      "df['prix']",
+      "df['produit', 'prix']",
+      "df.loc['prix']",
+      "df.prix()"
+    ],
+    "correct_answer": "df['prix']",
+    "explanation": "Le cours montre la sélection d'une colonne avec les crochets et le nom de la colonne."
+  },
+  {
+    "id": "l2_q006",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "filtering rows",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "prompt": "Quelle ligne garde uniquement les lignes où le prix est supérieur à 10 ?",
+    "code": "df = pd.DataFrame({'produit': ['A', 'B'], 'prix': [8, 15]})",
+    "options": [
+      "df.loc[df['prix'] > 10]",
+      "df.loc[df['prix']] > 10",
+      "df['prix' > 10]",
+      "df.filter('prix' > 10)"
+    ],
+    "correct_answer": "df.loc[df['prix'] > 10]",
+    "explanation": "Le filtrage avec condition utilise df.loc[condition], comme dans les exemples du cours."
+  },
+  {
+    "id": "l2_q007",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "adding or modifying columns",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "prompt": "Quelle ligne ajoute une colonne chiffre_affaires ?",
+    "code": "df = pd.DataFrame({'prix': [10, 20], 'quantite': [3, 2]})\n# Ligne manquante",
+    "options": [
+      "df['chiffre_affaires'] = df['prix'] * df['quantite']",
+      "df['chiffre_affaires'] = df['prix'] + 'quantite'",
+      "df.chiffre_affaires() = df['prix'] * df['quantite']",
+      "df.loc['chiffre_affaires'] = df['prix']"
+    ],
+    "correct_answer": "df['chiffre_affaires'] = df['prix'] * df['quantite']",
+    "explanation": "Comme dans les transformations du cours, on crée une nouvelle colonne en affectant une expression à df['nom_colonne']."
+  },
+  {
+    "id": "l2_q008",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "groupby and aggregation",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "prompt": "Quelle ligne calcule le total des ventes par région ?",
+    "code": "df = pd.DataFrame({'region': ['Nord', 'Sud', 'Nord'], 'ventes': [100, 80, 50]})",
+    "options": [
+      "df.groupby('region')['ventes'].sum()",
+      "df['region'].sum('ventes')",
+      "df.groupby('ventes')['region'].mean()",
+      "df.sum('region')['ventes']"
+    ],
+    "correct_answer": "df.groupby('region')['ventes'].sum()",
+    "explanation": "Le cours utilise groupby pour regrouper les lignes, puis une agrégation comme sum pour calculer un résultat par groupe."
+  },
+  {
+    "id": "l2_q009",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "creating a DataFrame",
+    "difficulty": 2,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : ce code crée un DataFrame avec 2 lignes et 2 colonnes.",
+    "code": "df = pd.DataFrame({'nom': ['Alice', 'Bob'], 'age': [25, 30]})",
+    "correct_answer": true,
+    "explanation": "Le dictionnaire contient deux colonnes, et chaque liste contient deux valeurs : le DataFrame a donc 2 lignes et 2 colonnes."
+  },
+  {
+    "id": "l2_q010",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "inspecting data with head, shape, columns, dtypes, info",
+    "difficulty": 2,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : df.shape renvoie le nombre de lignes et de colonnes du DataFrame.",
+    "code": "df = pd.DataFrame({'produit': ['A', 'B'], 'prix': [10, 20]})\nprint(df.shape)",
+    "correct_answer": true,
+    "explanation": "shape est utilisé pour inspecter les dimensions du DataFrame sous la forme (lignes, colonnes)."
+  },
+  {
+    "id": "l2_q011",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "selecting columns",
+    "difficulty": 2,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : df[['nom', 'prix']] sélectionne deux colonnes.",
+    "code": "df = pd.DataFrame({'nom': ['A'], 'prix': [10], 'stock': [5]})",
+    "correct_answer": true,
+    "explanation": "Une liste de noms de colonnes entre doubles crochets permet de sélectionner plusieurs colonnes."
+  },
+  {
+    "id": "l2_q012",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "handling missing values with dropna and fillna",
+    "difficulty": 3,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : fillna(0) peut remplacer des valeurs manquantes par 0.",
+    "code": "df['ventes'] = df['ventes'].fillna(0)",
+    "correct_answer": true,
+    "explanation": "Le cours présente fillna comme une façon de remplacer les NaN par une valeur choisie."
+  },
+  {
+    "id": "l2_q013",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "dropping columns",
+    "difficulty": 3,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : df.drop(columns=['temp']) supprime la colonne temp.",
+    "code": "df = df.drop(columns=['temp'])",
+    "correct_answer": true,
+    "explanation": "Dans le nettoyage des données, drop avec columns permet de retirer une ou plusieurs colonnes."
+  },
+  {
+    "id": "l2_q014",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "merge only if present in the notebooks",
+    "difficulty": 3,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : pd.merge(df_ventes, df_produits, on='produit') fusionne deux DataFrames sur la colonne produit.",
+    "code": "resultat = pd.merge(df_ventes, df_produits, on='produit')",
+    "correct_answer": true,
+    "explanation": "La fusion avec merge est présente dans le cours et permet de combiner deux DataFrames à partir d'une colonne commune."
+  },
+  {
+    "id": "l2_q015",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "importing pandas",
+    "difficulty": 3,
+    "type": "fill_blank",
+    "prompt": "Complète l'import Pandas utilisé dans le cours.",
+    "code": "import pandas as ____",
+    "correct_answer": "pd",
+    "explanation": "L'alias pd est utilisé dans les exemples pour appeler pd.DataFrame, pd.read_csv et pd.merge."
+  },
+  {
+    "id": "l2_q016",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "creating a DataFrame",
+    "difficulty": 3,
+    "type": "fill_blank",
+    "prompt": "Complète la méthode qui construit le DataFrame.",
+    "code": "donnees = {'produit': ['A', 'B'], 'prix': [10, 20]}\ndf = pd.____(donnees)",
+    "correct_answer": "DataFrame",
+    "explanation": "pd.DataFrame construit un DataFrame à partir d'un dictionnaire de listes."
+  },
+  {
+    "id": "l2_q017",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "reading CSV files",
+    "difficulty": 3,
+    "type": "fill_blank",
+    "prompt": "Complète la fonction utilisée pour importer un CSV.",
+    "code": "df = pd.____('ventes_regionales.csv')",
+    "correct_answer": "read_csv",
+    "explanation": "pd.read_csv lit un fichier CSV et renvoie un DataFrame."
+  },
+  {
+    "id": "l2_q018",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "loc and simple row/column access",
+    "difficulty": 3,
+    "type": "fill_blank",
+    "prompt": "Complète l'accès à la valeur de la ligne 0 et de la colonne nom.",
+    "code": "valeur = df.____[0, 'nom']",
+    "correct_answer": "loc",
+    "explanation": "Le cours met l'accent sur .loc pour accéder à des lignes et colonnes de façon explicite."
+  },
+  {
+    "id": "l2_q019",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "handling missing values with dropna and fillna",
+    "difficulty": 4,
+    "type": "fill_blank",
+    "prompt": "Complète la méthode qui supprime les lignes contenant des valeurs manquantes.",
+    "code": "df_nettoye = df.____()",
+    "correct_answer": "dropna",
+    "explanation": "dropna supprime les lignes avec des valeurs manquantes, comme dans la partie nettoyage du cours."
+  },
+  {
+    "id": "l2_q020",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "renaming columns",
+    "difficulty": 4,
+    "type": "fill_blank",
+    "prompt": "Complète la méthode utilisée pour renommer une colonne.",
+    "code": "df = df.____(columns={'ancien_nom': 'nouveau_nom'})",
+    "correct_answer": "rename",
+    "explanation": "rename(columns={...}) permet de changer les noms de colonnes."
+  },
+  {
+    "id": "l2_q021",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "groupby and aggregation",
+    "difficulty": 4,
+    "type": "fill_blank",
+    "prompt": "Complète la méthode qui regroupe les ventes par catégorie.",
+    "code": "total_par_categorie = df.____('categorie')['ventes'].sum()",
+    "correct_answer": "groupby",
+    "explanation": "groupby regroupe les lignes par catégorie avant d'appliquer une agrégation comme sum."
+  },
+  {
+    "id": "l2_q022",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "inspecting data with head, shape, columns, dtypes, info",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code ?",
+    "code": "df = pd.DataFrame({'nom': ['Stylo', 'Cahier', 'Sac'], 'prix': [2, 5, 20], 'categorie': ['Papeterie', 'Papeterie', 'Accessoire']})\nprint(df.shape)",
+    "correct_answer": "(3, 3)",
+    "explanation": "Le DataFrame contient 3 lignes et 3 colonnes, donc shape renvoie (3, 3)."
+  },
+  {
+    "id": "l2_q023",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "inspecting data with head, shape, columns, dtypes, info",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code ?",
+    "code": "df = pd.DataFrame({'nom': ['Stylo'], 'prix': [2], 'categorie': ['Papeterie']})\nprint(list(df.columns))",
+    "correct_answer": "['nom', 'prix', 'categorie']",
+    "explanation": "df.columns contient les noms des colonnes ; list(...) les transforme en liste Python."
+  },
+  {
+    "id": "l2_q024",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "loc and simple row/column access",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code ?",
+    "code": "df = pd.DataFrame({'nom': ['Stylo', 'Cahier'], 'prix': [2, 5]})\nprint(df.loc[0, 'nom'])",
+    "correct_answer": "Stylo",
+    "explanation": "df.loc[0, 'nom'] récupère la valeur de la ligne 0 dans la colonne nom."
+  },
+  {
+    "id": "l2_q025",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "basic statistics: mean, median, min, max, sum, describe",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code ?",
+    "code": "df = pd.DataFrame({'prix': [10, 20, 30]})\nprint(df['prix'].mean())",
+    "correct_answer": "20.0",
+    "explanation": "La moyenne de 10, 20 et 30 vaut 20.0."
+  },
+  {
+    "id": "l2_q026",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "adding or modifying columns",
+    "difficulty": 5,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code ?",
+    "code": "df = pd.DataFrame({'prix': [10, 20], 'quantite': [3, 2]})\ndf['ca'] = df['prix'] * df['quantite']\nprint(list(df['ca']))",
+    "correct_answer": "[30, 40]",
+    "explanation": "La nouvelle colonne ca contient 10 * 3 puis 20 * 2, donc [30, 40]."
+  },
+  {
+    "id": "l2_q027",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "value_counts",
+    "difficulty": 5,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code ?",
+    "code": "df = pd.DataFrame({'categorie': ['A', 'B', 'A', 'A']})\nprint(df['categorie'].value_counts()['A'])",
+    "correct_answer": "3",
+    "explanation": "La catégorie A apparaît trois fois dans la colonne."
+  },
+  {
+    "id": "l2_q028",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "groupby and aggregation",
+    "difficulty": 5,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code ?",
+    "code": "df = pd.DataFrame({'region': ['Nord', 'Sud', 'Nord'], 'ventes': [100, 80, 50]})\nresultat = df.groupby('region')['ventes'].sum()\nprint(resultat.loc['Nord'])",
+    "correct_answer": "150",
+    "explanation": "Les ventes du Nord valent 100 + 50, donc le total regroupé est 150."
+  },
+  {
+    "id": "l2_q029",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "filtering rows",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique en français ce que fait ce filtre.",
+    "code": "ventes_importantes = df.loc[df['ventes'] >= 15000]",
+    "explanation": "La ligne garde seulement les lignes dont la colonne ventes est supérieure ou égale à 15000.",
+    "oral_model_answer": "Cette ligne crée un nouveau DataFrame appelé ventes_importantes. Elle utilise .loc avec une condition : df['ventes'] >= 15000. Le résultat contient uniquement les lignes où les ventes atteignent au moins 15000, ce qui correspond à un filtrage comme dans les exercices de sélection du cours.",
+    "grading_checklist": [
+      "Mentionner l'utilisation de .loc.",
+      "Expliquer la condition df['ventes'] >= 15000.",
+      "Dire que le résultat contient seulement les lignes qui respectent la condition."
+    ]
+  },
+  {
+    "id": "l2_q030",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "handling missing values with dropna and fillna",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique la différence entre ces deux lignes de nettoyage.",
+    "code": "df_sans_na = df.dropna()\ndf_rempli = df.fillna(0)",
+    "explanation": "dropna supprime les lignes avec valeurs manquantes, tandis que fillna(0) remplace les valeurs manquantes par 0.",
+    "oral_model_answer": "La première ligne crée une version du DataFrame où les lignes contenant des valeurs manquantes sont supprimées. La deuxième ligne garde les lignes mais remplace les valeurs manquantes par 0. Ce sont deux stratégies de nettoyage vues dans le cours, et le choix dépend de ce qu'on veut faire des données incomplètes.",
+    "grading_checklist": [
+      "Dire que dropna supprime les lignes incomplètes.",
+      "Dire que fillna(0) remplace les valeurs manquantes par 0.",
+      "Expliquer que ce sont deux choix de nettoyage différents."
+    ]
+  },
+  {
+    "id": "l2_q031",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "adding or modifying columns",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique ce que fait cette création de colonne.",
+    "code": "df['marge'] = df['prix_vente'] - df['cout_achat']",
+    "explanation": "La ligne ajoute une colonne marge calculée à partir de deux colonnes existantes.",
+    "oral_model_answer": "Cette ligne ajoute une nouvelle colonne appelée marge dans le DataFrame. Pour chaque ligne, Pandas soustrait le coût d'achat au prix de vente. On obtient donc une valeur de marge par produit ou par vente, ce qui correspond aux transformations de colonnes pratiquées dans le cours.",
+    "grading_checklist": [
+      "Dire qu'une nouvelle colonne est créée.",
+      "Identifier la formule prix_vente moins cout_achat.",
+      "Préciser que le calcul est fait ligne par ligne."
+    ]
+  },
+  {
+    "id": "l2_q032",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "groupby and aggregation",
+    "difficulty": 6,
+    "type": "short_answer",
+    "prompt": "Explique ce que calcule ce groupby dans un contexte de ventes.",
+    "code": "total_par_categorie = df.groupby('categorie')['ventes'].sum()",
+    "explanation": "Le code regroupe les lignes par catégorie et additionne les ventes de chaque groupe.",
+    "oral_model_answer": "Ce code regroupe d'abord les lignes qui ont la même catégorie. Ensuite, pour chaque catégorie, il prend la colonne ventes et calcule la somme. Le résultat permet de savoir combien de ventes ont été réalisées par catégorie de produit, ce qui correspond aux exercices d'analyse statistique et commerciale du cours.",
+    "grading_checklist": [
+      "Dire que groupby regroupe les lignes par catégorie.",
+      "Dire que ['ventes'].sum() additionne les ventes dans chaque groupe.",
+      "Interpréter le résultat comme un total de ventes par catégorie."
+    ]
+  },
+  {
+    "id": "l2_q033",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "small sales/business-style examples from the notebooks",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement comment inspecter rapidement un DataFrame de ventes avant de l'analyser.",
+    "code": "print(df.head())\nprint(df.shape)\nprint(df.columns)\nprint(df.dtypes)",
+    "explanation": "La réponse attendue doit présenter les méthodes d'inspection utilisées dans le cours.",
+    "oral_model_answer": "Pour commencer, j'affiche df.head() afin de voir les premières lignes et vérifier le contenu concret des données. Ensuite, df.shape me donne le nombre de lignes et de colonnes. df.columns permet de connaître les noms des colonnes disponibles, et df.dtypes indique les types de données. Ces vérifications aident à comprendre le DataFrame avant de filtrer, nettoyer ou calculer des statistiques.",
+    "grading_checklist": [
+      "Expliquer le rôle de head().",
+      "Expliquer le rôle de shape.",
+      "Mentionner columns et dtypes.",
+      "Relier ces vérifications à la préparation de l'analyse."
+    ]
+  },
+  {
+    "id": "l2_q034",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "loc and simple row/column access",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement ce que fait ce code et pourquoi .loc est utile.",
+    "code": "clients_premium = df.loc[df['achats'] >= 5000, ['nom', 'achats']]",
+    "explanation": "La réponse attendue doit expliquer le filtrage des lignes et la sélection des colonnes.",
+    "oral_model_answer": "Ce code utilise .loc pour faire deux choses en même temps. Avant la virgule, il filtre les lignes : on garde seulement les clients dont les achats sont supérieurs ou égaux à 5000. Après la virgule, il choisit les colonnes à conserver, ici nom et achats. .loc est utile parce qu'il rend explicites les lignes sélectionnées et les colonnes affichées.",
+    "grading_checklist": [
+      "Identifier la condition df['achats'] >= 5000.",
+      "Dire que seules les colonnes nom et achats sont gardées.",
+      "Expliquer que .loc sépare clairement lignes et colonnes."
+    ]
+  },
+  {
+    "id": "l2_q035",
+    "stage": "lesson_2_pandas_minimal",
+    "lesson": "Cours 2 : Introduction à Pandas",
+    "topic": "groupby and aggregation",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement comment obtenir une analyse des ventes par région.",
+    "code": "ventes_region = df.groupby('region')['ventes'].sum()\nmeilleure_region = ventes_region.idxmax()",
+    "explanation": "La réponse attendue doit expliquer le regroupement, l'agrégation et l'interprétation business.",
+    "oral_model_answer": "La première ligne regroupe les données par région avec groupby('region'), puis additionne la colonne ventes pour obtenir le total par région. La deuxième ligne utilise idxmax pour identifier la région qui a le total le plus élevé. Dans un contexte business, cela permet de repérer la région la plus performante et de comparer les résultats entre régions.",
+    "grading_checklist": [
+      "Expliquer le regroupement par région.",
+      "Expliquer la somme de la colonne ventes.",
+      "Expliquer le rôle de idxmax.",
+      "Donner une interprétation commerciale du résultat."
+    ]
   }
 ]
