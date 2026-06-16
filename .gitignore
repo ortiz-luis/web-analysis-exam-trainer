@@ -1,3 +1,4 @@
 progress.json
 streamlit_progress.json
 .venv/
+dist/
