@@ -8,3 +8,4 @@
 6. Wrong questions must be repeated later.
 7. Progress must eventually be saved in progress.json.
 8. Add tests for core logic whenever implementing features.
+9. Before generating real questions, consult docs/course_content_map.md.
