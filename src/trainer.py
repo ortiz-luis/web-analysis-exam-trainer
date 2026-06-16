@@ -17,6 +17,7 @@ from src.question_loader import load_questions
 
 QUESTION_FILE = Path("data/questions_sample.json")
 AUTOMATIC_TYPES = {"multiple_choice", "true_false", "fill_blank", "predict_output"}
+OPEN_ANSWER_TYPES = {"short_answer", "oral_explanation"}
 
 
 def main() -> None:
@@ -82,7 +83,10 @@ def ask_current_stage(
             print("Correct.\n")
         else:
             progress.record_wrong(question["id"])
-            print("Wrong.\n")
+            print("Wrong.")
+            if question["type"] in AUTOMATIC_TYPES:
+                print(f"Correct answer: {format_correct_answer(question)}")
+            print()
 
             if question["id"] not in repeated_wrong_ids:
                 repeated_wrong_ids.add(question["id"])
@@ -102,12 +106,16 @@ def ask_question(
     print_question(question, stage, question_number, correct_in_stage, total_in_stage)
 
     question_type = question["type"]
-    if question_type == "oral_explanation":
+    if question_type in OPEN_ANSWER_TYPES:
         return ask_oral_question(question)
 
     if question_type in AUTOMATIC_TYPES:
-        answer = input("Your answer: ").strip()
-        return normalize_answer(answer) == normalize_answer(question["correct_answer"])
+        prompt = (
+            "Your answer (option number): "
+            if question_type == "multiple_choice"
+            else "Your answer: "
+        )
+        return check_answer(question, input(prompt))
 
     raise ValueError(f"Unsupported question type: {question_type}")
 
@@ -141,6 +149,11 @@ def ask_oral_question(question: dict[str, Any]) -> bool:
     print("\nModel answer:")
     print(question["oral_model_answer"])
 
+    if question.get("grading_checklist"):
+        print("\nGrading checklist:")
+        for item in question["grading_checklist"]:
+            print(f"- {item}")
+
     while True:
         grade = input("Self-grade as correct or wrong [c/w]: ").strip().lower()
         if grade in {"c", "correct"}:
@@ -150,10 +163,48 @@ def ask_oral_question(question: dict[str, Any]) -> bool:
         print("Please enter c or w.")
 
 
-def normalize_answer(answer: Any) -> str:
-    if isinstance(answer, bool):
-        return "true" if answer else "false"
-    return str(answer).strip().lower()
+def check_answer(question: dict[str, Any], raw_answer: str) -> bool:
+    question_type = question["type"]
+
+    if question_type == "multiple_choice":
+        selected_answer = answer_to_option_text(question, raw_answer)
+        return selected_answer == str(question["correct_answer"]).strip()
+
+    if question_type == "true_false":
+        user_answer = parse_bool_answer(raw_answer)
+        correct_answer = bool(question["correct_answer"])
+        return user_answer is not None and user_answer == correct_answer
+
+    if question_type in {"fill_blank", "predict_output"}:
+        return raw_answer.strip() == str(question["correct_answer"]).strip()
+
+    raise ValueError(f"Unsupported automatically checked type: {question_type}")
+
+
+def answer_to_option_text(question: dict[str, Any], raw_answer: str) -> str:
+    answer = raw_answer.strip()
+    if answer.isdigit():
+        option_index = int(answer) - 1
+        options = question.get("options", [])
+        if 0 <= option_index < len(options):
+            return str(options[option_index]).strip()
+    return answer
+
+
+def parse_bool_answer(raw_answer: str) -> bool | None:
+    normalized = raw_answer.strip().lower()
+    if normalized in {"true", "t", "vrai", "v", "yes", "y"}:
+        return True
+    if normalized in {"false", "f", "faux", "no", "n"}:
+        return False
+    return None
+
+
+def format_correct_answer(question: dict[str, Any]) -> str:
+    correct_answer = question["correct_answer"]
+    if isinstance(correct_answer, bool):
+        return "true" if correct_answer else "false"
+    return str(correct_answer)
 
 
 if __name__ == "__main__":

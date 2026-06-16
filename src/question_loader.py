@@ -18,6 +18,9 @@ REQUIRED_FIELDS = {
     "explanation",
 }
 
+AUTOMATIC_TYPES = {"multiple_choice", "true_false", "fill_blank", "predict_output"}
+OPEN_ANSWER_TYPES = {"short_answer", "oral_explanation"}
+
 
 def load_questions(path: str | Path) -> list[dict[str, Any]]:
     """Load questions from a JSON file."""
@@ -43,11 +46,16 @@ def _validate_question(question: Any) -> None:
         fields = ", ".join(sorted(missing_fields))
         raise ValueError(f"Question is missing required fields: {fields}")
 
-    if question["type"] == "oral_explanation" and "oral_model_answer" not in question:
-        raise ValueError("Oral explanation questions need oral_model_answer.")
+    question_type = question["type"]
 
-    if question["type"] != "oral_explanation" and "correct_answer" not in question:
+    if question_type in AUTOMATIC_TYPES and "correct_answer" not in question:
         raise ValueError("Automatically checkable questions need correct_answer.")
 
-    if question["type"] == "multiple_choice" and "options" not in question:
+    if question_type in OPEN_ANSWER_TYPES:
+        if "oral_model_answer" not in question:
+            raise ValueError("Open-answer questions need oral_model_answer.")
+        if "grading_checklist" not in question:
+            raise ValueError("Open-answer questions need grading_checklist.")
+
+    if question_type == "multiple_choice" and "options" not in question:
         raise ValueError("Multiple-choice questions need options.")

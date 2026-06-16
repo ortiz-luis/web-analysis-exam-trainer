@@ -32,7 +32,8 @@ ALLOWED_TYPES = {
     "oral_explanation",
 }
 
-AUTO_CHECKED_TYPES = {"true_false", "fill_blank", "predict_output"}
+AUTO_CHECKED_TYPES = {"multiple_choice", "true_false", "fill_blank", "predict_output"}
+OPEN_ANSWER_TYPES = {"short_answer", "oral_explanation"}
 
 
 def validate_question_bank(path: str | Path = DEFAULT_QUESTION_FILE) -> list[str]:
@@ -136,14 +137,15 @@ def _validate_type_rules(question: Any, label: str) -> list[str]:
     if question_type == "multiple_choice":
         if "options" not in question:
             errors.append(f"{label}: multiple_choice questions need options.")
-        if "correct_answer" not in question:
-            errors.append(f"{label}: multiple_choice questions need correct_answer.")
 
     if question_type in AUTO_CHECKED_TYPES and "correct_answer" not in question:
         errors.append(f"{label}: {question_type} questions need correct_answer.")
 
-    if question_type == "oral_explanation" and "oral_model_answer" not in question:
-        errors.append(f"{label}: oral_explanation questions need oral_model_answer.")
+    if question_type in OPEN_ANSWER_TYPES:
+        if "oral_model_answer" not in question:
+            errors.append(f"{label}: {question_type} questions need oral_model_answer.")
+        if "grading_checklist" not in question:
+            errors.append(f"{label}: {question_type} questions need grading_checklist.")
 
     return errors
 
