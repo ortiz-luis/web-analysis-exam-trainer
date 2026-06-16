@@ -35,6 +35,25 @@ ALLOWED_TYPES = {
 AUTO_CHECKED_TYPES = {"multiple_choice", "true_false", "fill_blank", "predict_output"}
 OPEN_ANSWER_TYPES = {"short_answer", "oral_explanation"}
 
+EXPECTED_STAGE_COUNTS = {
+    "lesson_1_python_basics": 35,
+    "lesson_2_pandas_minimal": 35,
+    "lesson_3_html_bs4_scraping": 35,
+    "lesson_4_allocine_scraping": 35,
+    "integrated_practice": 25,
+    "exam_mock_01": 5,
+    "exam_mock_02": 5,
+    "exam_mock_03": 5,
+    "exam_mock_04": 5,
+    "exam_mock_05": 5,
+    "exam_mock_06": 5,
+    "exam_mock_07": 5,
+    "exam_mock_08": 5,
+    "exam_mock_09": 5,
+    "exam_mock_10": 5,
+}
+EXPECTED_TOTAL = 215
+
 
 def validate_question_bank(path: str | Path = DEFAULT_QUESTION_FILE) -> list[str]:
     question_path = Path(path)
@@ -59,6 +78,8 @@ def validate_question_bank(path: str | Path = DEFAULT_QUESTION_FILE) -> list[str
         errors.extend(_validate_type_rules(question, label))
         errors.extend(_validate_stage(question, label))
         errors.extend(_validate_difficulty(question, label))
+
+    errors.extend(_validate_stage_counts(questions))
 
     return errors
 
@@ -137,17 +158,46 @@ def _validate_type_rules(question: Any, label: str) -> list[str]:
     if question_type == "multiple_choice":
         if "options" not in question:
             errors.append(f"{label}: multiple_choice questions need options.")
+        elif not isinstance(question["options"], list) or not question["options"]:
+            errors.append(f"{label}: multiple_choice options must be a non-empty list.")
 
     if question_type in AUTO_CHECKED_TYPES and "correct_answer" not in question:
         errors.append(f"{label}: {question_type} questions need correct_answer.")
+
+    if question_type == "multiple_choice" and "correct_answer" in question:
+        options = question.get("options")
+        if isinstance(options, list) and question["correct_answer"] not in options:
+            errors.append(
+                f"{label}: multiple_choice correct_answer must match one option."
+            )
+
+    if question_type == "true_false" and "correct_answer" in question:
+        if not isinstance(question["correct_answer"], bool):
+            errors.append(f"{label}: true_false correct_answer must be a boolean.")
 
     if question_type in OPEN_ANSWER_TYPES:
         if "oral_model_answer" not in question:
             errors.append(f"{label}: {question_type} questions need oral_model_answer.")
         if "grading_checklist" not in question:
             errors.append(f"{label}: {question_type} questions need grading_checklist.")
+        else:
+            errors.extend(_validate_grading_checklist(question, label))
 
     return errors
+
+
+def _validate_grading_checklist(
+    question: dict[str, Any],
+    label: str,
+) -> list[str]:
+    grading_checklist = question["grading_checklist"]
+    if not isinstance(grading_checklist, list) or not grading_checklist:
+        return [f"{label}: grading_checklist must be a non-empty list of strings."]
+
+    if not all(isinstance(item, str) and item for item in grading_checklist):
+        return [f"{label}: grading_checklist must be a non-empty list of strings."]
+
+    return []
 
 
 def _validate_stage(question: Any, label: str) -> list[str]:
@@ -170,6 +220,36 @@ def _validate_difficulty(question: Any, label: str) -> list[str]:
         return []
 
     return [f"{label}: difficulty must be an integer from 1 to 10."]
+
+
+def _validate_stage_counts(questions: list[dict[str, Any]]) -> list[str]:
+    errors: list[str] = []
+
+    if len(questions) != EXPECTED_TOTAL:
+        errors.append(
+            f"Question bank must contain exactly {EXPECTED_TOTAL} questions; "
+            f"found {len(questions)}."
+        )
+
+    stage_counts = {
+        stage: sum(
+            1
+            for question in questions
+            if isinstance(question, dict) and question.get("stage") == stage
+        )
+        for stage in STAGE_ORDER
+    }
+
+    for stage in STAGE_ORDER:
+        expected_count = EXPECTED_STAGE_COUNTS[stage]
+        actual_count = stage_counts[stage]
+        if actual_count != expected_count:
+            errors.append(
+                f"Stage {stage!r} must contain exactly {expected_count} questions; "
+                f"found {actual_count}."
+            )
+
+    return errors
 
 
 if __name__ == "__main__":
