@@ -5,5 +5,5 @@ Its goal is to help students prepare for a 20-minute oral exam in "Outils d'anal
 The question bank will be built only from the official course notebooks.
 The trainer will focus on repeated practice, recall, and oral-style explanations.
 Questions answered incorrectly will be scheduled again later.
-Progress tracking will be added once the core quiz flow exists.
-For now, this repository contains only the initial project structure.
+Progress is saved locally in progress.json.
+Run the minimal trainer with `python -m src.trainer`.

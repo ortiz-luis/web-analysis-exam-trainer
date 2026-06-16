@@ -1,1 +1,71 @@
-
+[
+  {
+    "id": "q001",
+    "stage": "sample",
+    "lesson": "Introduction",
+    "topic": "HTTP requests",
+    "difficulty": "easy",
+    "type": "multiple_choice",
+    "prompt": "Which HTTP method is usually used to request a web page without modifying server state?",
+    "options": ["GET", "POST", "PUT", "DELETE"],
+    "correct_answer": "GET",
+    "explanation": "GET is the standard method for retrieving a resource. It should not change server state."
+  },
+  {
+    "id": "q002",
+    "stage": "sample",
+    "lesson": "HTML parsing",
+    "topic": "CSS selectors",
+    "difficulty": "easy",
+    "type": "multiple_choice",
+    "prompt": "Which selector targets all links inside a paragraph element?",
+    "options": ["p a", "p > body", ".p a", "a + p"],
+    "correct_answer": "p a",
+    "explanation": "The selector `p a` matches any anchor element that is a descendant of a paragraph element."
+  },
+  {
+    "id": "q003",
+    "stage": "sample",
+    "lesson": "Robots and ethics",
+    "topic": "robots.txt",
+    "difficulty": "easy",
+    "type": "true_false",
+    "prompt": "A robots.txt file is a convention that tells crawlers which paths should not be crawled.",
+    "correct_answer": true,
+    "explanation": "robots.txt expresses crawl rules for cooperative crawlers, but it is not an access-control mechanism."
+  },
+  {
+    "id": "q004",
+    "stage": "sample",
+    "lesson": "HTML parsing",
+    "topic": "BeautifulSoup",
+    "difficulty": "medium",
+    "type": "fill_blank",
+    "prompt": "Fill in the blank: In BeautifulSoup, `soup.____('a')` returns all anchor elements.",
+    "correct_answer": "find_all",
+    "explanation": "`find_all` returns all matching elements for the given tag or selector-like criterion."
+  },
+  {
+    "id": "q005",
+    "stage": "sample",
+    "lesson": "Python basics for scraping",
+    "topic": "List comprehensions",
+    "difficulty": "medium",
+    "type": "predict_output",
+    "prompt": "What is printed by this code?",
+    "code": "links = ['/', '/about', 'https://example.com']\nprint([link for link in links if link.startswith('/')])",
+    "correct_answer": "['/', '/about']",
+    "explanation": "Only the first two strings start with `/`, so the list comprehension keeps those two values."
+  },
+  {
+    "id": "q006",
+    "stage": "sample",
+    "lesson": "Data extraction",
+    "topic": "Extraction pipeline",
+    "difficulty": "medium",
+    "type": "oral_explanation",
+    "prompt": "Explain orally the main steps of a simple web data extraction pipeline.",
+    "explanation": "A good answer should describe the workflow and mention validation or cleaning.",
+    "oral_model_answer": "A simple pipeline starts by requesting a page, checking that the response is valid, parsing the HTML, selecting the useful elements, extracting and cleaning the values, then storing the structured data. It should also respect the site's rules and avoid unnecessary requests."
+  }
+]
