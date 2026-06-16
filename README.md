@@ -14,3 +14,10 @@ Questions unlock stage by stage as each available stage is completed.
 - `python -m unittest discover`
 - `python -m src.trainer --questions data/questions_course.json`
 - `streamlit run src/app_streamlit.py`
+
+## Double-click launcher
+
+- Double-click `launch_web_trainer.bat`
+- The first launch may take longer because dependencies are installed.
+- The app opens in the browser.
+- Close the terminal window to stop the app.
