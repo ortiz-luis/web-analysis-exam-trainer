@@ -1,0 +1,17 @@
+Instructions de lancement
+
+Windows :
+1. Extraire le zip.
+2. Double-cliquer sur launch_web_trainer.bat.
+
+Mac :
+1. Extraire le zip.
+2. Double-cliquer sur launch_web_trainer_mac.command.
+3. Si macOS bloque le fichier, ouvrir Terminal dans le dossier et exécuter :
+   chmod +x launch_web_trainer_mac.command
+4. Puis double-cliquer à nouveau.
+
+Notes :
+- Le premier lancement peut prendre plus de temps, car les dépendances sont installées.
+- Python est requis.
+- La progression est locale à chaque ordinateur.
