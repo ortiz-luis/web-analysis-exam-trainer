@@ -10,8 +10,7 @@ Questions unlock stage by stage as each available stage is completed.
 
 ## Commands
 
-- `python -m src.trainer`
-- `python -m src.trainer --questions data/questions_sample.json`
-- `python -m src.validate_questions`
-- `python -m src.validate_questions data/questions_sample.json`
+- `python -m src.validate_questions data/questions_course.json`
 - `python -m unittest discover`
+- `python -m src.trainer --questions data/questions_course.json`
+- `streamlit run src/app_streamlit.py`
