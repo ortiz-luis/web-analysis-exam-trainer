@@ -30,3 +30,11 @@ Questions unlock stage by stage as each available stage is completed.
 - If macOS says the file cannot be opened because it is not executable, run once: `chmod +x launch_web_trainer_mac.command`
 - If Python is missing, the launcher will try Homebrew or open the Python download page.
 - Progress is local to each computer.
+
+## Déploiement Streamlit Community Cloud
+
+- Push project to GitHub.
+- App entry point: `streamlit_app.py`
+- Set environment variable `WEB_TRAINER_PROGRESS_MODE=cloud`
+- Deploy.
+- Share the app URL.

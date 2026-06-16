@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import random
 import sys
 from pathlib import Path
@@ -20,6 +21,8 @@ from src.trainer import AUTOMATIC_TYPES, OPEN_ANSWER_TYPES, check_answer, format
 
 QUESTION_FILE = Path("data/questions_course.json")
 PROGRESS_FILE = Path("streamlit_progress.json")
+PROGRESS_MODE_ENV = "WEB_TRAINER_PROGRESS_MODE"
+CLOUD_PROGRESS_MODE = "cloud"
 GUIDED_MODE = "Parcours guidé"
 STAGE_MODE = "Pratique par étape"
 RANDOM_MODE = "Série aléatoire"
@@ -33,7 +36,7 @@ def main() -> None:
     st.title("Web Analysis Exam Trainer")
 
     questions = load_questions(QUESTION_FILE)
-    progress = Progress(PROGRESS_FILE)
+    progress = load_streamlit_progress()
     questions_by_id = {question["id"]: question for question in questions}
 
     controls = render_sidebar(questions, progress)
@@ -66,8 +69,71 @@ def main() -> None:
     render_answer_controls(question, progress, context)
 
 
-def render_sidebar(questions: list[dict[str, Any]], progress: Progress) -> dict[str, Any]:
+class SessionProgress:
+    def __init__(self) -> None:
+        st.session_state.setdefault("cloud_progress", {"answers": {}})
+        self.data = st.session_state["cloud_progress"]
+
+    def record_correct(self, question_id: str) -> None:
+        self._record_answer(question_id, correct=True)
+
+    def record_wrong(self, question_id: str) -> None:
+        self._record_answer(question_id, correct=False)
+
+    def was_answered_correctly(self, question_id: str) -> bool:
+        answer = self.data["answers"].get(question_id)
+        return bool(answer and answer.get("correct_count", 0) > 0)
+
+    def count_correct_in_stage(self, questions: list[dict[str, Any]], stage: str) -> int:
+        return sum(
+            1
+            for question in questions
+            if question["stage"] == stage and self.was_answered_correctly(question["id"])
+        )
+
+    def is_stage_complete(self, questions: list[dict[str, Any]], stage: str) -> bool:
+        stage_questions = get_stage_questions(questions, stage)
+        return bool(stage_questions) and all(
+            self.was_answered_correctly(question["id"]) for question in stage_questions
+        )
+
+    def current_unlocked_stage(self, questions: list[dict[str, Any]]) -> str | None:
+        for stage in STAGE_ORDER:
+            if get_stage_questions(questions, stage) and not self.is_stage_complete(questions, stage):
+                return stage
+        return None
+
+    def _record_answer(self, question_id: str, correct: bool) -> None:
+        answer = self.data["answers"].setdefault(
+            question_id,
+            {"correct_count": 0, "wrong_count": 0, "last_answer_correct": None},
+        )
+        if correct:
+            answer["correct_count"] += 1
+        else:
+            answer["wrong_count"] += 1
+        answer["last_answer_correct"] = correct
+
+
+def is_cloud_progress_mode() -> bool:
+    return os.environ.get(PROGRESS_MODE_ENV) == CLOUD_PROGRESS_MODE
+
+
+def load_streamlit_progress() -> Progress | SessionProgress:
+    if is_cloud_progress_mode():
+        return SessionProgress()
+    return Progress(PROGRESS_FILE)
+
+
+def render_sidebar(
+    questions: list[dict[str, Any]],
+    progress: Progress | SessionProgress,
+) -> dict[str, Any]:
     st.sidebar.title("Mode de pratique")
+    if is_cloud_progress_mode():
+        st.sidebar.info(
+            "Mode en ligne : la progression est conservée pendant la session du navigateur."
+        )
     mode = st.sidebar.radio("Choisir un mode", MODES)
 
     available_stages = [stage for stage in STAGE_ORDER if get_stage_questions(questions, stage)]
@@ -95,7 +161,9 @@ def render_sidebar(questions: list[dict[str, Any]], progress: Progress) -> dict[
 
 
 def reset_progress() -> None:
-    if PROGRESS_FILE.exists():
+    if is_cloud_progress_mode():
+        st.session_state.pop("cloud_progress", None)
+    elif PROGRESS_FILE.exists():
         PROGRESS_FILE.unlink()
     st.session_state.clear()
     st.rerun()
@@ -103,7 +171,7 @@ def reset_progress() -> None:
 
 def build_context(
     questions: list[dict[str, Any]],
-    progress: Progress,
+    progress: Progress | SessionProgress,
     controls: dict[str, Any],
 ) -> dict[str, Any]:
     mode = controls["mode"]
@@ -168,7 +236,7 @@ def build_context(
 
 def random_question_ids(
     questions: list[dict[str, Any]],
-    progress: Progress,
+    progress: Progress | SessionProgress,
     count: int,
 ) -> list[str]:
     incomplete = [
@@ -255,7 +323,7 @@ def render_question(question: dict[str, Any]) -> None:
 
 def render_answer_controls(
     question: dict[str, Any],
-    progress: Progress,
+    progress: Progress | SessionProgress,
     context: dict[str, Any],
 ) -> None:
     if question["type"] in AUTOMATIC_TYPES:
@@ -271,7 +339,7 @@ def render_answer_controls(
 
 def render_automatic_question(
     question: dict[str, Any],
-    progress: Progress,
+    progress: Progress | SessionProgress,
     context: dict[str, Any],
 ) -> None:
     with st.form(f"answer_{question['id']}"):
@@ -313,7 +381,7 @@ def automatic_answer_input(question: dict[str, Any]) -> str:
 
 def render_open_question(
     question: dict[str, Any],
-    progress: Progress,
+    progress: Progress | SessionProgress,
     context: dict[str, Any],
 ) -> None:
     st.text_area(
@@ -345,7 +413,11 @@ def render_open_question(
             wait_for_next_question()
 
 
-def record_answer(question: dict[str, Any], progress: Progress, is_correct: bool) -> None:
+def record_answer(
+    question: dict[str, Any],
+    progress: Progress | SessionProgress,
+    is_correct: bool,
+) -> None:
     if is_correct:
         progress.record_correct(question["id"])
         st.session_state["correct_answers"] += 1
