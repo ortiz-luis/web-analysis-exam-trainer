@@ -21,3 +21,12 @@ Questions unlock stage by stage as each available stage is completed.
 - The first launch may take longer because dependencies are installed.
 - The app opens in the browser.
 - Close the terminal window to stop the app.
+
+## Installer sur un Mac
+
+- Copy or unzip the project folder on the Mac.
+- Double-click `launch_web_trainer_mac.command`.
+- The first launch may take longer because dependencies are installed.
+- If macOS says the file cannot be opened because it is not executable, run once: `chmod +x launch_web_trainer_mac.command`
+- If Python is missing, the launcher will try Homebrew or open the Python download page.
+- Progress is local to each computer.
