@@ -6,4 +6,5 @@ The question bank will be built only from the official course notebooks.
 The trainer will focus on repeated practice, recall, and oral-style explanations.
 Questions answered incorrectly will be scheduled again later.
 Progress is saved locally in progress.json.
+Questions unlock stage by stage as each available stage is completed.
 Run the minimal trainer with `python -m src.trainer`.

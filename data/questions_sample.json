@@ -1,7 +1,7 @@
 [
   {
     "id": "q001",
-    "stage": "sample",
+    "stage": "lesson_1_python_basics",
     "lesson": "Introduction",
     "topic": "HTTP requests",
     "difficulty": "easy",
@@ -13,7 +13,7 @@
   },
   {
     "id": "q002",
-    "stage": "sample",
+    "stage": "lesson_3_html_bs4_scraping",
     "lesson": "HTML parsing",
     "topic": "CSS selectors",
     "difficulty": "easy",
@@ -25,7 +25,7 @@
   },
   {
     "id": "q003",
-    "stage": "sample",
+    "stage": "lesson_4_allocine_scraping",
     "lesson": "Robots and ethics",
     "topic": "robots.txt",
     "difficulty": "easy",
@@ -36,7 +36,7 @@
   },
   {
     "id": "q004",
-    "stage": "sample",
+    "stage": "lesson_3_html_bs4_scraping",
     "lesson": "HTML parsing",
     "topic": "BeautifulSoup",
     "difficulty": "medium",
@@ -47,7 +47,7 @@
   },
   {
     "id": "q005",
-    "stage": "sample",
+    "stage": "lesson_1_python_basics",
     "lesson": "Python basics for scraping",
     "topic": "List comprehensions",
     "difficulty": "medium",
@@ -59,7 +59,7 @@
   },
   {
     "id": "q006",
-    "stage": "sample",
+    "stage": "integrated_practice",
     "lesson": "Data extraction",
     "topic": "Extraction pipeline",
     "difficulty": "medium",
