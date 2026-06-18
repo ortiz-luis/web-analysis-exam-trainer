@@ -11,9 +11,18 @@ Questions unlock stage by stage as each available stage is completed.
 ## Commands
 
 - `python -m src.validate_questions data/questions_course.json`
+- `python -m src.validate_questions data/exam_mocks_v2.json --exam-v2`
 - `python -m unittest discover`
 - `python -m src.trainer --questions data/questions_course.json`
 - `streamlit run src/app_streamlit.py`
+
+## Exam mock batteries
+
+The main course bank in `data/questions_course.json` contains the guided practice
+questions and the first 10 exam mocks. The second exam-only battery is stored in
+`data/exam_mocks_v2.json` with 20 additional five-question mocks designed to
+avoid memorized answers. In Streamlit, `Examen blanc` exposes both Batterie V1
+and Batterie V2.
 
 ## Double-click launcher
 

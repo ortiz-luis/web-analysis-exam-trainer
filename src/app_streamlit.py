@@ -20,6 +20,7 @@ from src.trainer import AUTOMATIC_TYPES, OPEN_ANSWER_TYPES, check_answer, format
 
 
 QUESTION_FILE = Path("data/questions_course.json")
+EXAM_V2_QUESTION_FILE = Path("data/exam_mocks_v2.json")
 PROGRESS_FILE = Path("streamlit_progress.json")
 PROGRESS_MODE_ENV = "WEB_TRAINER_PROGRESS_MODE"
 CLOUD_PROGRESS_MODE = "cloud"
@@ -29,6 +30,9 @@ RANDOM_MODE = "Série aléatoire"
 MOCK_MODE = "Examen blanc"
 MODES = [GUIDED_MODE, STAGE_MODE, RANDOM_MODE, MOCK_MODE]
 MOCK_STAGES = [f"exam_mock_{index:02d}" for index in range(1, 11)]
+EXAM_V2_STAGES = [f"exam_v2_{index:02d}" for index in range(1, 21)]
+MOCK_BATTERY_V1 = "Batterie V1"
+MOCK_BATTERY_V2 = "Batterie V2"
 
 
 def main() -> None:
@@ -36,14 +40,18 @@ def main() -> None:
     st.title("Web Analysis Exam Trainer")
 
     questions = load_questions(QUESTION_FILE)
+    exam_v2_questions = load_questions(EXAM_V2_QUESTION_FILE)
     progress = load_streamlit_progress()
-    questions_by_id = {question["id"]: question for question in questions}
+    questions_by_id = {
+        question["id"]: question
+        for question in questions + exam_v2_questions
+    }
 
     controls = render_sidebar(questions, progress)
     if controls["reset_progress"]:
         reset_progress()
 
-    context = build_context(questions, progress, controls)
+    context = build_context(questions, exam_v2_questions, progress, controls)
     st.caption(context["label"])
 
     if controls["restart_session"] or should_start_session(context["key"]):
@@ -139,7 +147,9 @@ def render_sidebar(
     available_stages = [stage for stage in STAGE_ORDER if get_stage_questions(questions, stage)]
     selected_stage = st.sidebar.selectbox("Étape", available_stages)
     random_count = st.sidebar.selectbox("Nombre de questions", [5, 10, 20], index=1)
-    selected_mock = st.sidebar.selectbox("Examen blanc", MOCK_STAGES)
+    mock_battery = st.sidebar.radio("Batterie d'examens", [MOCK_BATTERY_V1, MOCK_BATTERY_V2])
+    mock_stage_options = EXAM_V2_STAGES if mock_battery == MOCK_BATTERY_V2 else MOCK_STAGES
+    selected_mock = st.sidebar.selectbox("Examen blanc", mock_stage_options)
 
     new_random_series = st.sidebar.button("Nouvelle série aléatoire")
     restart_session = st.sidebar.button("Démarrer / redémarrer la session")
@@ -153,6 +163,7 @@ def render_sidebar(
         "mode": mode,
         "selected_stage": selected_stage,
         "random_count": int(random_count),
+        "mock_battery": mock_battery,
         "selected_mock": selected_mock,
         "new_random_series": new_random_series,
         "restart_session": restart_session,
@@ -171,6 +182,7 @@ def reset_progress() -> None:
 
 def build_context(
     questions: list[dict[str, Any]],
+    exam_v2_questions: list[dict[str, Any]],
     progress: Progress | SessionProgress,
     controls: dict[str, Any],
 ) -> dict[str, Any]:
@@ -223,11 +235,13 @@ def build_context(
         }
 
     mock_stage = controls["selected_mock"]
-    mock_questions = get_stage_questions(questions, mock_stage)
+    mock_battery = controls["mock_battery"]
+    mock_bank = exam_v2_questions if mock_battery == MOCK_BATTERY_V2 else questions
+    mock_questions = get_stage_questions(mock_bank, mock_stage)
     return {
-        "key": f"{MOCK_MODE}:{mock_stage}",
+        "key": f"{MOCK_MODE}:{mock_battery}:{mock_stage}",
         "mode": mode,
-        "label": f"Mode actuel : {mode} | Examen : {mock_stage}",
+        "label": f"Mode actuel : {mode} | {mock_battery} : {mock_stage}",
         "question_ids": [question["id"] for question in mock_questions],
         "repeat_wrong": False,
         "auto_finish": True,

@@ -54,8 +54,16 @@ EXPECTED_STAGE_COUNTS = {
 }
 EXPECTED_TOTAL = 215
 
+EXAM_V2_STAGE_ORDER = [f"exam_v2_{index:02d}" for index in range(1, 21)]
+EXAM_V2_STAGE_COUNTS = {stage: 5 for stage in EXAM_V2_STAGE_ORDER}
+EXAM_V2_EXPECTED_TOTAL = 100
 
-def validate_question_bank(path: str | Path = DEFAULT_QUESTION_FILE) -> list[str]:
+
+def validate_question_bank(
+    path: str | Path = DEFAULT_QUESTION_FILE,
+    *,
+    exam_v2: bool = False,
+) -> list[str]:
     question_path = Path(path)
     try:
         questions = _read_questions(question_path)
@@ -64,6 +72,9 @@ def validate_question_bank(path: str | Path = DEFAULT_QUESTION_FILE) -> list[str
 
     errors: list[str] = []
     seen_ids: set[str] = set()
+    stage_order = EXAM_V2_STAGE_ORDER if exam_v2 else STAGE_ORDER
+    expected_counts = EXAM_V2_STAGE_COUNTS if exam_v2 else EXPECTED_STAGE_COUNTS
+    expected_total = EXAM_V2_EXPECTED_TOTAL if exam_v2 else EXPECTED_TOTAL
 
     for index, question in enumerate(questions, start=1):
         label = _question_label(question, index)
@@ -76,10 +87,10 @@ def validate_question_bank(path: str | Path = DEFAULT_QUESTION_FILE) -> list[str
             seen_ids.add(question_id)
 
         errors.extend(_validate_type_rules(question, label))
-        errors.extend(_validate_stage(question, label))
+        errors.extend(_validate_stage(question, label, stage_order))
         errors.extend(_validate_difficulty(question, label))
 
-    errors.extend(_validate_stage_counts(questions))
+    errors.extend(_validate_stage_counts(questions, stage_order, expected_counts, expected_total))
 
     return errors
 
@@ -99,7 +110,7 @@ def print_validation_result(
 
 def main() -> int:
     args = parse_args()
-    errors = validate_question_bank(args.questions)
+    errors = validate_question_bank(args.questions, exam_v2=args.exam_v2)
     print_validation_result(errors, args.questions)
     return 1 if errors else 0
 
@@ -112,6 +123,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         type=Path,
         default=DEFAULT_QUESTION_FILE,
         help="Path to the question bank JSON file.",
+    )
+    parser.add_argument(
+        "--exam-v2",
+        action="store_true",
+        help="Validate the second exam-only mock question bank.",
     )
     return parser.parse_args(argv)
 
@@ -200,12 +216,12 @@ def _validate_grading_checklist(
     return []
 
 
-def _validate_stage(question: Any, label: str) -> list[str]:
+def _validate_stage(question: Any, label: str, allowed_stages: list[str]) -> list[str]:
     if not isinstance(question, dict):
         return []
 
     stage = question.get("stage")
-    if stage in STAGE_ORDER:
+    if stage in allowed_stages:
         return []
 
     return [f"{label}: invalid stage {stage!r}."]
@@ -222,12 +238,17 @@ def _validate_difficulty(question: Any, label: str) -> list[str]:
     return [f"{label}: difficulty must be an integer from 1 to 10."]
 
 
-def _validate_stage_counts(questions: list[dict[str, Any]]) -> list[str]:
+def _validate_stage_counts(
+    questions: list[dict[str, Any]],
+    stage_order: list[str],
+    expected_counts: dict[str, int],
+    expected_total: int,
+) -> list[str]:
     errors: list[str] = []
 
-    if len(questions) != EXPECTED_TOTAL:
+    if len(questions) != expected_total:
         errors.append(
-            f"Question bank must contain exactly {EXPECTED_TOTAL} questions; "
+            f"Question bank must contain exactly {expected_total} questions; "
             f"found {len(questions)}."
         )
 
@@ -237,11 +258,11 @@ def _validate_stage_counts(questions: list[dict[str, Any]]) -> list[str]:
             for question in questions
             if isinstance(question, dict) and question.get("stage") == stage
         )
-        for stage in STAGE_ORDER
+        for stage in stage_order
     }
 
-    for stage in STAGE_ORDER:
-        expected_count = EXPECTED_STAGE_COUNTS[stage]
+    for stage in stage_order:
+        expected_count = expected_counts[stage]
         actual_count = stage_counts[stage]
         if actual_count != expected_count:
             errors.append(

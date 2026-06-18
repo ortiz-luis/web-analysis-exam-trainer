@@ -5,6 +5,9 @@ from pathlib import Path
 
 from src.validate_questions import (
     DEFAULT_QUESTION_FILE,
+    EXAM_V2_EXPECTED_TOTAL,
+    EXAM_V2_STAGE_COUNTS,
+    EXAM_V2_STAGE_ORDER,
     EXPECTED_STAGE_COUNTS,
     EXPECTED_TOTAL,
     parse_args,
@@ -172,6 +175,44 @@ class ValidateQuestionsTests(unittest.TestCase):
 
         self.assertEqual(args.questions, Path("data/real_questions.json"))
 
+    def test_exam_v2_argument(self) -> None:
+        args = parse_args(["data/exam_mocks_v2.json", "--exam-v2"])
+
+        self.assertTrue(args.exam_v2)
+
+    def test_existing_course_bank_is_valid(self) -> None:
+        errors = validate_question_bank(Path("data/questions_course.json"))
+
+        self.assertEqual(errors, [])
+
+    def test_exam_v2_bank_is_valid(self) -> None:
+        errors = validate_question_bank(Path("data/exam_mocks_v2.json"), exam_v2=True)
+
+        self.assertEqual(errors, [])
+
+    def test_exam_v2_stage_counts(self) -> None:
+        questions = read_json(Path("data/exam_mocks_v2.json"))
+
+        self.assertEqual(len(questions), EXAM_V2_EXPECTED_TOTAL)
+        for stage in EXAM_V2_STAGE_ORDER:
+            count = sum(1 for question in questions if question["stage"] == stage)
+            self.assertEqual(count, EXAM_V2_STAGE_COUNTS[stage])
+
+    def test_exam_v2_schema(self) -> None:
+        questions = read_json(Path("data/exam_mocks_v2.json"))
+
+        for question in questions:
+            with self.subTest(question_id=question["id"]):
+                self.assertIn(question["stage"], EXAM_V2_STAGE_ORDER)
+                if question["type"] == "multiple_choice":
+                    self.assertIn(question["correct_answer"], question["options"])
+                if question["type"] == "true_false":
+                    self.assertIsInstance(question["correct_answer"], bool)
+                if question["type"] in {"short_answer", "oral_explanation"}:
+                    self.assertNotIn("correct_answer", question)
+                    self.assertIsInstance(question["oral_model_answer"], str)
+                    self.assertTrue(question["grading_checklist"])
+
     def write_bank(self, questions: list[dict[str, object]]) -> Path:
         directory = tempfile.TemporaryDirectory()
         self.temp_dirs.append(directory)
@@ -238,6 +279,10 @@ def first_question_of_type(
         if question["type"] == question_type:
             return question
     raise AssertionError(f"No question of type {question_type}")
+
+
+def read_json(path: Path) -> list[dict[str, object]]:
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

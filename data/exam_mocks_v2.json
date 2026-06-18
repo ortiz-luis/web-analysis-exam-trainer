@@ -1,0 +1,1437 @@
+[
+  {
+    "id": "exam_v2_01_q01",
+    "stage": "exam_v2_01",
+    "lesson": "Examen blanc V2 01",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "prix = 12\nquantite = 3\ntotal = prix * quantite\nprint(total)",
+    "correct_answer": "36",
+    "explanation": "La multiplication calcule le total : 12 * 3 = 36."
+  },
+  {
+    "id": "exam_v2_01_q02",
+    "stage": "exam_v2_01",
+    "lesson": "Examen blanc V2 01",
+    "topic": "Pandas basics",
+    "difficulty": 4,
+    "type": "multiple_choice",
+    "prompt": "On exécute :\n\ndf = pd.DataFrame({'ville': ['Paris', 'Lyon'], 'ventes': [12, 9]})\nprint(df.shape)\n\nQue représente le résultat ?",
+    "correct_answer": "2 lignes et 2 colonnes",
+    "explanation": "df.shape renvoie un tuple avec le nombre de lignes puis le nombre de colonnes.",
+    "options": [
+      "2 lignes et 2 colonnes",
+      "2 lignes et 1 colonne",
+      "1 ligne et 2 colonnes",
+      "Le nom des colonnes"
+    ]
+  },
+  {
+    "id": "exam_v2_01_q03",
+    "stage": "exam_v2_01",
+    "lesson": "Examen blanc V2 01",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 4,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour créer l'objet BeautifulSoup à partir de `html`.",
+    "code": "from bs4 import BeautifulSoup\nhtml = '<h1>Films</h1>'\nsoup = ______",
+    "correct_answer": "BeautifulSoup(html, 'html.parser')",
+    "explanation": "BeautifulSoup(html, 'html.parser') construit l'arbre HTML avec le parseur standard."
+  },
+  {
+    "id": "exam_v2_01_q04",
+    "stage": "exam_v2_01",
+    "lesson": "Examen blanc V2 01",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique comment tu vérifierais rapidement qu'une page a bien répondu avant de l'analyser avec BeautifulSoup.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Je vérifierais le code de statut avec `response.status_code`, par exemple 200 pour une réponse réussie, puis seulement ensuite j'utiliserais `response.text` avec BeautifulSoup. Cela évite d'analyser une page vide ou une erreur HTML comme si c'était le contenu attendu.",
+    "grading_checklist": [
+      "Mentionne requests.get",
+      "Vérifie status_code",
+      "Utilise response.text seulement après la vérification"
+    ]
+  },
+  {
+    "id": "exam_v2_01_q05",
+    "stage": "exam_v2_01",
+    "lesson": "Examen blanc V2 01",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement ce que fait ce code et ce que tu vérifierais ensuite.",
+    "code": "import pandas as pd\ndonnees = [{'titre': 'Film A', 'note': 4.2}, {'titre': 'Film B', 'note': None}]\ndf = pd.DataFrame(donnees)\ndf['note'] = df['note'].fillna(0)",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Ce code crée un DataFrame à partir d'une liste de dictionnaires contenant des titres et des notes. Ensuite, il remplace les notes manquantes par 0 avec `fillna`. Je vérifierais ensuite les premières lignes et les types de colonnes pour confirmer que la colonne `note` est bien exploitable.",
+    "grading_checklist": [
+      "DataFrame depuis liste de dictionnaires",
+      "Remplacement des valeurs manquantes",
+      "Vérification avec head/info ou dtypes"
+    ]
+  },
+  {
+    "id": "exam_v2_02_q01",
+    "stage": "exam_v2_02",
+    "lesson": "Examen blanc V2 02",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "notes = [8, 12, 15]\nnotes.append(10)\nprint(notes[-1])",
+    "correct_answer": "10",
+    "explanation": "append ajoute 10 en fin de liste, donc notes[-1] vaut 10."
+  },
+  {
+    "id": "exam_v2_02_q02",
+    "stage": "exam_v2_02",
+    "lesson": "Examen blanc V2 02",
+    "topic": "Pandas basics",
+    "difficulty": 4,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : après `df = pd.read_csv('ventes.csv')`, l'instruction `df.head()` permet de visualiser les premières lignes du fichier chargé.",
+    "correct_answer": true,
+    "explanation": "head affiche les premières lignes, ce qui sert à inspecter rapidement les données."
+  },
+  {
+    "id": "exam_v2_02_q03",
+    "stage": "exam_v2_02",
+    "lesson": "Examen blanc V2 02",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 4,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour récupérer le premier lien `<a>`.",
+    "code": "soup = BeautifulSoup(html, 'html.parser')\nlien = soup.______('a')",
+    "correct_answer": "find",
+    "explanation": "find renvoie le premier élément correspondant au nom de balise."
+  },
+  {
+    "id": "exam_v2_02_q04",
+    "stage": "exam_v2_02",
+    "lesson": "Examen blanc V2 02",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique comment extraire proprement les textes de toutes les lignes d'un tableau HTML simple.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Je commencerais par trouver le tableau, puis je parcourrais ses lignes avec `find_all('tr')`. Pour chaque ligne, je récupérerais les cellules avec `find_all('td')` et j'utiliserais `get_text(strip=True)` pour obtenir des valeurs propres.",
+    "grading_checklist": [
+      "Trouver le tableau",
+      "Parcourir les tr",
+      "Extraire les td",
+      "Nettoyer avec get_text(strip=True)"
+    ]
+  },
+  {
+    "id": "exam_v2_02_q05",
+    "stage": "exam_v2_02",
+    "lesson": "Examen blanc V2 02",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement comment ce code organise une extraction de liens.",
+    "code": "liens = []\nfor bloc in soup.find_all('div', class_='movie'):\n    a = bloc.find('a')\n    if a is not None:\n        liens.append(a.get('href'))",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code crée une liste vide, parcourt tous les blocs de film, cherche un lien dans chaque bloc et ajoute son `href` s'il existe. Le test évite une erreur quand un bloc ne contient pas de balise `a`.",
+    "grading_checklist": [
+      "Liste de résultats",
+      "Boucle sur les blocs",
+      "Extraction de href",
+      "Gestion du lien absent"
+    ]
+  },
+  {
+    "id": "exam_v2_03_q01",
+    "stage": "exam_v2_03",
+    "lesson": "Examen blanc V2 03",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "client = {'nom': 'Lina', 'achats': 4}\nclient['achats'] += 1\nprint(client['achats'])",
+    "correct_answer": "5",
+    "explanation": "La valeur associée à 'achats' est incrémentée de 1."
+  },
+  {
+    "id": "exam_v2_03_q02",
+    "stage": "exam_v2_03",
+    "lesson": "Examen blanc V2 03",
+    "topic": "Pandas basics",
+    "difficulty": 4,
+    "type": "multiple_choice",
+    "prompt": "Quel code sélectionne uniquement la colonne `prix` dans un DataFrame `df` ?",
+    "correct_answer": "df['prix']",
+    "explanation": "La syntaxe vue dans les notebooks pour accéder à une colonne est df['nom_colonne'].",
+    "options": [
+      "df['prix']",
+      "df(prix)",
+      "df->prix",
+      "df.select('prix')"
+    ]
+  },
+  {
+    "id": "exam_v2_03_q03",
+    "stage": "exam_v2_03",
+    "lesson": "Examen blanc V2 03",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 4,
+    "type": "fill_blank",
+    "prompt": "Complète l'argument BeautifulSoup pour chercher une classe CSS appelée `title`.",
+    "code": "titre = soup.find('h2', ______='title')",
+    "correct_answer": "class_",
+    "explanation": "En Python, on utilise class_ car class est un mot réservé."
+  },
+  {
+    "id": "exam_v2_03_q04",
+    "stage": "exam_v2_03",
+    "lesson": "Examen blanc V2 03",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique pourquoi on construit souvent une liste de dictionnaires pendant un scraping.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Une liste de dictionnaires permet de stocker chaque élément extrait avec les mêmes clés, par exemple un titre, un lien et une note. C'est pratique pour vérifier les données puis les transformer en tableau ou les sauvegarder proprement.",
+    "grading_checklist": [
+      "Un dictionnaire par élément",
+      "Clés stables",
+      "Préparation à un tableau ou CSV"
+    ]
+  },
+  {
+    "id": "exam_v2_03_q05",
+    "stage": "exam_v2_03",
+    "lesson": "Examen blanc V2 03",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement ce que fait ce code de préparation de données.",
+    "code": "df['total'] = df['prix'] * df['quantite']\nresume = df.groupby('categorie')['total'].sum()",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code ajoute une colonne `total` en multipliant prix et quantité. Puis il regroupe les lignes par catégorie et calcule le total des ventes pour chaque catégorie. C'est une synthèse commerciale simple.",
+    "grading_checklist": [
+      "Création de colonne calculée",
+      "Groupby par catégorie",
+      "Somme des totaux",
+      "Interprétation métier"
+    ]
+  },
+  {
+    "id": "exam_v2_04_q01",
+    "stage": "exam_v2_04",
+    "lesson": "Examen blanc V2 04",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "total = 47\nif total >= 50:\n    remise = 5\nelse:\n    remise = 0\nprint(remise)",
+    "correct_answer": "0",
+    "explanation": "47 est inférieur à 50, donc le bloc else fixe la remise à 0."
+  },
+  {
+    "id": "exam_v2_04_q02",
+    "stage": "exam_v2_04",
+    "lesson": "Examen blanc V2 04",
+    "topic": "Pandas basics",
+    "difficulty": 4,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df[df['prix'] > 10]` garde seulement les lignes dont la colonne `prix` est supérieure à 10.",
+    "correct_answer": true,
+    "explanation": "Le masque booléen filtre les lignes selon la condition."
+  },
+  {
+    "id": "exam_v2_04_q03",
+    "stage": "exam_v2_04",
+    "lesson": "Examen blanc V2 04",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 4,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour récupérer le texte sans espaces inutiles.",
+    "code": "titre = soup.find('h1')\ntexte = titre.get_text(______=True)",
+    "correct_answer": "strip",
+    "explanation": "get_text(strip=True) nettoie les espaces au début et à la fin."
+  },
+  {
+    "id": "exam_v2_04_q04",
+    "stage": "exam_v2_04",
+    "lesson": "Examen blanc V2 04",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique comment gérer un film dont la note est absente dans une page de résultats.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Je testerais si l'élément existe avant de lire son texte. S'il est absent, je mettrais une valeur comme `None` ou une chaîne vide, afin de garder une structure régulière sans provoquer d'erreur.",
+    "grading_checklist": [
+      "Teste l'existence de l'élément",
+      "Évite l'erreur sur None",
+      "Préserve une structure régulière"
+    ]
+  },
+  {
+    "id": "exam_v2_04_q05",
+    "stage": "exam_v2_04",
+    "lesson": "Examen blanc V2 04",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement le rôle de ce code dans un scraping paginé.",
+    "code": "resultats = []\nfor page in range(1, 4):\n    url = f'https://exemple.local/page={page}'\n    html = requests.get(url).text\n    soup = BeautifulSoup(html, 'html.parser')",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Ce code prépare une boucle sur trois pages. Pour chaque numéro de page, il construit une URL, récupère le HTML et le transforme en objet BeautifulSoup. Il manque ensuite l'étape d'extraction et l'ajout dans `resultats`.",
+    "grading_checklist": [
+      "Boucle de pagination",
+      "Construction de l'URL",
+      "Récupération du HTML",
+      "Parsing avec BeautifulSoup"
+    ]
+  },
+  {
+    "id": "exam_v2_05_q01",
+    "stage": "exam_v2_05",
+    "lesson": "Examen blanc V2 05",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "articles = ['stylo', 'carnet', 'sac']\nprint(articles[1])",
+    "correct_answer": "carnet",
+    "explanation": "L'indice 1 désigne le deuxième élément de la liste."
+  },
+  {
+    "id": "exam_v2_05_q02",
+    "stage": "exam_v2_05",
+    "lesson": "Examen blanc V2 05",
+    "topic": "Pandas basics",
+    "difficulty": 4,
+    "type": "multiple_choice",
+    "prompt": "On veut remplacer les valeurs manquantes de la colonne `note` par 0. Quelle ligne convient ?",
+    "correct_answer": "df['note'] = df['note'].fillna(0)",
+    "explanation": "fillna permet de remplacer les valeurs manquantes par une valeur choisie.",
+    "options": [
+      "df['note'] = df['note'].fillna(0)",
+      "df['note'].dropna(0)",
+      "df.fill('note', 0)",
+      "df['note'] = None"
+    ]
+  },
+  {
+    "id": "exam_v2_05_q03",
+    "stage": "exam_v2_05",
+    "lesson": "Examen blanc V2 05",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 4,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour récupérer tous les éléments `<tr>` d'un tableau.",
+    "code": "lignes = table.______('tr')",
+    "correct_answer": "find_all",
+    "explanation": "find_all renvoie la liste de toutes les balises correspondantes."
+  },
+  {
+    "id": "exam_v2_05_q04",
+    "stage": "exam_v2_05",
+    "lesson": "Examen blanc V2 05",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique le rôle d'une boucle de pagination dans un scraping AlloCiné-style.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "La boucle de pagination sert à répéter la même extraction sur plusieurs pages de résultats. À chaque tour, on construit l'URL de la page, on récupère son HTML, on extrait les films, puis on ajoute les résultats à la même liste.",
+    "grading_checklist": [
+      "Construit les URL de pages",
+      "Répète l'extraction",
+      "Ajoute les résultats à une liste commune"
+    ]
+  },
+  {
+    "id": "exam_v2_05_q05",
+    "stage": "exam_v2_05",
+    "lesson": "Examen blanc V2 05",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement comment ce code nettoie des textes HTML.",
+    "code": "noms = []\nfor cellule in table.find_all('td'):\n    noms.append(cellule.get_text(strip=True))",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code parcourt toutes les cellules du tableau et extrait leur texte en retirant les espaces inutiles. Les valeurs propres sont ajoutées dans une liste appelée `noms`.",
+    "grading_checklist": [
+      "Parcours des cellules",
+      "get_text(strip=True)",
+      "Ajout dans une liste"
+    ]
+  },
+  {
+    "id": "exam_v2_06_q01",
+    "stage": "exam_v2_06",
+    "lesson": "Examen blanc V2 06",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "def marge(prix, cout):\n    return prix - cout\nprint(marge(20, 13))",
+    "correct_answer": "7",
+    "explanation": "La fonction renvoie 20 - 13, donc 7."
+  },
+  {
+    "id": "exam_v2_06_q02",
+    "stage": "exam_v2_06",
+    "lesson": "Examen blanc V2 06",
+    "topic": "Pandas basics",
+    "difficulty": 4,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.columns` permet d'obtenir les noms des colonnes d'un DataFrame.",
+    "correct_answer": true,
+    "explanation": "df.columns expose les noms de colonnes."
+  },
+  {
+    "id": "exam_v2_06_q03",
+    "stage": "exam_v2_06",
+    "lesson": "Examen blanc V2 06",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 4,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour récupérer l'attribut `href` du lien.",
+    "code": "lien = soup.find('a')\nurl = lien[______]",
+    "correct_answer": "'href'",
+    "explanation": "Les attributs HTML se lisent comme des clés de dictionnaire."
+  },
+  {
+    "id": "exam_v2_06_q04",
+    "stage": "exam_v2_06",
+    "lesson": "Examen blanc V2 06",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique comment tu récupérerais les liens des films à partir de blocs HTML.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Je parcourrais chaque bloc de film, je chercherais la balise `a`, puis je lirais son attribut `href`. Si le site utilise des liens relatifs, je garderais le lien ou je le compléterais avec l'URL de base selon le besoin de l'exercice.",
+    "grading_checklist": [
+      "Parcourt les blocs",
+      "Cherche la balise a",
+      "Lit href",
+      "Mentionne les liens relatifs"
+    ]
+  },
+  {
+    "id": "exam_v2_06_q05",
+    "stage": "exam_v2_06",
+    "lesson": "Examen blanc V2 06",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement comment relier ce code aux étapes du cours.",
+    "code": "response = requests.get(url)\nsoup = BeautifulSoup(response.text, 'html.parser')\ntitres = [h2.get_text(strip=True) for h2 in soup.find_all('h2')]",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code suit le flux classique du cours : récupérer la page avec requests, analyser le HTML avec BeautifulSoup, trouver toutes les balises h2 et extraire leur texte proprement dans une liste.",
+    "grading_checklist": [
+      "requests.get",
+      "BeautifulSoup sur response.text",
+      "find_all('h2')",
+      "Liste de textes propres"
+    ]
+  },
+  {
+    "id": "exam_v2_07_q01",
+    "stage": "exam_v2_07",
+    "lesson": "Examen blanc V2 07",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "ventes = [3, 5, 2]\ntotal = 0\nfor vente in ventes:\n    total += vente\nprint(total)",
+    "correct_answer": "10",
+    "explanation": "La boucle additionne 3, 5 et 2."
+  },
+  {
+    "id": "exam_v2_07_q02",
+    "stage": "exam_v2_07",
+    "lesson": "Examen blanc V2 07",
+    "topic": "Pandas basics",
+    "difficulty": 4,
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule la moyenne de la colonne `total` ?",
+    "correct_answer": "df['total'].mean()",
+    "explanation": "La méthode mean appelée sur la colonne calcule sa moyenne.",
+    "options": [
+      "df['total'].mean()",
+      "df['total'].median()",
+      "df.mean['total']",
+      "mean(df['total'])"
+    ]
+  },
+  {
+    "id": "exam_v2_07_q03",
+    "stage": "exam_v2_07",
+    "lesson": "Examen blanc V2 07",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 4,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour récupérer le contenu HTML de la réponse `response`.",
+    "code": "response = requests.get(url)\nhtml = response.______",
+    "correct_answer": "text",
+    "explanation": "response.text contient le HTML sous forme de chaîne."
+  },
+  {
+    "id": "exam_v2_07_q04",
+    "stage": "exam_v2_07",
+    "lesson": "Examen blanc V2 07",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique pourquoi `find_all` est utilisé quand une page contient plusieurs cartes de films.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "J'utiliserais `find_all` parce qu'il renvoie toutes les balises correspondant au sélecteur, pas seulement la première. On peut ensuite parcourir la liste obtenue pour extraire chaque film.",
+    "grading_checklist": [
+      "find_all renvoie plusieurs éléments",
+      "find ne renvoie que le premier",
+      "Parcourt la liste obtenue"
+    ]
+  },
+  {
+    "id": "exam_v2_07_q05",
+    "stage": "exam_v2_07",
+    "lesson": "Examen blanc V2 07",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement ce que fait ce code et sa limite principale.",
+    "code": "note = bloc.find('span', class_='note')\nvaleur = note.get_text(strip=True)",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code cherche une balise `span` de classe `note` dans un bloc puis extrait son texte. Sa limite est qu'il peut échouer si la note est absente, car `note` vaudrait `None` et `get_text` provoquerait une erreur.",
+    "grading_checklist": [
+      "Recherche par balise et classe",
+      "Extraction du texte",
+      "Risque si l'élément manque"
+    ]
+  },
+  {
+    "id": "exam_v2_08_q01",
+    "stage": "exam_v2_08",
+    "lesson": "Examen blanc V2 08",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "nom = 'Alice'\nscore = 14\nprint(f'{nom}: {score}/20')",
+    "correct_answer": "Alice: 14/20",
+    "explanation": "La f-string insère les valeurs de nom et score."
+  },
+  {
+    "id": "exam_v2_08_q02",
+    "stage": "exam_v2_08",
+    "lesson": "Examen blanc V2 08",
+    "topic": "Pandas basics",
+    "difficulty": 4,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.drop(columns=['ancien_nom'])` supprime une colonne appelée `ancien_nom`.",
+    "correct_answer": true,
+    "explanation": "drop avec l'argument columns supprime les colonnes listées."
+  },
+  {
+    "id": "exam_v2_08_q03",
+    "stage": "exam_v2_08",
+    "lesson": "Examen blanc V2 08",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 4,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour trouver un tableau avec la classe `table`.",
+    "code": "table = soup.find('table', ______='table')",
+    "correct_answer": "class_",
+    "explanation": "class_ permet de filtrer sur l'attribut HTML class."
+  },
+  {
+    "id": "exam_v2_08_q04",
+    "stage": "exam_v2_08",
+    "lesson": "Examen blanc V2 08",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique comment passer de données extraites à un petit tableau Pandas.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Je stockerais d'abord les données dans une liste de dictionnaires avec des clés cohérentes. Ensuite, je créerais un DataFrame avec `pd.DataFrame(donnees)` pour inspecter les colonnes, filtrer ou calculer des statistiques simples.",
+    "grading_checklist": [
+      "Liste de dictionnaires",
+      "Clés cohérentes",
+      "Création avec pd.DataFrame",
+      "Inspection ou calcul simple"
+    ]
+  },
+  {
+    "id": "exam_v2_08_q05",
+    "stage": "exam_v2_08",
+    "lesson": "Examen blanc V2 08",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement comment ce code filtre des données après extraction.",
+    "code": "df_filtre = df[df['note'] >= 4]\nprint(df_filtre[['titre', 'note']].head())",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code garde uniquement les lignes dont la note est au moins 4, puis affiche les premières lignes avec seulement les colonnes titre et note. Il sert à inspecter rapidement les meilleurs éléments extraits.",
+    "grading_checklist": [
+      "Filtrage booléen",
+      "Sélection de colonnes",
+      "Inspection avec head",
+      "Interprétation des notes"
+    ]
+  },
+  {
+    "id": "exam_v2_09_q01",
+    "stage": "exam_v2_09",
+    "lesson": "Examen blanc V2 09",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "a = '12'\nb = 8\nprint(int(a) + b)",
+    "correct_answer": "20",
+    "explanation": "int(a) convertit la chaîne '12' en entier avant l'addition."
+  },
+  {
+    "id": "exam_v2_09_q02",
+    "stage": "exam_v2_09",
+    "lesson": "Examen blanc V2 09",
+    "topic": "Pandas basics",
+    "difficulty": 5,
+    "type": "multiple_choice",
+    "prompt": "Quel code trie `df` par la colonne `ventes` du plus grand au plus petit ?",
+    "correct_answer": "df.sort_values('ventes', ascending=False)",
+    "explanation": "ascending=False demande un tri décroissant.",
+    "options": [
+      "df.sort_values('ventes', ascending=False)",
+      "df.sort_values('ventes', ascending=True)",
+      "df.order_by('ventes')",
+      "df['ventes'].sort(False)"
+    ]
+  },
+  {
+    "id": "exam_v2_09_q03",
+    "stage": "exam_v2_09",
+    "lesson": "Examen blanc V2 09",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 4,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour récupérer les cellules `<td>` d'une ligne.",
+    "code": "cellules = ligne.______('td')",
+    "correct_answer": "find_all",
+    "explanation": "find_all récupère toutes les cellules de la ligne."
+  },
+  {
+    "id": "exam_v2_09_q04",
+    "stage": "exam_v2_09",
+    "lesson": "Examen blanc V2 09",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique une stratégie simple pour éviter de casser le script si une balise manque.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Avant d'appeler `get_text` ou de lire un attribut, je vérifierais que la balise trouvée n'est pas `None`. Si elle manque, je stockerais une valeur par défaut, ce qui rend le script plus robuste.",
+    "grading_checklist": [
+      "Vérifie que l'élément n'est pas None",
+      "Valeur par défaut",
+      "Évite une erreur d'attribut"
+    ]
+  },
+  {
+    "id": "exam_v2_09_q05",
+    "stage": "exam_v2_09",
+    "lesson": "Examen blanc V2 09",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement pourquoi ce code est utile après une extraction de catégories.",
+    "code": "comptes = df['categorie'].value_counts()\nprint(comptes)",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Ce code compte combien de fois chaque catégorie apparaît dans le DataFrame. Après un scraping, cela aide à comprendre la répartition des éléments extraits, par exemple les produits ou les films par catégorie.",
+    "grading_checklist": [
+      "value_counts",
+      "Compte par catégorie",
+      "Utilité après extraction"
+    ]
+  },
+  {
+    "id": "exam_v2_10_q01",
+    "stage": "exam_v2_10",
+    "lesson": "Examen blanc V2 10",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "produits = ['A', 'B', 'C', 'D']\nprint(produits[1:3])",
+    "correct_answer": "['B', 'C']",
+    "explanation": "Le slicing garde les indices 1 et 2, sans inclure l'indice 3."
+  },
+  {
+    "id": "exam_v2_10_q02",
+    "stage": "exam_v2_10",
+    "lesson": "Examen blanc V2 10",
+    "topic": "Pandas basics",
+    "difficulty": 5,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df['categorie'].value_counts()` compte les occurrences de chaque catégorie.",
+    "correct_answer": true,
+    "explanation": "value_counts regroupe les valeurs identiques et compte leur fréquence."
+  },
+  {
+    "id": "exam_v2_10_q03",
+    "stage": "exam_v2_10",
+    "lesson": "Examen blanc V2 10",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 4,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour extraire le premier paragraphe.",
+    "code": "paragraphe = soup.______('p')",
+    "correct_answer": "find",
+    "explanation": "find récupère la première balise p rencontrée."
+  },
+  {
+    "id": "exam_v2_10_q04",
+    "stage": "exam_v2_10",
+    "lesson": "Examen blanc V2 10",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique comment choisir entre `find` et `find_all` dans une extraction.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "J'utilise `find` quand je veux un seul élément, souvent le premier titre ou le premier tableau. J'utilise `find_all` quand je veux parcourir une collection, comme plusieurs liens, lignes ou cartes de films.",
+    "grading_checklist": [
+      "find pour un seul élément",
+      "find_all pour une liste",
+      "Donne un exemple HTML"
+    ]
+  },
+  {
+    "id": "exam_v2_10_q05",
+    "stage": "exam_v2_10",
+    "lesson": "Examen blanc V2 10",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement le fonctionnement de ce petit pipeline.",
+    "code": "cartes = soup.find_all('div', class_='card')\ndonnees = []\nfor carte in cartes:\n    titre = carte.find('h2').get_text(strip=True)\n    donnees.append({'titre': titre})",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code récupère toutes les cartes HTML, prépare une liste, puis extrait le titre h2 de chaque carte pour construire une liste de dictionnaires. C'est le début d'une table de données issue du HTML.",
+    "grading_checklist": [
+      "find_all sur les cartes",
+      "Boucle d'extraction",
+      "Titre nettoyé",
+      "Liste de dictionnaires"
+    ]
+  },
+  {
+    "id": "exam_v2_11_q01",
+    "stage": "exam_v2_11",
+    "lesson": "Examen blanc V2 11",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "stock = {'livre': 2}\nprint(stock.get('stylo', 0))",
+    "correct_answer": "0",
+    "explanation": "get renvoie la valeur par défaut 0 si la clé n'existe pas."
+  },
+  {
+    "id": "exam_v2_11_q02",
+    "stage": "exam_v2_11",
+    "lesson": "Examen blanc V2 11",
+    "topic": "Pandas basics",
+    "difficulty": 5,
+    "type": "multiple_choice",
+    "prompt": "Dans `df.groupby('categorie')['prix'].mean()`, quelle colonne sert à former les groupes ?",
+    "correct_answer": "categorie",
+    "explanation": "groupby('categorie') crée un groupe par valeur de la colonne categorie.",
+    "options": [
+      "categorie",
+      "prix",
+      "mean",
+      "df"
+    ]
+  },
+  {
+    "id": "exam_v2_11_q03",
+    "stage": "exam_v2_11",
+    "lesson": "Examen blanc V2 11",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 5,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour lire l'attribut `src` d'une image.",
+    "code": "image = soup.find('img')\nsource = image[______]",
+    "correct_answer": "'src'",
+    "explanation": "L'attribut src se lit avec la clé 'src'."
+  },
+  {
+    "id": "exam_v2_11_q04",
+    "stage": "exam_v2_11",
+    "lesson": "Examen blanc V2 11",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique pourquoi il faut regarder le HTML avant d'écrire les sélecteurs.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Observer le HTML permet d'identifier les bonnes balises, les classes et la structure répétée. Sans cette étape, on risque de chercher une classe inexistante ou d'extraire le mauvais texte.",
+    "grading_checklist": [
+      "Identifie balises/classes",
+      "Repère la structure répétée",
+      "Réduit les erreurs de sélection"
+    ]
+  },
+  {
+    "id": "exam_v2_11_q05",
+    "stage": "exam_v2_11",
+    "lesson": "Examen blanc V2 11",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement comment ce code utilise `loc`.",
+    "code": "nom = df.loc[0, 'nom']\nprint(f'Premier nom : {nom}')",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code récupère la valeur située sur la ligne d'étiquette 0 et dans la colonne `nom`, puis l'affiche dans une f-string. C'est un accès ciblé à une cellule du DataFrame.",
+    "grading_checklist": [
+      "Accès avec loc",
+      "Ligne 0",
+      "Colonne nom",
+      "Affichage formaté"
+    ]
+  },
+  {
+    "id": "exam_v2_12_q01",
+    "stage": "exam_v2_12",
+    "lesson": "Examen blanc V2 12",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "x = 4\ny = 9\nprint(x < 5 and y > 10)",
+    "correct_answer": "False",
+    "explanation": "La première condition est vraie, mais la seconde est fausse ; avec and, le résultat est False."
+  },
+  {
+    "id": "exam_v2_12_q02",
+    "stage": "exam_v2_12",
+    "lesson": "Examen blanc V2 12",
+    "topic": "Pandas basics",
+    "difficulty": 5,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[0, 'nom']` permet d'accéder à la valeur de la colonne `nom` sur la ligne d'étiquette 0.",
+    "correct_answer": true,
+    "explanation": "loc combine une étiquette de ligne et un nom de colonne."
+  },
+  {
+    "id": "exam_v2_12_q03",
+    "stage": "exam_v2_12",
+    "lesson": "Examen blanc V2 12",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 5,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour créer une liste des liens trouvés.",
+    "code": "liens = soup.______('a')",
+    "correct_answer": "find_all",
+    "explanation": "find_all('a') renvoie tous les liens."
+  },
+  {
+    "id": "exam_v2_12_q04",
+    "stage": "exam_v2_12",
+    "lesson": "Examen blanc V2 12",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique comment extraire un nombre depuis une cellule de tableau contenant des espaces.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Je commencerais par lire le texte avec `get_text(strip=True)`. Ensuite, selon le format vu dans la page, je supprimerais les espaces inutiles avant de convertir la valeur si un calcul est nécessaire.",
+    "grading_checklist": [
+      "get_text(strip=True)",
+      "Nettoie les espaces",
+      "Convertit seulement si nécessaire"
+    ]
+  },
+  {
+    "id": "exam_v2_12_q05",
+    "stage": "exam_v2_12",
+    "lesson": "Examen blanc V2 12",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement ce que ce code vérifie sur une réponse HTTP.",
+    "code": "response = requests.get(url)\nif response.status_code == 200:\n    soup = BeautifulSoup(response.text, 'html.parser')",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code récupère une page puis vérifie que le code HTTP vaut 200 avant de parser le HTML. Cela évite de traiter une réponse d'erreur comme une page valide.",
+    "grading_checklist": [
+      "Récupération de la page",
+      "Vérification du status_code",
+      "Parsing seulement si réussite"
+    ]
+  },
+  {
+    "id": "exam_v2_13_q01",
+    "stage": "exam_v2_13",
+    "lesson": "Examen blanc V2 13",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "for i in range(2, 5):\n    print(i)",
+    "correct_answer": "2\n3\n4",
+    "explanation": "range(2, 5) produit 2, 3 et 4."
+  },
+  {
+    "id": "exam_v2_13_q02",
+    "stage": "exam_v2_13",
+    "lesson": "Examen blanc V2 13",
+    "topic": "Pandas basics",
+    "difficulty": 5,
+    "type": "multiple_choice",
+    "prompt": "On veut renommer la colonne `montant` en `total`. Quelle ligne correspond au cours ?",
+    "correct_answer": "df = df.rename(columns={'montant': 'total'})",
+    "explanation": "rename avec columns reçoit un dictionnaire ancien nom vers nouveau nom.",
+    "options": [
+      "df = df.rename(columns={'montant': 'total'})",
+      "df.rename('montant', 'total')",
+      "df.columns.rename('montant', 'total')",
+      "df['montant'] = 'total'"
+    ]
+  },
+  {
+    "id": "exam_v2_13_q03",
+    "stage": "exam_v2_13",
+    "lesson": "Examen blanc V2 13",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 5,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour tester le code HTTP de la réponse.",
+    "code": "response = requests.get(url)\nprint(response.______)",
+    "correct_answer": "status_code",
+    "explanation": "status_code donne le code de statut HTTP."
+  },
+  {
+    "id": "exam_v2_13_q04",
+    "stage": "exam_v2_13",
+    "lesson": "Examen blanc V2 13",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique comment vérifier rapidement les données après scraping avant de les utiliser.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Je regarderais les premières entrées de la liste ou du DataFrame, puis je vérifierais les colonnes attendues, le nombre de lignes et quelques valeurs manquantes. Cela permet de repérer une extraction vide ou décalée.",
+    "grading_checklist": [
+      "Inspecte quelques résultats",
+      "Vérifie colonnes et lignes",
+      "Cherche valeurs manquantes"
+    ]
+  },
+  {
+    "id": "exam_v2_13_q05",
+    "stage": "exam_v2_13",
+    "lesson": "Examen blanc V2 13",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement comment ce code traite une colonne manquante ou incomplète.",
+    "code": "df = df.rename(columns={'montant': 'total'})\ndf['total'] = df['total'].fillna(0)",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code renomme d'abord la colonne `montant` en `total`, puis remplace les valeurs manquantes de cette colonne par 0. Il rend les données plus cohérentes pour les calculs suivants.",
+    "grading_checklist": [
+      "Renommage de colonne",
+      "fillna sur total",
+      "Préparation aux calculs"
+    ]
+  },
+  {
+    "id": "exam_v2_14_q01",
+    "stage": "exam_v2_14",
+    "lesson": "Examen blanc V2 14",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "def calcul(prix, quantite):\n    total = prix * quantite\n    return total, total > 30\nprint(calcul(8, 5))",
+    "correct_answer": "(40, True)",
+    "explanation": "La fonction renvoie deux valeurs : 40 et le booléen True."
+  },
+  {
+    "id": "exam_v2_14_q02",
+    "stage": "exam_v2_14",
+    "lesson": "Examen blanc V2 14",
+    "topic": "Pandas basics",
+    "difficulty": 5,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.describe()` donne des statistiques descriptives sur les colonnes numériques.",
+    "correct_answer": true,
+    "explanation": "describe résume les colonnes numériques avec count, mean, min, max, etc."
+  },
+  {
+    "id": "exam_v2_14_q03",
+    "stage": "exam_v2_14",
+    "lesson": "Examen blanc V2 14",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 5,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour trouver le titre principal `<h1>`.",
+    "code": "titre = soup.______('h1')",
+    "correct_answer": "find",
+    "explanation": "find('h1') récupère la première balise h1."
+  },
+  {
+    "id": "exam_v2_14_q04",
+    "stage": "exam_v2_14",
+    "lesson": "Examen blanc V2 14",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique comment tu structurerais une extraction de titres et de notes de films.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Je récupérerais chaque bloc de film, puis j'extrais le titre et la note avec des sélecteurs adaptés. Pour chaque film, j'ajoute un dictionnaire comme `{'titre': titre, 'note': note}` dans une liste commune.",
+    "grading_checklist": [
+      "Boucle sur les blocs",
+      "Extrait titre et note",
+      "Ajoute un dictionnaire par film"
+    ]
+  },
+  {
+    "id": "exam_v2_14_q05",
+    "stage": "exam_v2_14",
+    "lesson": "Examen blanc V2 14",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement ce que produit ce code de tableau HTML.",
+    "code": "lignes = table.find_all('tr')\nfor ligne in lignes:\n    cellules = [td.get_text(strip=True) for td in ligne.find_all('td')]\n    print(cellules)",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code parcourt les lignes du tableau, extrait le texte propre de chaque cellule td, puis affiche une petite liste par ligne. Il transforme progressivement le tableau HTML en données Python.",
+    "grading_checklist": [
+      "Parcours des tr",
+      "Extraction des td",
+      "Nettoyage des textes",
+      "Liste par ligne"
+    ]
+  },
+  {
+    "id": "exam_v2_15_q01",
+    "stage": "exam_v2_15",
+    "lesson": "Examen blanc V2 15",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "panier = []\npanier.insert(0, 'eau')\npanier.append('pain')\nprint(panier)",
+    "correct_answer": "['eau', 'pain']",
+    "explanation": "insert place 'eau' au début puis append ajoute 'pain' à la fin."
+  },
+  {
+    "id": "exam_v2_15_q02",
+    "stage": "exam_v2_15",
+    "lesson": "Examen blanc V2 15",
+    "topic": "Pandas basics",
+    "difficulty": 5,
+    "type": "multiple_choice",
+    "prompt": "Quel code ajoute une colonne `total` égale à `prix * quantite` ?",
+    "correct_answer": "df['total'] = df['prix'] * df['quantite']",
+    "explanation": "La nouvelle colonne est créée par affectation avec un calcul vectorisé.",
+    "options": [
+      "df['total'] = df['prix'] * df['quantite']",
+      "df.total = prix * quantite",
+      "df.add('total')",
+      "df['total'] = 'prix' * 'quantite'"
+    ]
+  },
+  {
+    "id": "exam_v2_15_q03",
+    "stage": "exam_v2_15",
+    "lesson": "Examen blanc V2 15",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 5,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour récupérer les colonnes d'une ligne de tableau.",
+    "code": "colonnes = ligne.______('td')",
+    "correct_answer": "find_all",
+    "explanation": "Les cellules d'une ligne sont représentées par des balises td."
+  },
+  {
+    "id": "exam_v2_15_q04",
+    "stage": "exam_v2_15",
+    "lesson": "Examen blanc V2 15",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique pourquoi il faut garder des sorties courtes quand on prépare une question predict-output.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Pour une question orale ou interactive, une sortie courte permet à l'étudiant de raisonner sans se perdre dans le formatage. On préfère donc des valeurs comme une forme, une moyenne ou une petite liste.",
+    "grading_checklist": [
+      "Sortie facile à vérifier",
+      "Évite les grands tableaux",
+      "Favorise le raisonnement"
+    ]
+  },
+  {
+    "id": "exam_v2_15_q05",
+    "stage": "exam_v2_15",
+    "lesson": "Examen blanc V2 15",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement l'intérêt de ce calcul Pandas.",
+    "code": "df['benefice'] = df['prix_vente'] - df['cout']\nprint(df['benefice'].mean())",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code crée une colonne bénéfice en soustrayant le coût du prix de vente, puis calcule le bénéfice moyen. C'est une mesure simple pour résumer la performance commerciale.",
+    "grading_checklist": [
+      "Colonne calculée",
+      "Soustraction prix/coût",
+      "Moyenne",
+      "Sens métier"
+    ]
+  },
+  {
+    "id": "exam_v2_16_q01",
+    "stage": "exam_v2_16",
+    "lesson": "Examen blanc V2 16",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "compteur = 3\nwhile compteur > 0:\n    compteur -= 1\nprint(compteur)",
+    "correct_answer": "0",
+    "explanation": "La boucle réduit compteur jusqu'à 0."
+  },
+  {
+    "id": "exam_v2_16_q02",
+    "stage": "exam_v2_16",
+    "lesson": "Examen blanc V2 16",
+    "topic": "Pandas basics",
+    "difficulty": 5,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.dropna()` supprime les lignes qui contiennent au moins une valeur manquante.",
+    "correct_answer": true,
+    "explanation": "dropna enlève par défaut les lignes contenant des valeurs manquantes."
+  },
+  {
+    "id": "exam_v2_16_q03",
+    "stage": "exam_v2_16",
+    "lesson": "Examen blanc V2 16",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 5,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour nettoyer le texte d'une cellule.",
+    "code": "valeur = cellule.get_text(______=True)",
+    "correct_answer": "strip",
+    "explanation": "strip=True retire les espaces autour du texte."
+  },
+  {
+    "id": "exam_v2_16_q04",
+    "stage": "exam_v2_16",
+    "lesson": "Examen blanc V2 16",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique comment filtrer des données Pandas après un scraping simple.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Après avoir créé un DataFrame, je peux utiliser un masque booléen, par exemple `df[df['note'] >= 4]`, pour garder seulement les lignes qui respectent la condition. Cela permet d'analyser une partie utile des données.",
+    "grading_checklist": [
+      "Crée un DataFrame",
+      "Utilise un masque booléen",
+      "Donne une condition concrète"
+    ]
+  },
+  {
+    "id": "exam_v2_16_q05",
+    "stage": "exam_v2_16",
+    "lesson": "Examen blanc V2 16",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement ce code d'extraction d'attribut.",
+    "code": "for a in soup.find_all('a'):\n    href = a.get('href')\n    if href:\n        print(href)",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code parcourt tous les liens de la page, récupère l'attribut `href` de chacun, puis affiche seulement les valeurs présentes. Il évite donc d'afficher des attributs absents.",
+    "grading_checklist": [
+      "find_all('a')",
+      "get('href')",
+      "Test de présence",
+      "Affichage des liens"
+    ]
+  },
+  {
+    "id": "exam_v2_17_q01",
+    "stage": "exam_v2_17",
+    "lesson": "Examen blanc V2 17",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "prix = 19.99\nprint(type(prix).__name__)",
+    "correct_answer": "float",
+    "explanation": "19.99 est une valeur décimale, donc son type est float."
+  },
+  {
+    "id": "exam_v2_17_q02",
+    "stage": "exam_v2_17",
+    "lesson": "Examen blanc V2 17",
+    "topic": "Pandas basics",
+    "difficulty": 5,
+    "type": "multiple_choice",
+    "prompt": "Quel code affiche les types de colonnes ?",
+    "correct_answer": "df.dtypes",
+    "explanation": "df.dtypes liste le type associé à chaque colonne.",
+    "options": [
+      "df.dtypes",
+      "df.types()",
+      "df.columns.types",
+      "df.info_types"
+    ]
+  },
+  {
+    "id": "exam_v2_17_q03",
+    "stage": "exam_v2_17",
+    "lesson": "Examen blanc V2 17",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 5,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour trouver une div de classe `card`.",
+    "code": "carte = soup.find('div', ______='card')",
+    "correct_answer": "class_",
+    "explanation": "class_ filtre l'attribut class sans conflit avec le mot réservé Python."
+  },
+  {
+    "id": "exam_v2_17_q04",
+    "stage": "exam_v2_17",
+    "lesson": "Examen blanc V2 17",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique pourquoi on nettoie les textes extraits avec `strip=True`.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Les textes HTML contiennent souvent des retours à la ligne ou des espaces autour de la valeur. `get_text(strip=True)` renvoie une chaîne plus propre, plus facile à comparer, stocker ou afficher.",
+    "grading_checklist": [
+      "Mentionne espaces/retours ligne",
+      "Utilise get_text(strip=True)",
+      "Rend les données plus propres"
+    ]
+  },
+  {
+    "id": "exam_v2_17_q05",
+    "stage": "exam_v2_17",
+    "lesson": "Examen blanc V2 17",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement ce code de tri après collecte.",
+    "code": "df = df.sort_values('note', ascending=False)\nprint(df[['titre', 'note']].head())",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code trie les lignes par note décroissante, puis affiche les premiers titres avec leur note. Cela permet d'inspecter rapidement les meilleurs résultats collectés.",
+    "grading_checklist": [
+      "Tri décroissant",
+      "Sélection titre/note",
+      "Inspection des premiers résultats"
+    ]
+  },
+  {
+    "id": "exam_v2_18_q01",
+    "stage": "exam_v2_18",
+    "lesson": "Examen blanc V2 18",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "noms = ['A', 'B']\nscores = [10, 12]\nfor nom, score in zip(noms, scores):\n    print(f'{nom}-{score}')",
+    "correct_answer": "A-10\nB-12",
+    "explanation": "zip associe les éléments de même position dans les deux listes."
+  },
+  {
+    "id": "exam_v2_18_q02",
+    "stage": "exam_v2_18",
+    "lesson": "Examen blanc V2 18",
+    "topic": "Pandas basics",
+    "difficulty": 5,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.info()` est utile pour voir les colonnes, les valeurs non nulles et les types.",
+    "correct_answer": true,
+    "explanation": "info donne une vue synthétique de la structure du DataFrame."
+  },
+  {
+    "id": "exam_v2_18_q03",
+    "stage": "exam_v2_18",
+    "lesson": "Examen blanc V2 18",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 5,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour récupérer les titres `<h2>`.",
+    "code": "titres = soup.______('h2')",
+    "correct_answer": "find_all",
+    "explanation": "find_all('h2') renvoie une liste de tous les titres h2."
+  },
+  {
+    "id": "exam_v2_18_q04",
+    "stage": "exam_v2_18",
+    "lesson": "Examen blanc V2 18",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique comment extraire toutes les URL d'une page de liens.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Je ferais `find_all('a')` pour obtenir tous les liens, puis je lirais `href` sur chaque balise. Je vérifierais aussi que l'attribut existe avant de l'ajouter à ma liste.",
+    "grading_checklist": [
+      "find_all('a')",
+      "Lecture de href",
+      "Vérification de l'attribut"
+    ]
+  },
+  {
+    "id": "exam_v2_18_q05",
+    "stage": "exam_v2_18",
+    "lesson": "Examen blanc V2 18",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement ce que fait cette fonction Python dans un contexte de ventes.",
+    "code": "def total_ligne(prix, quantite):\n    return prix * quantite\n\nmontant = total_ligne(9, 4)",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "La fonction reçoit un prix et une quantité, puis renvoie leur produit. L'appel avec 9 et 4 calcule un montant de ligne égal à 36, utile pour des exemples de ventes.",
+    "grading_checklist": [
+      "Paramètres prix et quantité",
+      "Retourne le produit",
+      "Interprétation ventes"
+    ]
+  },
+  {
+    "id": "exam_v2_19_q01",
+    "stage": "exam_v2_19",
+    "lesson": "Examen blanc V2 19",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "produit = {'nom': 'café'}\nproduit.update({'prix': 3})\nprint(produit['prix'])",
+    "correct_answer": "3",
+    "explanation": "update ajoute la clé 'prix' avec la valeur 3."
+  },
+  {
+    "id": "exam_v2_19_q02",
+    "stage": "exam_v2_19",
+    "lesson": "Examen blanc V2 19",
+    "topic": "Pandas basics",
+    "difficulty": 5,
+    "type": "multiple_choice",
+    "prompt": "Quel code sélectionne les lignes où `ville` vaut `'Paris'` ?",
+    "correct_answer": "df[df['ville'] == 'Paris']",
+    "explanation": "La condition produit un masque booléen utilisé pour filtrer les lignes.",
+    "options": [
+      "df[df['ville'] == 'Paris']",
+      "df['ville' == 'Paris']",
+      "df.where(ville = Paris)",
+      "df.loc['Paris']"
+    ]
+  },
+  {
+    "id": "exam_v2_19_q03",
+    "stage": "exam_v2_19",
+    "lesson": "Examen blanc V2 19",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 5,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour transformer une réponse HTTP en soupe BeautifulSoup.",
+    "code": "soup = BeautifulSoup(response.______, 'html.parser')",
+    "correct_answer": "text",
+    "explanation": "response.text fournit le HTML à analyser."
+  },
+  {
+    "id": "exam_v2_19_q04",
+    "stage": "exam_v2_19",
+    "lesson": "Examen blanc V2 19",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique l'intérêt de calculer un `value_counts` après avoir organisé des données extraites.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "`value_counts` permet de compter rapidement les occurrences d'une catégorie, par exemple le nombre de films par genre ou le nombre de produits par type. C'est une statistique simple utile après le nettoyage.",
+    "grading_checklist": [
+      "Compte les catégories",
+      "S'applique après organisation",
+      "Donne un exemple métier"
+    ]
+  },
+  {
+    "id": "exam_v2_19_q05",
+    "stage": "exam_v2_19",
+    "lesson": "Examen blanc V2 19",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement comment ce code construit des données régulières malgré des champs optionnels.",
+    "code": "donnees.append({\n    'titre': titre,\n    'note': note if note is not None else 'absente'\n})",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code ajoute un dictionnaire avec un titre et une note. Si la note manque, il met une valeur par défaut, ce qui garde les mêmes clés pour toutes les lignes.",
+    "grading_checklist": [
+      "Ajout d'un dictionnaire",
+      "Valeur par défaut",
+      "Structure régulière"
+    ]
+  },
+  {
+    "id": "exam_v2_20_q01",
+    "stage": "exam_v2_20",
+    "lesson": "Examen blanc V2 20",
+    "topic": "Python basics",
+    "difficulty": 4,
+    "type": "predict_output",
+    "prompt": "Que va afficher ce code Python ?",
+    "code": "valeurs = [6, 2, 9]\nvaleurs.remove(2)\nprint(sum(valeurs))",
+    "correct_answer": "15",
+    "explanation": "remove supprime 2, puis sum additionne 6 et 9."
+  },
+  {
+    "id": "exam_v2_20_q02",
+    "stage": "exam_v2_20",
+    "lesson": "Examen blanc V2 20",
+    "topic": "Pandas basics",
+    "difficulty": 5,
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df['ventes'].sum()` additionne toutes les valeurs de la colonne `ventes`.",
+    "correct_answer": true,
+    "explanation": "sum calcule la somme de la série."
+  },
+  {
+    "id": "exam_v2_20_q03",
+    "stage": "exam_v2_20",
+    "lesson": "Examen blanc V2 20",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 5,
+    "type": "fill_blank",
+    "prompt": "Complète la ligne pour lire le lien relatif d'un film.",
+    "code": "a = bloc.find('a')\nurl = a.get(______)",
+    "correct_answer": "'href'",
+    "explanation": "get('href') récupère l'attribut href sans exécuter le lien."
+  },
+  {
+    "id": "exam_v2_20_q04",
+    "stage": "exam_v2_20",
+    "lesson": "Examen blanc V2 20",
+    "topic": "scraping workflow",
+    "difficulty": 5,
+    "type": "short_answer",
+    "prompt": "Explique comment enchaîner récupération HTML, extraction et organisation en tableau.",
+    "explanation": "La réponse doit décrire une démarche concrète et vérifiable, pas seulement nommer une fonction.",
+    "oral_model_answer": "Je récupère d'abord le HTML avec `requests.get`, je le transforme en soupe BeautifulSoup, puis j'extrais les éléments utiles dans une liste de dictionnaires. Enfin, je peux créer un DataFrame pour inspecter et nettoyer les données.",
+    "grading_checklist": [
+      "requests.get",
+      "BeautifulSoup",
+      "Liste de dictionnaires",
+      "DataFrame final"
+    ]
+  },
+  {
+    "id": "exam_v2_20_q05",
+    "stage": "exam_v2_20",
+    "lesson": "Examen blanc V2 20",
+    "topic": "integrated oral-style",
+    "difficulty": 6,
+    "type": "oral_explanation",
+    "prompt": "Explique oralement comment ce code combine scraping et analyse simple.",
+    "code": "films = pd.DataFrame(donnees)\nprint(films.shape)\nprint(films['categorie'].value_counts())",
+    "explanation": "Une bonne réponse relie le code aux étapes du cours et précise le résultat attendu ou le risque principal.",
+    "oral_model_answer": "Le code transforme les données extraites en DataFrame, affiche sa forme pour vérifier le nombre de lignes et colonnes, puis compte les films par catégorie. C'est une vérification simple après scraping.",
+    "grading_checklist": [
+      "Création du DataFrame",
+      "Contrôle avec shape",
+      "value_counts sur catégorie",
+      "Analyse simple"
+    ]
+  }
+]
