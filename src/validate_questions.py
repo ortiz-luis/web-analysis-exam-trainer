@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -58,11 +59,24 @@ EXAM_V2_STAGE_ORDER = [f"exam_v2_{index:02d}" for index in range(1, 21)]
 EXAM_V2_STAGE_COUNTS = {stage: 5 for stage in EXAM_V2_STAGE_ORDER}
 EXAM_V2_EXPECTED_TOTAL = 100
 
+STRESS_DIFFICULTY_GROUPS = ("difficile", "tres_difficile", "extra_difficile")
+STRESS_STAGE_ORDER = [
+    f"stress_{group}_{index:02d}"
+    for group in STRESS_DIFFICULTY_GROUPS
+    for index in range(1, 11)
+]
+STRESS_STAGE_COUNTS = {stage: 5 for stage in STRESS_STAGE_ORDER}
+STRESS_EXPECTED_TOTAL = 150
+STRESS_STAGE_PATTERN = re.compile(
+    r"^stress_(difficile|tres_difficile|extra_difficile)_(0[1-9]|10)$"
+)
+
 
 def validate_question_bank(
     path: str | Path = DEFAULT_QUESTION_FILE,
     *,
     exam_v2: bool = False,
+    stress: bool = False,
 ) -> list[str]:
     question_path = Path(path)
     try:
@@ -72,13 +86,12 @@ def validate_question_bank(
 
     errors: list[str] = []
     seen_ids: set[str] = set()
-    stage_order = EXAM_V2_STAGE_ORDER if exam_v2 else STAGE_ORDER
-    expected_counts = EXAM_V2_STAGE_COUNTS if exam_v2 else EXPECTED_STAGE_COUNTS
-    expected_total = EXAM_V2_EXPECTED_TOTAL if exam_v2 else EXPECTED_TOTAL
+    stage_order, expected_counts, expected_total = _validation_shape(exam_v2, stress)
 
     for index, question in enumerate(questions, start=1):
         label = _question_label(question, index)
         errors.extend(_validate_required_fields(question, label))
+        errors.extend(_validate_non_empty_text(question, label))
 
         question_id = question.get("id")
         if question_id in seen_ids:
@@ -91,6 +104,8 @@ def validate_question_bank(
         errors.extend(_validate_difficulty(question, label))
 
     errors.extend(_validate_stage_counts(questions, stage_order, expected_counts, expected_total))
+    if stress:
+        errors.extend(_validate_stress_structure(questions))
 
     return errors
 
@@ -110,7 +125,11 @@ def print_validation_result(
 
 def main() -> int:
     args = parse_args()
-    errors = validate_question_bank(args.questions, exam_v2=args.exam_v2)
+    errors = validate_question_bank(
+        args.questions,
+        exam_v2=args.exam_v2,
+        stress=args.stress,
+    )
     print_validation_result(errors, args.questions)
     return 1 if errors else 0
 
@@ -124,12 +143,29 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default=DEFAULT_QUESTION_FILE,
         help="Path to the question bank JSON file.",
     )
-    parser.add_argument(
+    mode_group = parser.add_mutually_exclusive_group()
+    mode_group.add_argument(
         "--exam-v2",
         action="store_true",
         help="Validate the second exam-only mock question bank.",
     )
+    mode_group.add_argument(
+        "--stress",
+        action="store_true",
+        help="Validate the difficult timed mock exam question bank.",
+    )
     return parser.parse_args(argv)
+
+
+def _validation_shape(
+    exam_v2: bool,
+    stress: bool,
+) -> tuple[list[str], dict[str, int], int]:
+    if stress:
+        return STRESS_STAGE_ORDER, STRESS_STAGE_COUNTS, STRESS_EXPECTED_TOTAL
+    if exam_v2:
+        return EXAM_V2_STAGE_ORDER, EXAM_V2_STAGE_COUNTS, EXAM_V2_EXPECTED_TOTAL
+    return STAGE_ORDER, EXPECTED_STAGE_COUNTS, EXPECTED_TOTAL
 
 
 def _read_questions(path: Path) -> list[dict[str, Any]]:
@@ -158,6 +194,18 @@ def _validate_required_fields(question: Any, label: str) -> list[str]:
 
     fields = ", ".join(sorted(missing))
     return [f"{label}: missing required field(s): {fields}."]
+
+
+def _validate_non_empty_text(question: Any, label: str) -> list[str]:
+    if not isinstance(question, dict):
+        return []
+
+    errors: list[str] = []
+    for field in ("prompt", "explanation"):
+        value = question.get(field)
+        if not isinstance(value, str) or not value.strip():
+            errors.append(f"{label}: {field} must be a non-empty string.")
+    return errors
 
 
 def _validate_type_rules(question: Any, label: str) -> list[str]:
@@ -269,6 +317,49 @@ def _validate_stage_counts(
                 f"Stage {stage!r} must contain exactly {expected_count} questions; "
                 f"found {actual_count}."
             )
+
+    return errors
+
+
+def _validate_stress_structure(questions: list[dict[str, Any]]) -> list[str]:
+    errors: list[str] = []
+    stages = [
+        question.get("stage")
+        for question in questions
+        if isinstance(question, dict) and isinstance(question.get("stage"), str)
+    ]
+    unique_stages = set(stages)
+
+    if len(unique_stages) != 30:
+        errors.append(
+            f"Stress bank must contain exactly 30 stages; found {len(unique_stages)}."
+        )
+
+    groups = {
+        match.group(1)
+        for stage in unique_stages
+        if (match := STRESS_STAGE_PATTERN.match(stage))
+    }
+    if groups != set(STRESS_DIFFICULTY_GROUPS):
+        found = ", ".join(sorted(groups)) or "none"
+        errors.append(f"Stress bank must contain exactly 3 difficulty groups; found {found}.")
+
+    for group in STRESS_DIFFICULTY_GROUPS:
+        group_stages = [
+            stage
+            for stage in unique_stages
+            if STRESS_STAGE_PATTERN.match(stage)
+            and stage.startswith(f"stress_{group}_")
+        ]
+        if len(group_stages) != 10:
+            errors.append(
+                f"Stress difficulty group {group!r} must contain exactly 10 mocks; "
+                f"found {len(group_stages)}."
+            )
+
+    for stage in unique_stages:
+        if not STRESS_STAGE_PATTERN.match(stage):
+            errors.append(f"Stress stage {stage!r} does not match the required pattern.")
 
     return errors
 

@@ -12,6 +12,7 @@ Questions unlock stage by stage as each available stage is completed.
 
 - `python -m src.validate_questions data/questions_course.json`
 - `python -m src.validate_questions data/exam_mocks_v2.json --exam-v2`
+- `python -m src.validate_questions data/exam_mocks_stress.json --stress`
 - `python -m unittest discover`
 - `python -m src.trainer --questions data/questions_course.json`
 - `streamlit run src/app_streamlit.py`
@@ -23,6 +24,14 @@ questions and the first 10 exam mocks. The second exam-only battery is stored in
 `data/exam_mocks_v2.json` with 20 additional five-question mocks designed to
 avoid memorized answers. In Streamlit, `Examen blanc` exposes both Batterie V1
 and Batterie V2.
+
+## Examen blanc stress
+
+`data/exam_mocks_stress.json` contains 150 exclusive harder questions based only
+on the official course notebooks. The Streamlit mode `Examen blanc stress`
+offers three levels: Difficile, Très difficile, and Extra difficile. Each level
+contains 10 timed five-question mocks, with timer choices of disabled, 30, 45,
+or 60 seconds per question.
 
 ## Double-click launcher
 

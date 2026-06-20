@@ -1,0 +1,2162 @@
+[
+  {
+    "id": "stress_difficile_01_q01",
+    "stage": "stress_difficile_01",
+    "lesson": "Examen blanc stress Difficile 01",
+    "topic": "Python basics",
+    "difficulty": 7,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "tickets = [18, 24, 31]\ntickets[1] += 3\nprint(tickets[1] + tickets[-1])",
+    "correct_answer": "58",
+    "explanation": "La liste est modifiée à l'indice 1 : 24 devient 27, puis 27 + 31 donne 58."
+  },
+  {
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule `sum` de `revenu` par `segment` sans changer le DataFrame d'origine ?",
+    "options": [
+      "df.groupby('segment')['revenu'].sum()",
+      "df['segment'].groupby('revenu').sum()",
+      "df.groupby('revenu')['segment'].sum()",
+      "df.sum('segment', 'revenu')"
+    ],
+    "correct_answer": "df.groupby('segment')['revenu'].sum()",
+    "explanation": "`groupby('segment')` forme les groupes, puis la colonne `revenu` est agrégée avec `sum`.",
+    "id": "stress_difficile_01_q02",
+    "stage": "stress_difficile_01",
+    "lesson": "Examen blanc stress Difficile 01",
+    "topic": "Pandas",
+    "difficulty": 7
+  },
+  {
+    "id": "stress_difficile_01_q03",
+    "stage": "stress_difficile_01",
+    "lesson": "Examen blanc stress Difficile 01",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 7,
+    "type": "fill_blank",
+    "prompt": "Complète pour récupérer les blocs de films.",
+    "code": "blocs = soup.______('li', class_='film-card-x1')",
+    "correct_answer": "find_all",
+    "explanation": "find_all récupère tous les éléments qui correspondent à la balise et à la classe."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter une page qui répond mais dont le tableau attendu est absent.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour une page qui répond mais dont le tableau attendu est absent, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_difficile_01_q04",
+    "stage": "stress_difficile_01",
+    "lesson": "Examen blanc stress Difficile 01",
+    "topic": "scraping workflow",
+    "difficulty": 7,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "resultats = []\nfor carte in soup.find_all('li', class_='film-mini'):\n    lien = carte.find('a')\n    titre = carte.find('h2')\n    if lien and titre:\n        resultats.append({'titre': titre.get_text(strip=True), 'url': lien.get('href')})",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Ce code parcourt des cartes de films, vérifie que le lien et le titre existent, puis stocke un dictionnaire par film. C'est une extraction robuste de titres et d'URL relatives.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_difficile_01_q05",
+    "stage": "stress_difficile_01",
+    "lesson": "Examen blanc stress Difficile 01",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 7,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_difficile_02_q01",
+    "stage": "stress_difficile_02",
+    "lesson": "Examen blanc stress Difficile 02",
+    "topic": "Python basics",
+    "difficulty": 7,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "panier = {'livres': 2, 'stylos': 5}\npanier['stylos'] -= 2\nprint(panier.get('gommes', 1) + panier['stylos'])",
+    "correct_answer": "4",
+    "explanation": "get renvoie 1 pour la clé absente et il reste 3 stylos, donc 1 + 3 = 4."
+  },
+  {
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[df['note'] >= 19, 'genre']` sélectionne la colonne `genre` seulement pour les lignes dont `note` atteint le seuil.",
+    "correct_answer": true,
+    "explanation": "Avec `.loc`, la première partie filtre les lignes et la seconde choisit la colonne à retourner.",
+    "id": "stress_difficile_02_q02",
+    "stage": "stress_difficile_02",
+    "lesson": "Examen blanc stress Difficile 02",
+    "topic": "Pandas",
+    "difficulty": 7
+  },
+  {
+    "id": "stress_difficile_02_q03",
+    "stage": "stress_difficile_02",
+    "lesson": "Examen blanc stress Difficile 02",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 7,
+    "type": "fill_blank",
+    "prompt": "Complète pour lire le texte nettoyé d'un titre.",
+    "code": "titre = bloc.find('h2').get_text(______=True)",
+    "correct_answer": "strip",
+    "explanation": "strip=True retire les espaces autour du texte extrait."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter des cartes de films avec parfois un titre manquant.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour des cartes de films avec parfois un titre manquant, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_difficile_02_q04",
+    "stage": "stress_difficile_02",
+    "lesson": "Examen blanc stress Difficile 02",
+    "topic": "scraping workflow",
+    "difficulty": 7,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "df = pd.DataFrame(resultats)\ndf['note'] = df['note'].fillna(0)\nmeilleurs = df[df['note'] >= 4]",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Ce code transforme les résultats en DataFrame, remplace les notes absentes par 0, puis garde seulement les lignes dont la note atteint 4. Il combine nettoyage et filtrage.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_difficile_02_q05",
+    "stage": "stress_difficile_02",
+    "lesson": "Examen blanc stress Difficile 02",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 7,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_difficile_03_q01",
+    "stage": "stress_difficile_03",
+    "lesson": "Examen blanc stress Difficile 03",
+    "topic": "Python basics",
+    "difficulty": 7,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "montant = 64\nclient_fidele = False\nif montant > 60 and client_fidele:\n    remise = 10\nelif montant > 60:\n    remise = 5\nelse:\n    remise = 0\nprint(remise)",
+    "correct_answer": "5",
+    "explanation": "La première condition échoue à cause de client_fidele False, mais le elif est vrai."
+  },
+  {
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule `max` de `stock` par `rayon` sans changer le DataFrame d'origine ?",
+    "options": [
+      "df.groupby('rayon')['stock'].max()",
+      "df['rayon'].groupby('stock').max()",
+      "df.groupby('stock')['rayon'].max()",
+      "df.max('rayon', 'stock')"
+    ],
+    "correct_answer": "df.groupby('rayon')['stock'].max()",
+    "explanation": "`groupby('rayon')` forme les groupes, puis la colonne `stock` est agrégée avec `max`.",
+    "id": "stress_difficile_03_q02",
+    "stage": "stress_difficile_03",
+    "lesson": "Examen blanc stress Difficile 03",
+    "topic": "Pandas",
+    "difficulty": 7
+  },
+  {
+    "id": "stress_difficile_03_q03",
+    "stage": "stress_difficile_03",
+    "lesson": "Examen blanc stress Difficile 03",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 7,
+    "type": "fill_blank",
+    "prompt": "Complète pour lire un lien relatif.",
+    "code": "href = bloc.find('a').get(______)",
+    "correct_answer": "'href'",
+    "explanation": "get('href') lit l'attribut href de la balise a."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter une extraction de liens relatifs sur plusieurs pages.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour une extraction de liens relatifs sur plusieurs pages, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_difficile_03_q04",
+    "stage": "stress_difficile_03",
+    "lesson": "Examen blanc stress Difficile 03",
+    "topic": "scraping workflow",
+    "difficulty": 7,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "for page in range(1, 4):\n    url = f'{base}?page={page}'\n    soup = BeautifulSoup(requests.get(url).text, 'html.parser')\n    titres.extend([h2.get_text(strip=True) for h2 in soup.find_all('h2')])",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Ce code parcourt trois pages, construit une URL de pagination, parse chaque page et ajoute tous les titres h2 nettoyés à une liste commune.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_difficile_03_q05",
+    "stage": "stress_difficile_03",
+    "lesson": "Examen blanc stress Difficile 03",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 7,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_difficile_04_q01",
+    "stage": "stress_difficile_04",
+    "lesson": "Examen blanc stress Difficile 04",
+    "topic": "Python basics",
+    "difficulty": 7,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "def detail(prix, quantite):\n    total = prix * quantite\n    return total, total >= 40\n\nprint(detail(9, 5)[1])",
+    "correct_answer": "True",
+    "explanation": "La fonction renvoie (45, True), puis l'indice 1 récupère True."
+  },
+  {
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[df['age'] >= 21, 'equipe']` sélectionne la colonne `equipe` seulement pour les lignes dont `age` atteint le seuil.",
+    "correct_answer": true,
+    "explanation": "Avec `.loc`, la première partie filtre les lignes et la seconde choisit la colonne à retourner.",
+    "id": "stress_difficile_04_q02",
+    "stage": "stress_difficile_04",
+    "lesson": "Examen blanc stress Difficile 04",
+    "topic": "Pandas",
+    "difficulty": 7
+  },
+  {
+    "id": "stress_difficile_04_q03",
+    "stage": "stress_difficile_04",
+    "lesson": "Examen blanc stress Difficile 04",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 7,
+    "type": "fill_blank",
+    "prompt": "Complète pour parser le HTML reçu.",
+    "code": "soup = BeautifulSoup(response.______, 'html.parser')",
+    "correct_answer": "text",
+    "explanation": "response.text contient le HTML à analyser."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter un tableau HTML dont certaines lignes ont moins de cellules.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour un tableau HTML dont certaines lignes ont moins de cellules, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_difficile_04_q04",
+    "stage": "stress_difficile_04",
+    "lesson": "Examen blanc stress Difficile 04",
+    "topic": "scraping workflow",
+    "difficulty": 7,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "cellules = [td.get_text(strip=True) for td in ligne.find_all('td')]\nif len(cellules) >= 2:\n    donnees.append({'pays': cellules[0], 'population': cellules[1]})",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code transforme une ligne de tableau HTML en liste de textes propres, puis ajoute un dictionnaire seulement si la ligne contient assez de cellules.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_difficile_04_q05",
+    "stage": "stress_difficile_04",
+    "lesson": "Examen blanc stress Difficile 04",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 7,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_difficile_05_q01",
+    "stage": "stress_difficile_05",
+    "lesson": "Examen blanc stress Difficile 05",
+    "topic": "Python basics",
+    "difficulty": 7,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "noms = ['Ada', 'Ben', 'Chloé']\npoints = [7, 4, 8]\ntotal = 0\nfor nom, point in zip(noms, points):\n    if point >= 7:\n        total += len(nom)\nprint(total)",
+    "correct_answer": "8",
+    "explanation": "Ada et Chloé sont gardées ; leurs longueurs 3 et 5 donnent 8."
+  },
+  {
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule `mean` de `panier` par `ville` sans changer le DataFrame d'origine ?",
+    "options": [
+      "df.groupby('ville')['panier'].mean()",
+      "df['ville'].groupby('panier').mean()",
+      "df.groupby('panier')['ville'].mean()",
+      "df.mean('ville', 'panier')"
+    ],
+    "correct_answer": "df.groupby('ville')['panier'].mean()",
+    "explanation": "`groupby('ville')` forme les groupes, puis la colonne `panier` est agrégée avec `mean`.",
+    "id": "stress_difficile_05_q02",
+    "stage": "stress_difficile_05",
+    "lesson": "Examen blanc stress Difficile 05",
+    "topic": "Pandas",
+    "difficulty": 7
+  },
+  {
+    "id": "stress_difficile_05_q03",
+    "stage": "stress_difficile_05",
+    "lesson": "Examen blanc stress Difficile 05",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 7,
+    "type": "fill_blank",
+    "prompt": "Complète l'argument de classe CSS.",
+    "code": "note = bloc.find('span', ______='rating-small')",
+    "correct_answer": "class_",
+    "explanation": "class_ est la forme Python utilisée pour filtrer l'attribut HTML class."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter une liste de dictionnaires avant création d'un DataFrame.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour une liste de dictionnaires avant création d'un DataFrame, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_difficile_05_q04",
+    "stage": "stress_difficile_05",
+    "lesson": "Examen blanc stress Difficile 05",
+    "topic": "scraping workflow",
+    "difficulty": 7,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "films = pd.read_csv('films.csv')\nliens = films['url'].dropna().tolist()\nprint(len(liens))",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Ce code réimporte un CSV, enlève les URL manquantes, convertit la colonne en liste et affiche le nombre de liens exploitables.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_difficile_05_q05",
+    "stage": "stress_difficile_05",
+    "lesson": "Examen blanc stress Difficile 05",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 7,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_difficile_06_q01",
+    "stage": "stress_difficile_06",
+    "lesson": "Examen blanc stress Difficile 06",
+    "topic": "Python basics",
+    "difficulty": 7,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "reste = 17\ncoups = 0\nwhile reste > 5:\n    reste -= 4\n    coups += 1\nprint(reste, coups)",
+    "correct_answer": "5 3",
+    "explanation": "La boucle passe par 13, 9, puis 5 et s'arrête après 3 tours."
+  },
+  {
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[df['delai'] >= 23, 'source']` sélectionne la colonne `source` seulement pour les lignes dont `delai` atteint le seuil.",
+    "correct_answer": true,
+    "explanation": "Avec `.loc`, la première partie filtre les lignes et la seconde choisit la colonne à retourner.",
+    "id": "stress_difficile_06_q02",
+    "stage": "stress_difficile_06",
+    "lesson": "Examen blanc stress Difficile 06",
+    "topic": "Pandas",
+    "difficulty": 7
+  },
+  {
+    "id": "stress_difficile_06_q03",
+    "stage": "stress_difficile_06",
+    "lesson": "Examen blanc stress Difficile 06",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 7,
+    "type": "fill_blank",
+    "prompt": "Complète pour récupérer les lignes d'un tableau.",
+    "code": "lignes = tableau.______('tr')",
+    "correct_answer": "find_all",
+    "explanation": "Un tableau contient plusieurs balises tr, donc on utilise find_all."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter un DataFrame avec des notes manquantes après scraping.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour un DataFrame avec des notes manquantes après scraping, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_difficile_06_q04",
+    "stage": "stress_difficile_06",
+    "lesson": "Examen blanc stress Difficile 06",
+    "topic": "scraping workflow",
+    "difficulty": 7,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "fiche = {}\nfor ligne in soup.find_all('div', class_='meta-row'):\n    cle = ligne.find('span', class_='label')\n    valeur = ligne.find('span', class_='value')\n    if cle and valeur:\n        fiche[cle.get_text(strip=True)] = valeur.get_text(strip=True)",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code construit un dictionnaire de fiche technique en parcourant les lignes de métadonnées et en vérifiant l'existence des libellés et valeurs.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_difficile_06_q05",
+    "stage": "stress_difficile_06",
+    "lesson": "Examen blanc stress Difficile 06",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 7,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_difficile_07_q01",
+    "stage": "stress_difficile_07",
+    "lesson": "Examen blanc stress Difficile 07",
+    "topic": "Python basics",
+    "difficulty": 7,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "prix = '14.5'\nquantite = 2\nprint(f\"Total:{float(prix) * quantite}\")",
+    "correct_answer": "Total:29.0",
+    "explanation": "La chaîne est convertie en float avant la multiplication."
+  },
+  {
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule `mean` de `prix` par `categorie` sans changer le DataFrame d'origine ?",
+    "options": [
+      "df.groupby('categorie')['prix'].mean()",
+      "df['categorie'].groupby('prix').mean()",
+      "df.groupby('prix')['categorie'].mean()",
+      "df.mean('categorie', 'prix')"
+    ],
+    "correct_answer": "df.groupby('categorie')['prix'].mean()",
+    "explanation": "`groupby('categorie')` forme les groupes, puis la colonne `prix` est agrégée avec `mean`.",
+    "id": "stress_difficile_07_q02",
+    "stage": "stress_difficile_07",
+    "lesson": "Examen blanc stress Difficile 07",
+    "topic": "Pandas",
+    "difficulty": 7
+  },
+  {
+    "id": "stress_difficile_07_q03",
+    "stage": "stress_difficile_07",
+    "lesson": "Examen blanc stress Difficile 07",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 7,
+    "type": "fill_blank",
+    "prompt": "Complète pour récupérer les cellules d'une ligne.",
+    "code": "cellules = ligne.______('td')",
+    "correct_answer": "find_all",
+    "explanation": "Chaque ligne peut contenir plusieurs cellules td."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter un CSV réimporté pour choisir un film au hasard.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour un CSV réimporté pour choisir un film au hasard, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_difficile_07_q04",
+    "stage": "stress_difficile_07",
+    "lesson": "Examen blanc stress Difficile 07",
+    "topic": "scraping workflow",
+    "difficulty": 7,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "df['total'] = df['prix'] * df['quantite']\nresume = df.groupby('categorie')['total'].sum()\nprint(resume.max())",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code calcule une colonne total, agrège les ventes par catégorie, puis affiche la plus grande somme obtenue.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_difficile_07_q05",
+    "stage": "stress_difficile_07",
+    "lesson": "Examen blanc stress Difficile 07",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 7,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_difficile_08_q01",
+    "stage": "stress_difficile_08",
+    "lesson": "Examen blanc stress Difficile 08",
+    "topic": "Python basics",
+    "difficulty": 7,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "files = ['a.csv', 'b.csv', 'c.csv']\nfiles.insert(1, 'notes.csv')\nfiles.remove('b.csv')\nprint(files[1:])",
+    "correct_answer": "['notes.csv', 'c.csv']",
+    "explanation": "insert ajoute notes.csv à l'indice 1, puis b.csv est supprimé."
+  },
+  {
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[df['quantite'] >= 25, 'magasin']` sélectionne la colonne `magasin` seulement pour les lignes dont `quantite` atteint le seuil.",
+    "correct_answer": true,
+    "explanation": "Avec `.loc`, la première partie filtre les lignes et la seconde choisit la colonne à retourner.",
+    "id": "stress_difficile_08_q02",
+    "stage": "stress_difficile_08",
+    "lesson": "Examen blanc stress Difficile 08",
+    "topic": "Pandas",
+    "difficulty": 7
+  },
+  {
+    "id": "stress_difficile_08_q03",
+    "stage": "stress_difficile_08",
+    "lesson": "Examen blanc stress Difficile 08",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 7,
+    "type": "fill_blank",
+    "prompt": "Complète pour tester le code HTTP.",
+    "code": "if response.______ == 200:\n    soup = BeautifulSoup(response.text, 'html.parser')",
+    "correct_answer": "status_code",
+    "explanation": "status_code permet de vérifier la réponse avant le parsing."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter une boucle de pagination qui accumule les résultats.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour une boucle de pagination qui accumule les résultats, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_difficile_08_q04",
+    "stage": "stress_difficile_08",
+    "lesson": "Examen blanc stress Difficile 08",
+    "topic": "scraping workflow",
+    "difficulty": 7,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "response = requests.get(url)\nif response.status_code == 200:\n    soup = BeautifulSoup(response.text, 'html.parser')\nelse:\n    soup = None",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code vérifie le statut HTTP avant de parser le HTML. Si la réponse n'est pas correcte, il évite de créer une soupe à partir d'une page d'erreur.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_difficile_08_q05",
+    "stage": "stress_difficile_08",
+    "lesson": "Examen blanc stress Difficile 08",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 7,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_difficile_09_q01",
+    "stage": "stress_difficile_09",
+    "lesson": "Examen blanc stress Difficile 09",
+    "topic": "Python basics",
+    "difficulty": 7,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "somme = 0\nfor indice in range(1, 6, 2):\n    somme += indice * 2\nprint(somme)",
+    "correct_answer": "18",
+    "explanation": "range produit 1, 3, 5 ; doublés puis additionnés, ils donnent 18."
+  },
+  {
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule `max` de `score` par `classe` sans changer le DataFrame d'origine ?",
+    "options": [
+      "df.groupby('classe')['score'].max()",
+      "df['classe'].groupby('score').max()",
+      "df.groupby('score')['classe'].max()",
+      "df.max('classe', 'score')"
+    ],
+    "correct_answer": "df.groupby('classe')['score'].max()",
+    "explanation": "`groupby('classe')` forme les groupes, puis la colonne `score` est agrégée avec `max`.",
+    "id": "stress_difficile_09_q02",
+    "stage": "stress_difficile_09",
+    "lesson": "Examen blanc stress Difficile 09",
+    "topic": "Pandas",
+    "difficulty": 7
+  },
+  {
+    "id": "stress_difficile_09_q03",
+    "stage": "stress_difficile_09",
+    "lesson": "Examen blanc stress Difficile 09",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 7,
+    "type": "fill_blank",
+    "prompt": "Complète pour trouver une seule fiche technique.",
+    "code": "fiche = soup.______('section', class_='tech-data')",
+    "correct_answer": "find",
+    "explanation": "find renvoie le premier élément correspondant."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter une fiche technique dont les libellés changent selon le film.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour une fiche technique dont les libellés changent selon le film, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_difficile_09_q04",
+    "stage": "stress_difficile_09",
+    "lesson": "Examen blanc stress Difficile 09",
+    "topic": "scraping workflow",
+    "difficulty": 7,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "notes = []\nfor bloc in blocs:\n    note = bloc.find('span', class_='note')\n    notes.append(note.get_text(strip=True) if note else 'absente')",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code extrait une note quand elle existe et stocke une valeur par défaut sinon, ce qui garde une liste alignée avec les blocs parcourus.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_difficile_09_q05",
+    "stage": "stress_difficile_09",
+    "lesson": "Examen blanc stress Difficile 09",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 7,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_difficile_10_q01",
+    "stage": "stress_difficile_10",
+    "lesson": "Examen blanc stress Difficile 10",
+    "topic": "Python basics",
+    "difficulty": 7,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "ventes = [12, 0, 7]\nstatut = []\nfor vente in ventes:\n    statut.append(vente > 5)\nprint(statut.count(True))",
+    "correct_answer": "2",
+    "explanation": "Deux ventes, 12 et 7, sont strictement supérieures à 5."
+  },
+  {
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[df['marge'] >= 27, 'produit']` sélectionne la colonne `produit` seulement pour les lignes dont `marge` atteint le seuil.",
+    "correct_answer": true,
+    "explanation": "Avec `.loc`, la première partie filtre les lignes et la seconde choisit la colonne à retourner.",
+    "id": "stress_difficile_10_q02",
+    "stage": "stress_difficile_10",
+    "lesson": "Examen blanc stress Difficile 10",
+    "topic": "Pandas",
+    "difficulty": 7
+  },
+  {
+    "id": "stress_difficile_10_q03",
+    "stage": "stress_difficile_10",
+    "lesson": "Examen blanc stress Difficile 10",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 7,
+    "type": "fill_blank",
+    "prompt": "Complète pour construire l'URL de pagination.",
+    "code": "url = base + f'?page={______}'",
+    "correct_answer": "page",
+    "explanation": "La variable de boucle page est insérée dans l'URL paginée."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter un contrôle rapide des résultats avant sauvegarde CSV.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour un contrôle rapide des résultats avant sauvegarde CSV, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_difficile_10_q04",
+    "stage": "stress_difficile_10",
+    "lesson": "Examen blanc stress Difficile 10",
+    "topic": "scraping workflow",
+    "difficulty": 7,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "df = pd.DataFrame(donnees)\nprint(df.shape)\nprint(df.columns)\nprint(df.head())",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code crée un DataFrame puis vérifie sa forme, ses colonnes et ses premières lignes. C'est un contrôle rapide après extraction.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_difficile_10_q05",
+    "stage": "stress_difficile_10",
+    "lesson": "Examen blanc stress Difficile 10",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 7,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_tres_difficile_01_q01",
+    "stage": "stress_tres_difficile_01",
+    "lesson": "Examen blanc stress Très difficile 01",
+    "topic": "Python basics",
+    "difficulty": 8,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "lignes = [{'prix': 8, 'qte': 3}, {'prix': 5, 'qte': 4}]\ntotal = 0\nfor ligne in lignes:\n    total += ligne['prix'] * ligne['qte']\nprint(total)",
+    "correct_answer": "44",
+    "explanation": "La boucle additionne 8*3 et 5*4, soit 24 + 20."
+  },
+  {
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule `sum` de `revenu` par `segment` sans changer le DataFrame d'origine ?",
+    "options": [
+      "df.groupby('segment')['revenu'].sum()",
+      "df['segment'].groupby('revenu').sum()",
+      "df.groupby('revenu')['segment'].sum()",
+      "df.sum('segment', 'revenu')"
+    ],
+    "correct_answer": "df.groupby('segment')['revenu'].sum()",
+    "explanation": "`groupby('segment')` forme les groupes, puis la colonne `revenu` est agrégée avec `sum`.",
+    "id": "stress_tres_difficile_01_q02",
+    "stage": "stress_tres_difficile_01",
+    "lesson": "Examen blanc stress Très difficile 01",
+    "topic": "Pandas",
+    "difficulty": 8
+  },
+  {
+    "id": "stress_tres_difficile_01_q03",
+    "stage": "stress_tres_difficile_01",
+    "lesson": "Examen blanc stress Très difficile 01",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 8,
+    "type": "fill_blank",
+    "prompt": "Complète pour récupérer les blocs de films.",
+    "code": "blocs = soup.______('li', class_='film-card-x1')",
+    "correct_answer": "find_all",
+    "explanation": "find_all récupère tous les éléments qui correspondent à la balise et à la classe."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter une page qui répond mais dont le tableau attendu est absent.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour une page qui répond mais dont le tableau attendu est absent, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_tres_difficile_01_q04",
+    "stage": "stress_tres_difficile_01",
+    "lesson": "Examen blanc stress Très difficile 01",
+    "topic": "scraping workflow",
+    "difficulty": 8,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "resultats = []\nfor carte in soup.find_all('li', class_='film-mini'):\n    lien = carte.find('a')\n    titre = carte.find('h2')\n    if lien and titre:\n        resultats.append({'titre': titre.get_text(strip=True), 'url': lien.get('href')})",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Ce code parcourt des cartes de films, vérifie que le lien et le titre existent, puis stocke un dictionnaire par film. C'est une extraction robuste de titres et d'URL relatives.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_tres_difficile_01_q05",
+    "stage": "stress_tres_difficile_01",
+    "lesson": "Examen blanc stress Très difficile 01",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 8,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_tres_difficile_02_q01",
+    "stage": "stress_tres_difficile_02",
+    "lesson": "Examen blanc stress Très difficile 02",
+    "topic": "Python basics",
+    "difficulty": 8,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "def etiqueter(nom, score):\n    if score >= 10:\n        return f'{nom}:ok'\n    return f'{nom}:à revoir'\n\nprint(etiqueter('Léo', 9))",
+    "correct_answer": "Léo:à revoir",
+    "explanation": "Le score 9 ne satisfait pas la condition, donc la fonction renvoie la deuxième chaîne."
+  },
+  {
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[df['note'] >= 20, 'genre']` sélectionne la colonne `genre` seulement pour les lignes dont `note` atteint le seuil.",
+    "correct_answer": true,
+    "explanation": "Avec `.loc`, la première partie filtre les lignes et la seconde choisit la colonne à retourner.",
+    "id": "stress_tres_difficile_02_q02",
+    "stage": "stress_tres_difficile_02",
+    "lesson": "Examen blanc stress Très difficile 02",
+    "topic": "Pandas",
+    "difficulty": 8
+  },
+  {
+    "id": "stress_tres_difficile_02_q03",
+    "stage": "stress_tres_difficile_02",
+    "lesson": "Examen blanc stress Très difficile 02",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 8,
+    "type": "fill_blank",
+    "prompt": "Complète pour lire le texte nettoyé d'un titre.",
+    "code": "titre = bloc.find('h2').get_text(______=True)",
+    "correct_answer": "strip",
+    "explanation": "strip=True retire les espaces autour du texte extrait."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter des cartes de films avec parfois un titre manquant.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour des cartes de films avec parfois un titre manquant, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_tres_difficile_02_q04",
+    "stage": "stress_tres_difficile_02",
+    "lesson": "Examen blanc stress Très difficile 02",
+    "topic": "scraping workflow",
+    "difficulty": 8,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "df = pd.DataFrame(resultats)\ndf['note'] = df['note'].fillna(0)\nmeilleurs = df[df['note'] >= 4]",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Ce code transforme les résultats en DataFrame, remplace les notes absentes par 0, puis garde seulement les lignes dont la note atteint 4. Il combine nettoyage et filtrage.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_tres_difficile_02_q05",
+    "stage": "stress_tres_difficile_02",
+    "lesson": "Examen blanc stress Très difficile 02",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 8,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_tres_difficile_03_q01",
+    "stage": "stress_tres_difficile_03",
+    "lesson": "Examen blanc stress Très difficile 03",
+    "topic": "Python basics",
+    "difficulty": 8,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "produits = ['A', 'B', 'C']\nstocks = [0, 4, 2]\nalerte = []\nfor produit, stock in zip(produits, stocks):\n    if stock <= 2:\n        alerte.append(produit)\nprint(alerte)",
+    "correct_answer": "['A', 'C']",
+    "explanation": "Les stocks 0 et 2 déclenchent l'alerte."
+  },
+  {
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule `max` de `stock` par `rayon` sans changer le DataFrame d'origine ?",
+    "options": [
+      "df.groupby('rayon')['stock'].max()",
+      "df['rayon'].groupby('stock').max()",
+      "df.groupby('stock')['rayon'].max()",
+      "df.max('rayon', 'stock')"
+    ],
+    "correct_answer": "df.groupby('rayon')['stock'].max()",
+    "explanation": "`groupby('rayon')` forme les groupes, puis la colonne `stock` est agrégée avec `max`.",
+    "id": "stress_tres_difficile_03_q02",
+    "stage": "stress_tres_difficile_03",
+    "lesson": "Examen blanc stress Très difficile 03",
+    "topic": "Pandas",
+    "difficulty": 8
+  },
+  {
+    "id": "stress_tres_difficile_03_q03",
+    "stage": "stress_tres_difficile_03",
+    "lesson": "Examen blanc stress Très difficile 03",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 8,
+    "type": "fill_blank",
+    "prompt": "Complète pour lire un lien relatif.",
+    "code": "href = bloc.find('a').get(______)",
+    "correct_answer": "'href'",
+    "explanation": "get('href') lit l'attribut href de la balise a."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter une extraction de liens relatifs sur plusieurs pages.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour une extraction de liens relatifs sur plusieurs pages, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_tres_difficile_03_q04",
+    "stage": "stress_tres_difficile_03",
+    "lesson": "Examen blanc stress Très difficile 03",
+    "topic": "scraping workflow",
+    "difficulty": 8,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "for page in range(1, 4):\n    url = f'{base}?page={page}'\n    soup = BeautifulSoup(requests.get(url).text, 'html.parser')\n    titres.extend([h2.get_text(strip=True) for h2 in soup.find_all('h2')])",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Ce code parcourt trois pages, construit une URL de pagination, parse chaque page et ajoute tous les titres h2 nettoyés à une liste commune.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_tres_difficile_03_q05",
+    "stage": "stress_tres_difficile_03",
+    "lesson": "Examen blanc stress Très difficile 03",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 8,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_tres_difficile_04_q01",
+    "stage": "stress_tres_difficile_04",
+    "lesson": "Examen blanc stress Très difficile 04",
+    "topic": "Python basics",
+    "difficulty": 8,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "def split_total(valeurs):\n    pair = []\n    impair = []\n    for valeur in valeurs:\n        if valeur % 2 == 0:\n            pair.append(valeur)\n        else:\n            impair.append(valeur)\n    return sum(pair), sum(impair)\n\nprint(split_total([3, 4, 8, 5]))",
+    "correct_answer": "(12, 8)",
+    "explanation": "Les pairs 4 et 8 donnent 12 ; les impairs 3 et 5 donnent 8."
+  },
+  {
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[df['age'] >= 22, 'equipe']` sélectionne la colonne `equipe` seulement pour les lignes dont `age` atteint le seuil.",
+    "correct_answer": true,
+    "explanation": "Avec `.loc`, la première partie filtre les lignes et la seconde choisit la colonne à retourner.",
+    "id": "stress_tres_difficile_04_q02",
+    "stage": "stress_tres_difficile_04",
+    "lesson": "Examen blanc stress Très difficile 04",
+    "topic": "Pandas",
+    "difficulty": 8
+  },
+  {
+    "id": "stress_tres_difficile_04_q03",
+    "stage": "stress_tres_difficile_04",
+    "lesson": "Examen blanc stress Très difficile 04",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 8,
+    "type": "fill_blank",
+    "prompt": "Complète pour parser le HTML reçu.",
+    "code": "soup = BeautifulSoup(response.______, 'html.parser')",
+    "correct_answer": "text",
+    "explanation": "response.text contient le HTML à analyser."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter un tableau HTML dont certaines lignes ont moins de cellules.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour un tableau HTML dont certaines lignes ont moins de cellules, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_tres_difficile_04_q04",
+    "stage": "stress_tres_difficile_04",
+    "lesson": "Examen blanc stress Très difficile 04",
+    "topic": "scraping workflow",
+    "difficulty": 8,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "cellules = [td.get_text(strip=True) for td in ligne.find_all('td')]\nif len(cellules) >= 2:\n    donnees.append({'pays': cellules[0], 'population': cellules[1]})",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code transforme une ligne de tableau HTML en liste de textes propres, puis ajoute un dictionnaire seulement si la ligne contient assez de cellules.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_tres_difficile_04_q05",
+    "stage": "stress_tres_difficile_04",
+    "lesson": "Examen blanc stress Très difficile 04",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 8,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_tres_difficile_05_q01",
+    "stage": "stress_tres_difficile_05",
+    "lesson": "Examen blanc stress Très difficile 05",
+    "topic": "Python basics",
+    "difficulty": 8,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "catalogue = {'film': 9, 'livre': 12}\ncle = 'jeu'\nif cle not in catalogue:\n    catalogue[cle] = catalogue['film'] + 1\nprint(catalogue)",
+    "correct_answer": "{'film': 9, 'livre': 12, 'jeu': 10}",
+    "explanation": "La clé jeu est absente, elle est ajoutée avec 9 + 1."
+  },
+  {
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule `mean` de `panier` par `ville` sans changer le DataFrame d'origine ?",
+    "options": [
+      "df.groupby('ville')['panier'].mean()",
+      "df['ville'].groupby('panier').mean()",
+      "df.groupby('panier')['ville'].mean()",
+      "df.mean('ville', 'panier')"
+    ],
+    "correct_answer": "df.groupby('ville')['panier'].mean()",
+    "explanation": "`groupby('ville')` forme les groupes, puis la colonne `panier` est agrégée avec `mean`.",
+    "id": "stress_tres_difficile_05_q02",
+    "stage": "stress_tres_difficile_05",
+    "lesson": "Examen blanc stress Très difficile 05",
+    "topic": "Pandas",
+    "difficulty": 8
+  },
+  {
+    "id": "stress_tres_difficile_05_q03",
+    "stage": "stress_tres_difficile_05",
+    "lesson": "Examen blanc stress Très difficile 05",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 8,
+    "type": "fill_blank",
+    "prompt": "Complète l'argument de classe CSS.",
+    "code": "note = bloc.find('span', ______='rating-small')",
+    "correct_answer": "class_",
+    "explanation": "class_ est la forme Python utilisée pour filtrer l'attribut HTML class."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter une liste de dictionnaires avant création d'un DataFrame.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour une liste de dictionnaires avant création d'un DataFrame, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_tres_difficile_05_q04",
+    "stage": "stress_tres_difficile_05",
+    "lesson": "Examen blanc stress Très difficile 05",
+    "topic": "scraping workflow",
+    "difficulty": 8,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "films = pd.read_csv('films.csv')\nliens = films['url'].dropna().tolist()\nprint(len(liens))",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Ce code réimporte un CSV, enlève les URL manquantes, convertit la colonne en liste et affiche le nombre de liens exploitables.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_tres_difficile_05_q05",
+    "stage": "stress_tres_difficile_05",
+    "lesson": "Examen blanc stress Très difficile 05",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 8,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_tres_difficile_06_q01",
+    "stage": "stress_tres_difficile_06",
+    "lesson": "Examen blanc stress Très difficile 06",
+    "topic": "Python basics",
+    "difficulty": 8,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "mots = ['web', 'data', 'html']\nresultat = ''\nfor mot in mots[1:]:\n    resultat += mot[0].upper()\nprint(resultat)",
+    "correct_answer": "DH",
+    "explanation": "Le slicing garde data et html ; leurs premières lettres mises en majuscule donnent D et H."
+  },
+  {
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[df['delai'] >= 24, 'source']` sélectionne la colonne `source` seulement pour les lignes dont `delai` atteint le seuil.",
+    "correct_answer": true,
+    "explanation": "Avec `.loc`, la première partie filtre les lignes et la seconde choisit la colonne à retourner.",
+    "id": "stress_tres_difficile_06_q02",
+    "stage": "stress_tres_difficile_06",
+    "lesson": "Examen blanc stress Très difficile 06",
+    "topic": "Pandas",
+    "difficulty": 8
+  },
+  {
+    "id": "stress_tres_difficile_06_q03",
+    "stage": "stress_tres_difficile_06",
+    "lesson": "Examen blanc stress Très difficile 06",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 8,
+    "type": "fill_blank",
+    "prompt": "Complète pour récupérer les lignes d'un tableau.",
+    "code": "lignes = tableau.______('tr')",
+    "correct_answer": "find_all",
+    "explanation": "Un tableau contient plusieurs balises tr, donc on utilise find_all."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter un DataFrame avec des notes manquantes après scraping.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour un DataFrame avec des notes manquantes après scraping, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_tres_difficile_06_q04",
+    "stage": "stress_tres_difficile_06",
+    "lesson": "Examen blanc stress Très difficile 06",
+    "topic": "scraping workflow",
+    "difficulty": 8,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "fiche = {}\nfor ligne in soup.find_all('div', class_='meta-row'):\n    cle = ligne.find('span', class_='label')\n    valeur = ligne.find('span', class_='value')\n    if cle and valeur:\n        fiche[cle.get_text(strip=True)] = valeur.get_text(strip=True)",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code construit un dictionnaire de fiche technique en parcourant les lignes de métadonnées et en vérifiant l'existence des libellés et valeurs.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_tres_difficile_06_q05",
+    "stage": "stress_tres_difficile_06",
+    "lesson": "Examen blanc stress Très difficile 06",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 8,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_tres_difficile_07_q01",
+    "stage": "stress_tres_difficile_07",
+    "lesson": "Examen blanc stress Très difficile 07",
+    "topic": "Python basics",
+    "difficulty": 8,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "def seuil(prix, remise):\n    final = prix - remise\n    return final, final < 20\n\nmontant, bas = seuil(27, 9)\nprint(montant, bas)",
+    "correct_answer": "18 True",
+    "explanation": "La fonction renvoie 18 et True, puis les deux valeurs sont affichées."
+  },
+  {
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule `mean` de `prix` par `categorie` sans changer le DataFrame d'origine ?",
+    "options": [
+      "df.groupby('categorie')['prix'].mean()",
+      "df['categorie'].groupby('prix').mean()",
+      "df.groupby('prix')['categorie'].mean()",
+      "df.mean('categorie', 'prix')"
+    ],
+    "correct_answer": "df.groupby('categorie')['prix'].mean()",
+    "explanation": "`groupby('categorie')` forme les groupes, puis la colonne `prix` est agrégée avec `mean`.",
+    "id": "stress_tres_difficile_07_q02",
+    "stage": "stress_tres_difficile_07",
+    "lesson": "Examen blanc stress Très difficile 07",
+    "topic": "Pandas",
+    "difficulty": 8
+  },
+  {
+    "id": "stress_tres_difficile_07_q03",
+    "stage": "stress_tres_difficile_07",
+    "lesson": "Examen blanc stress Très difficile 07",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 8,
+    "type": "fill_blank",
+    "prompt": "Complète pour récupérer les cellules d'une ligne.",
+    "code": "cellules = ligne.______('td')",
+    "correct_answer": "find_all",
+    "explanation": "Chaque ligne peut contenir plusieurs cellules td."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter un CSV réimporté pour choisir un film au hasard.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour un CSV réimporté pour choisir un film au hasard, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_tres_difficile_07_q04",
+    "stage": "stress_tres_difficile_07",
+    "lesson": "Examen blanc stress Très difficile 07",
+    "topic": "scraping workflow",
+    "difficulty": 8,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "df['total'] = df['prix'] * df['quantite']\nresume = df.groupby('categorie')['total'].sum()\nprint(resume.max())",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code calcule une colonne total, agrège les ventes par catégorie, puis affiche la plus grande somme obtenue.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_tres_difficile_07_q05",
+    "stage": "stress_tres_difficile_07",
+    "lesson": "Examen blanc stress Très difficile 07",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 8,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_tres_difficile_08_q01",
+    "stage": "stress_tres_difficile_08",
+    "lesson": "Examen blanc stress Très difficile 08",
+    "topic": "Python basics",
+    "difficulty": 8,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "compte = 1\nhistorique = []\nwhile compte < 10:\n    historique.append(compte)\n    compte *= 3\nprint(historique)",
+    "correct_answer": "[1, 3, 9]",
+    "explanation": "La boucle ajoute 1, 3 et 9 avant que compte devienne 27."
+  },
+  {
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[df['quantite'] >= 26, 'magasin']` sélectionne la colonne `magasin` seulement pour les lignes dont `quantite` atteint le seuil.",
+    "correct_answer": true,
+    "explanation": "Avec `.loc`, la première partie filtre les lignes et la seconde choisit la colonne à retourner.",
+    "id": "stress_tres_difficile_08_q02",
+    "stage": "stress_tres_difficile_08",
+    "lesson": "Examen blanc stress Très difficile 08",
+    "topic": "Pandas",
+    "difficulty": 8
+  },
+  {
+    "id": "stress_tres_difficile_08_q03",
+    "stage": "stress_tres_difficile_08",
+    "lesson": "Examen blanc stress Très difficile 08",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 8,
+    "type": "fill_blank",
+    "prompt": "Complète pour tester le code HTTP.",
+    "code": "if response.______ == 200:\n    soup = BeautifulSoup(response.text, 'html.parser')",
+    "correct_answer": "status_code",
+    "explanation": "status_code permet de vérifier la réponse avant le parsing."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter une boucle de pagination qui accumule les résultats.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour une boucle de pagination qui accumule les résultats, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_tres_difficile_08_q04",
+    "stage": "stress_tres_difficile_08",
+    "lesson": "Examen blanc stress Très difficile 08",
+    "topic": "scraping workflow",
+    "difficulty": 8,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "response = requests.get(url)\nif response.status_code == 200:\n    soup = BeautifulSoup(response.text, 'html.parser')\nelse:\n    soup = None",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code vérifie le statut HTTP avant de parser le HTML. Si la réponse n'est pas correcte, il évite de créer une soupe à partir d'une page d'erreur.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_tres_difficile_08_q05",
+    "stage": "stress_tres_difficile_08",
+    "lesson": "Examen blanc stress Très difficile 08",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 8,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_tres_difficile_09_q01",
+    "stage": "stress_tres_difficile_09",
+    "lesson": "Examen blanc stress Très difficile 09",
+    "topic": "Python basics",
+    "difficulty": 8,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "achats = {'A': [4, 6], 'B': [3]}\nfor cle in achats:\n    achats[cle].append(len(cle) + len(achats[cle]))\nprint(achats['A'])",
+    "correct_answer": "[4, 6, 3]",
+    "explanation": "Pour A, len('A') vaut 1 et la liste a longueur 2, donc on ajoute 3."
+  },
+  {
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule `max` de `score` par `classe` sans changer le DataFrame d'origine ?",
+    "options": [
+      "df.groupby('classe')['score'].max()",
+      "df['classe'].groupby('score').max()",
+      "df.groupby('score')['classe'].max()",
+      "df.max('classe', 'score')"
+    ],
+    "correct_answer": "df.groupby('classe')['score'].max()",
+    "explanation": "`groupby('classe')` forme les groupes, puis la colonne `score` est agrégée avec `max`.",
+    "id": "stress_tres_difficile_09_q02",
+    "stage": "stress_tres_difficile_09",
+    "lesson": "Examen blanc stress Très difficile 09",
+    "topic": "Pandas",
+    "difficulty": 8
+  },
+  {
+    "id": "stress_tres_difficile_09_q03",
+    "stage": "stress_tres_difficile_09",
+    "lesson": "Examen blanc stress Très difficile 09",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 8,
+    "type": "fill_blank",
+    "prompt": "Complète pour trouver une seule fiche technique.",
+    "code": "fiche = soup.______('section', class_='tech-data')",
+    "correct_answer": "find",
+    "explanation": "find renvoie le premier élément correspondant."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter une fiche technique dont les libellés changent selon le film.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour une fiche technique dont les libellés changent selon le film, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_tres_difficile_09_q04",
+    "stage": "stress_tres_difficile_09",
+    "lesson": "Examen blanc stress Très difficile 09",
+    "topic": "scraping workflow",
+    "difficulty": 8,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "notes = []\nfor bloc in blocs:\n    note = bloc.find('span', class_='note')\n    notes.append(note.get_text(strip=True) if note else 'absente')",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code extrait une note quand elle existe et stocke une valeur par défaut sinon, ce qui garde une liste alignée avec les blocs parcourus.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_tres_difficile_09_q05",
+    "stage": "stress_tres_difficile_09",
+    "lesson": "Examen blanc stress Très difficile 09",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 8,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_tres_difficile_10_q01",
+    "stage": "stress_tres_difficile_10",
+    "lesson": "Examen blanc stress Très difficile 10",
+    "topic": "Python basics",
+    "difficulty": 8,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "def normaliser(texte):\n    texte = texte.strip()\n    return texte[:3].lower()\n\nprint(normaliser('  PANDAS '))",
+    "correct_answer": "pan",
+    "explanation": "strip retire les espaces, puis les trois premiers caractères sont mis en minuscules."
+  },
+  {
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[df['marge'] >= 28, 'produit']` sélectionne la colonne `produit` seulement pour les lignes dont `marge` atteint le seuil.",
+    "correct_answer": true,
+    "explanation": "Avec `.loc`, la première partie filtre les lignes et la seconde choisit la colonne à retourner.",
+    "id": "stress_tres_difficile_10_q02",
+    "stage": "stress_tres_difficile_10",
+    "lesson": "Examen blanc stress Très difficile 10",
+    "topic": "Pandas",
+    "difficulty": 8
+  },
+  {
+    "id": "stress_tres_difficile_10_q03",
+    "stage": "stress_tres_difficile_10",
+    "lesson": "Examen blanc stress Très difficile 10",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 8,
+    "type": "fill_blank",
+    "prompt": "Complète pour construire l'URL de pagination.",
+    "code": "url = base + f'?page={______}'",
+    "correct_answer": "page",
+    "explanation": "La variable de boucle page est insérée dans l'URL paginée."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter un contrôle rapide des résultats avant sauvegarde CSV.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour un contrôle rapide des résultats avant sauvegarde CSV, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_tres_difficile_10_q04",
+    "stage": "stress_tres_difficile_10",
+    "lesson": "Examen blanc stress Très difficile 10",
+    "topic": "scraping workflow",
+    "difficulty": 8,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "df = pd.DataFrame(donnees)\nprint(df.shape)\nprint(df.columns)\nprint(df.head())",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code crée un DataFrame puis vérifie sa forme, ses colonnes et ses premières lignes. C'est un contrôle rapide après extraction.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_tres_difficile_10_q05",
+    "stage": "stress_tres_difficile_10",
+    "lesson": "Examen blanc stress Très difficile 10",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 8,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_extra_difficile_01_q01",
+    "stage": "stress_extra_difficile_01",
+    "lesson": "Examen blanc stress Extra difficile 01",
+    "topic": "Python basics",
+    "difficulty": 9,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "articles = [{'nom': 'A', 'prix': 6, 'qte': 4}, {'nom': 'B', 'prix': 11, 'qte': 1}]\nretenus = []\nfor article in articles:\n    total = article['prix'] * article['qte']\n    if total >= 20:\n        retenus.append((article['nom'], total))\nprint(retenus)",
+    "correct_answer": "[('A', 24)]",
+    "explanation": "Seul l'article A atteint le seuil de 20 avec 6 * 4."
+  },
+  {
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule `sum` de `revenu` par `segment` sans changer le DataFrame d'origine ?",
+    "options": [
+      "df.groupby('segment')['revenu'].sum()",
+      "df['segment'].groupby('revenu').sum()",
+      "df.groupby('revenu')['segment'].sum()",
+      "df.sum('segment', 'revenu')"
+    ],
+    "correct_answer": "df.groupby('segment')['revenu'].sum()",
+    "explanation": "`groupby('segment')` forme les groupes, puis la colonne `revenu` est agrégée avec `sum`.",
+    "id": "stress_extra_difficile_01_q02",
+    "stage": "stress_extra_difficile_01",
+    "lesson": "Examen blanc stress Extra difficile 01",
+    "topic": "Pandas",
+    "difficulty": 9
+  },
+  {
+    "id": "stress_extra_difficile_01_q03",
+    "stage": "stress_extra_difficile_01",
+    "lesson": "Examen blanc stress Extra difficile 01",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 9,
+    "type": "fill_blank",
+    "prompt": "Complète pour récupérer les blocs de films.",
+    "code": "blocs = soup.______('li', class_='film-card-x1')",
+    "correct_answer": "find_all",
+    "explanation": "find_all récupère tous les éléments qui correspondent à la balise et à la classe."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter une page qui répond mais dont le tableau attendu est absent.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour une page qui répond mais dont le tableau attendu est absent, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_extra_difficile_01_q04",
+    "stage": "stress_extra_difficile_01",
+    "lesson": "Examen blanc stress Extra difficile 01",
+    "topic": "scraping workflow",
+    "difficulty": 9,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "resultats = []\nfor carte in soup.find_all('li', class_='film-mini'):\n    lien = carte.find('a')\n    titre = carte.find('h2')\n    if lien and titre:\n        resultats.append({'titre': titre.get_text(strip=True), 'url': lien.get('href')})",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Ce code parcourt des cartes de films, vérifie que le lien et le titre existent, puis stocke un dictionnaire par film. C'est une extraction robuste de titres et d'URL relatives.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_extra_difficile_01_q05",
+    "stage": "stress_extra_difficile_01",
+    "lesson": "Examen blanc stress Extra difficile 01",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 9,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_extra_difficile_02_q01",
+    "stage": "stress_extra_difficile_02",
+    "lesson": "Examen blanc stress Extra difficile 02",
+    "topic": "Python basics",
+    "difficulty": 9,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "def resumer(lignes):\n    total = 0\n    noms = []\n    for ligne in lignes:\n        if ligne['actif']:\n            total += ligne['valeur']\n            noms.append(ligne['nom'])\n    return noms, total\n\nprint(resumer([{'nom': 'x', 'valeur': 5, 'actif': True}, {'nom': 'y', 'valeur': 7, 'actif': False}]))",
+    "correct_answer": "(['x'], 5)",
+    "explanation": "La fonction garde seulement la ligne active et renvoie la liste des noms puis le total."
+  },
+  {
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[df['note'] >= 21, 'genre']` sélectionne la colonne `genre` seulement pour les lignes dont `note` atteint le seuil.",
+    "correct_answer": true,
+    "explanation": "Avec `.loc`, la première partie filtre les lignes et la seconde choisit la colonne à retourner.",
+    "id": "stress_extra_difficile_02_q02",
+    "stage": "stress_extra_difficile_02",
+    "lesson": "Examen blanc stress Extra difficile 02",
+    "topic": "Pandas",
+    "difficulty": 9
+  },
+  {
+    "id": "stress_extra_difficile_02_q03",
+    "stage": "stress_extra_difficile_02",
+    "lesson": "Examen blanc stress Extra difficile 02",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 9,
+    "type": "fill_blank",
+    "prompt": "Complète pour lire le texte nettoyé d'un titre.",
+    "code": "titre = bloc.find('h2').get_text(______=True)",
+    "correct_answer": "strip",
+    "explanation": "strip=True retire les espaces autour du texte extrait."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter des cartes de films avec parfois un titre manquant.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour des cartes de films avec parfois un titre manquant, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_extra_difficile_02_q04",
+    "stage": "stress_extra_difficile_02",
+    "lesson": "Examen blanc stress Extra difficile 02",
+    "topic": "scraping workflow",
+    "difficulty": 9,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "df = pd.DataFrame(resultats)\ndf['note'] = df['note'].fillna(0)\nmeilleurs = df[df['note'] >= 4]",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Ce code transforme les résultats en DataFrame, remplace les notes absentes par 0, puis garde seulement les lignes dont la note atteint 4. Il combine nettoyage et filtrage.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_extra_difficile_02_q05",
+    "stage": "stress_extra_difficile_02",
+    "lesson": "Examen blanc stress Extra difficile 02",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 9,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_extra_difficile_03_q01",
+    "stage": "stress_extra_difficile_03",
+    "lesson": "Examen blanc stress Extra difficile 03",
+    "topic": "Python basics",
+    "difficulty": 9,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "colonnes = ['titre', 'note', 'annee']\nvaleurs = ['Film Z', '4.1', '2024']\nfiche = {}\nfor col, val in zip(colonnes, valeurs):\n    fiche[col] = val\nprint(fiche['titre'], float(fiche['note']) > 4)",
+    "correct_answer": "Film Z True",
+    "explanation": "zip construit le dictionnaire, puis la note convertie en float est supérieure à 4."
+  },
+  {
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule `max` de `stock` par `rayon` sans changer le DataFrame d'origine ?",
+    "options": [
+      "df.groupby('rayon')['stock'].max()",
+      "df['rayon'].groupby('stock').max()",
+      "df.groupby('stock')['rayon'].max()",
+      "df.max('rayon', 'stock')"
+    ],
+    "correct_answer": "df.groupby('rayon')['stock'].max()",
+    "explanation": "`groupby('rayon')` forme les groupes, puis la colonne `stock` est agrégée avec `max`.",
+    "id": "stress_extra_difficile_03_q02",
+    "stage": "stress_extra_difficile_03",
+    "lesson": "Examen blanc stress Extra difficile 03",
+    "topic": "Pandas",
+    "difficulty": 9
+  },
+  {
+    "id": "stress_extra_difficile_03_q03",
+    "stage": "stress_extra_difficile_03",
+    "lesson": "Examen blanc stress Extra difficile 03",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 9,
+    "type": "fill_blank",
+    "prompt": "Complète pour lire un lien relatif.",
+    "code": "href = bloc.find('a').get(______)",
+    "correct_answer": "'href'",
+    "explanation": "get('href') lit l'attribut href de la balise a."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter une extraction de liens relatifs sur plusieurs pages.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour une extraction de liens relatifs sur plusieurs pages, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_extra_difficile_03_q04",
+    "stage": "stress_extra_difficile_03",
+    "lesson": "Examen blanc stress Extra difficile 03",
+    "topic": "scraping workflow",
+    "difficulty": 9,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "for page in range(1, 4):\n    url = f'{base}?page={page}'\n    soup = BeautifulSoup(requests.get(url).text, 'html.parser')\n    titres.extend([h2.get_text(strip=True) for h2 in soup.find_all('h2')])",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Ce code parcourt trois pages, construit une URL de pagination, parse chaque page et ajoute tous les titres h2 nettoyés à une liste commune.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_extra_difficile_03_q05",
+    "stage": "stress_extra_difficile_03",
+    "lesson": "Examen blanc stress Extra difficile 03",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 9,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_extra_difficile_04_q01",
+    "stage": "stress_extra_difficile_04",
+    "lesson": "Examen blanc stress Extra difficile 04",
+    "topic": "Python basics",
+    "difficulty": 9,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "pages = []\nfor numero in range(2, 5):\n    pages.append(f'?page={numero}')\nprint('-'.join(pages[-2:]))",
+    "correct_answer": "?page=3-?page=4",
+    "explanation": "Les pages 2, 3 et 4 sont créées ; le slicing garde les deux dernières."
+  },
+  {
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[df['age'] >= 23, 'equipe']` sélectionne la colonne `equipe` seulement pour les lignes dont `age` atteint le seuil.",
+    "correct_answer": true,
+    "explanation": "Avec `.loc`, la première partie filtre les lignes et la seconde choisit la colonne à retourner.",
+    "id": "stress_extra_difficile_04_q02",
+    "stage": "stress_extra_difficile_04",
+    "lesson": "Examen blanc stress Extra difficile 04",
+    "topic": "Pandas",
+    "difficulty": 9
+  },
+  {
+    "id": "stress_extra_difficile_04_q03",
+    "stage": "stress_extra_difficile_04",
+    "lesson": "Examen blanc stress Extra difficile 04",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 9,
+    "type": "fill_blank",
+    "prompt": "Complète pour parser le HTML reçu.",
+    "code": "soup = BeautifulSoup(response.______, 'html.parser')",
+    "correct_answer": "text",
+    "explanation": "response.text contient le HTML à analyser."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter un tableau HTML dont certaines lignes ont moins de cellules.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour un tableau HTML dont certaines lignes ont moins de cellules, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_extra_difficile_04_q04",
+    "stage": "stress_extra_difficile_04",
+    "lesson": "Examen blanc stress Extra difficile 04",
+    "topic": "scraping workflow",
+    "difficulty": 9,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "cellules = [td.get_text(strip=True) for td in ligne.find_all('td')]\nif len(cellules) >= 2:\n    donnees.append({'pays': cellules[0], 'population': cellules[1]})",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code transforme une ligne de tableau HTML en liste de textes propres, puis ajoute un dictionnaire seulement si la ligne contient assez de cellules.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_extra_difficile_04_q05",
+    "stage": "stress_extra_difficile_04",
+    "lesson": "Examen blanc stress Extra difficile 04",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 9,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_extra_difficile_05_q01",
+    "stage": "stress_extra_difficile_05",
+    "lesson": "Examen blanc stress Extra difficile 05",
+    "topic": "Python basics",
+    "difficulty": 9,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "def choisir_note(notes):\n    propres = []\n    for note in notes:\n        if note is not None:\n            propres.append(note)\n    return min(propres), max(propres)\n\nprint(choisir_note([None, 3.8, 4.4, 4.0]))",
+    "correct_answer": "(3.8, 4.4)",
+    "explanation": "La valeur None est ignorée avant de calculer min et max."
+  },
+  {
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule `mean` de `panier` par `ville` sans changer le DataFrame d'origine ?",
+    "options": [
+      "df.groupby('ville')['panier'].mean()",
+      "df['ville'].groupby('panier').mean()",
+      "df.groupby('panier')['ville'].mean()",
+      "df.mean('ville', 'panier')"
+    ],
+    "correct_answer": "df.groupby('ville')['panier'].mean()",
+    "explanation": "`groupby('ville')` forme les groupes, puis la colonne `panier` est agrégée avec `mean`.",
+    "id": "stress_extra_difficile_05_q02",
+    "stage": "stress_extra_difficile_05",
+    "lesson": "Examen blanc stress Extra difficile 05",
+    "topic": "Pandas",
+    "difficulty": 9
+  },
+  {
+    "id": "stress_extra_difficile_05_q03",
+    "stage": "stress_extra_difficile_05",
+    "lesson": "Examen blanc stress Extra difficile 05",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 9,
+    "type": "fill_blank",
+    "prompt": "Complète l'argument de classe CSS.",
+    "code": "note = bloc.find('span', ______='rating-small')",
+    "correct_answer": "class_",
+    "explanation": "class_ est la forme Python utilisée pour filtrer l'attribut HTML class."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter une liste de dictionnaires avant création d'un DataFrame.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour une liste de dictionnaires avant création d'un DataFrame, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_extra_difficile_05_q04",
+    "stage": "stress_extra_difficile_05",
+    "lesson": "Examen blanc stress Extra difficile 05",
+    "topic": "scraping workflow",
+    "difficulty": 9,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "films = pd.read_csv('films.csv')\nliens = films['url'].dropna().tolist()\nprint(len(liens))",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Ce code réimporte un CSV, enlève les URL manquantes, convertit la colonne en liste et affiche le nombre de liens exploitables.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_extra_difficile_05_q05",
+    "stage": "stress_extra_difficile_05",
+    "lesson": "Examen blanc stress Extra difficile 05",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 9,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_extra_difficile_06_q01",
+    "stage": "stress_extra_difficile_06",
+    "lesson": "Examen blanc stress Extra difficile 06",
+    "topic": "Python basics",
+    "difficulty": 9,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "resultats = [{'cat': 'A', 'total': 12}, {'cat': 'B', 'total': 5}, {'cat': 'A', 'total': 8}]\nsynthese = {}\nfor ligne in resultats:\n    synthese[ligne['cat']] = synthese.get(ligne['cat'], 0) + ligne['total']\nprint(synthese)",
+    "correct_answer": "{'A': 20, 'B': 5}",
+    "explanation": "get initialise les catégories absentes à 0 puis additionne les totaux."
+  },
+  {
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[df['delai'] >= 25, 'source']` sélectionne la colonne `source` seulement pour les lignes dont `delai` atteint le seuil.",
+    "correct_answer": true,
+    "explanation": "Avec `.loc`, la première partie filtre les lignes et la seconde choisit la colonne à retourner.",
+    "id": "stress_extra_difficile_06_q02",
+    "stage": "stress_extra_difficile_06",
+    "lesson": "Examen blanc stress Extra difficile 06",
+    "topic": "Pandas",
+    "difficulty": 9
+  },
+  {
+    "id": "stress_extra_difficile_06_q03",
+    "stage": "stress_extra_difficile_06",
+    "lesson": "Examen blanc stress Extra difficile 06",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 9,
+    "type": "fill_blank",
+    "prompt": "Complète pour récupérer les lignes d'un tableau.",
+    "code": "lignes = tableau.______('tr')",
+    "correct_answer": "find_all",
+    "explanation": "Un tableau contient plusieurs balises tr, donc on utilise find_all."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter un DataFrame avec des notes manquantes après scraping.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour un DataFrame avec des notes manquantes après scraping, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_extra_difficile_06_q04",
+    "stage": "stress_extra_difficile_06",
+    "lesson": "Examen blanc stress Extra difficile 06",
+    "topic": "scraping workflow",
+    "difficulty": 9,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "fiche = {}\nfor ligne in soup.find_all('div', class_='meta-row'):\n    cle = ligne.find('span', class_='label')\n    valeur = ligne.find('span', class_='value')\n    if cle and valeur:\n        fiche[cle.get_text(strip=True)] = valeur.get_text(strip=True)",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code construit un dictionnaire de fiche technique en parcourant les lignes de métadonnées et en vérifiant l'existence des libellés et valeurs.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_extra_difficile_06_q05",
+    "stage": "stress_extra_difficile_06",
+    "lesson": "Examen blanc stress Extra difficile 06",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 9,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_extra_difficile_07_q01",
+    "stage": "stress_extra_difficile_07",
+    "lesson": "Examen blanc stress Extra difficile 07",
+    "topic": "Python basics",
+    "difficulty": 9,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "titres = [' Alpha ', 'Beta', ' Gamma']\npropres = []\nfor titre in titres:\n    texte = titre.strip()\n    if texte.startswith('G') or len(texte) == 4:\n        propres.append(texte)\nprint(propreset if False else propres)",
+    "correct_answer": "['Beta', 'Gamma']",
+    "explanation": "Beta a longueur 4 et Gamma commence par G ; le ternaire garde la variable propres."
+  },
+  {
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule `mean` de `prix` par `categorie` sans changer le DataFrame d'origine ?",
+    "options": [
+      "df.groupby('categorie')['prix'].mean()",
+      "df['categorie'].groupby('prix').mean()",
+      "df.groupby('prix')['categorie'].mean()",
+      "df.mean('categorie', 'prix')"
+    ],
+    "correct_answer": "df.groupby('categorie')['prix'].mean()",
+    "explanation": "`groupby('categorie')` forme les groupes, puis la colonne `prix` est agrégée avec `mean`.",
+    "id": "stress_extra_difficile_07_q02",
+    "stage": "stress_extra_difficile_07",
+    "lesson": "Examen blanc stress Extra difficile 07",
+    "topic": "Pandas",
+    "difficulty": 9
+  },
+  {
+    "id": "stress_extra_difficile_07_q03",
+    "stage": "stress_extra_difficile_07",
+    "lesson": "Examen blanc stress Extra difficile 07",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 9,
+    "type": "fill_blank",
+    "prompt": "Complète pour récupérer les cellules d'une ligne.",
+    "code": "cellules = ligne.______('td')",
+    "correct_answer": "find_all",
+    "explanation": "Chaque ligne peut contenir plusieurs cellules td."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter un CSV réimporté pour choisir un film au hasard.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour un CSV réimporté pour choisir un film au hasard, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_extra_difficile_07_q04",
+    "stage": "stress_extra_difficile_07",
+    "lesson": "Examen blanc stress Extra difficile 07",
+    "topic": "scraping workflow",
+    "difficulty": 9,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "df['total'] = df['prix'] * df['quantite']\nresume = df.groupby('categorie')['total'].sum()\nprint(resume.max())",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code calcule une colonne total, agrège les ventes par catégorie, puis affiche la plus grande somme obtenue.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_extra_difficile_07_q05",
+    "stage": "stress_extra_difficile_07",
+    "lesson": "Examen blanc stress Extra difficile 07",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 9,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_extra_difficile_08_q01",
+    "stage": "stress_extra_difficile_08",
+    "lesson": "Examen blanc stress Extra difficile 08",
+    "topic": "Python basics",
+    "difficulty": 9,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "def extraire_ligne(cellules):\n    valeurs = []\n    for cellule in cellules:\n        valeurs.append(cellule.strip())\n    return valeurs[0], int(valeurs[1])\n\nprint(extraire_ligne([' Paris ', ' 2035 ']))",
+    "correct_answer": "('Paris', 2035)",
+    "explanation": "La fonction nettoie deux chaînes puis convertit la deuxième en entier."
+  },
+  {
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[df['quantite'] >= 27, 'magasin']` sélectionne la colonne `magasin` seulement pour les lignes dont `quantite` atteint le seuil.",
+    "correct_answer": true,
+    "explanation": "Avec `.loc`, la première partie filtre les lignes et la seconde choisit la colonne à retourner.",
+    "id": "stress_extra_difficile_08_q02",
+    "stage": "stress_extra_difficile_08",
+    "lesson": "Examen blanc stress Extra difficile 08",
+    "topic": "Pandas",
+    "difficulty": 9
+  },
+  {
+    "id": "stress_extra_difficile_08_q03",
+    "stage": "stress_extra_difficile_08",
+    "lesson": "Examen blanc stress Extra difficile 08",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 9,
+    "type": "fill_blank",
+    "prompt": "Complète pour tester le code HTTP.",
+    "code": "if response.______ == 200:\n    soup = BeautifulSoup(response.text, 'html.parser')",
+    "correct_answer": "status_code",
+    "explanation": "status_code permet de vérifier la réponse avant le parsing."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter une boucle de pagination qui accumule les résultats.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour une boucle de pagination qui accumule les résultats, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_extra_difficile_08_q04",
+    "stage": "stress_extra_difficile_08",
+    "lesson": "Examen blanc stress Extra difficile 08",
+    "topic": "scraping workflow",
+    "difficulty": 9,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "response = requests.get(url)\nif response.status_code == 200:\n    soup = BeautifulSoup(response.text, 'html.parser')\nelse:\n    soup = None",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code vérifie le statut HTTP avant de parser le HTML. Si la réponse n'est pas correcte, il évite de créer une soupe à partir d'une page d'erreur.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_extra_difficile_08_q05",
+    "stage": "stress_extra_difficile_08",
+    "lesson": "Examen blanc stress Extra difficile 08",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 9,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_extra_difficile_09_q01",
+    "stage": "stress_extra_difficile_09",
+    "lesson": "Examen blanc stress Extra difficile 09",
+    "topic": "Python basics",
+    "difficulty": 9,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "urls = ['film-a', 'film-b', 'film-c']\ncompletes = []\nfor idx, url in enumerate(urls):\n    if idx != 1:\n        completes.append('/cinema/' + url)\nprint(completes)",
+    "correct_answer": "['/cinema/film-a', '/cinema/film-c']",
+    "explanation": "L'indice 1 est ignoré, les autres liens sont préfixés."
+  },
+  {
+    "type": "multiple_choice",
+    "prompt": "Quel code calcule `max` de `score` par `classe` sans changer le DataFrame d'origine ?",
+    "options": [
+      "df.groupby('classe')['score'].max()",
+      "df['classe'].groupby('score').max()",
+      "df.groupby('score')['classe'].max()",
+      "df.max('classe', 'score')"
+    ],
+    "correct_answer": "df.groupby('classe')['score'].max()",
+    "explanation": "`groupby('classe')` forme les groupes, puis la colonne `score` est agrégée avec `max`.",
+    "id": "stress_extra_difficile_09_q02",
+    "stage": "stress_extra_difficile_09",
+    "lesson": "Examen blanc stress Extra difficile 09",
+    "topic": "Pandas",
+    "difficulty": 9
+  },
+  {
+    "id": "stress_extra_difficile_09_q03",
+    "stage": "stress_extra_difficile_09",
+    "lesson": "Examen blanc stress Extra difficile 09",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 9,
+    "type": "fill_blank",
+    "prompt": "Complète pour trouver une seule fiche technique.",
+    "code": "fiche = soup.______('section', class_='tech-data')",
+    "correct_answer": "find",
+    "explanation": "find renvoie le premier élément correspondant."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter une fiche technique dont les libellés changent selon le film.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour une fiche technique dont les libellés changent selon le film, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_extra_difficile_09_q04",
+    "stage": "stress_extra_difficile_09",
+    "lesson": "Examen blanc stress Extra difficile 09",
+    "topic": "scraping workflow",
+    "difficulty": 9,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "notes = []\nfor bloc in blocs:\n    note = bloc.find('span', class_='note')\n    notes.append(note.get_text(strip=True) if note else 'absente')",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code extrait une note quand elle existe et stocke une valeur par défaut sinon, ce qui garde une liste alignée avec les blocs parcourus.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_extra_difficile_09_q05",
+    "stage": "stress_extra_difficile_09",
+    "lesson": "Examen blanc stress Extra difficile 09",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 9,
+    "type": "oral_explanation"
+  },
+  {
+    "id": "stress_extra_difficile_10_q01",
+    "stage": "stress_extra_difficile_10",
+    "lesson": "Examen blanc stress Extra difficile 10",
+    "topic": "Python basics",
+    "difficulty": 9,
+    "type": "predict_output",
+    "prompt": "Lis attentivement le code Python. Quelle est la sortie exacte ?",
+    "code": "def bilan(ventes):\n    forts = [v for v in ventes if v >= 10]\n    return len(forts), sum(forts)\n\nprint(bilan([4, 10, 13, 2]))",
+    "correct_answer": "(2, 23)",
+    "explanation": "Deux ventes atteignent 10, et leur somme vaut 23."
+  },
+  {
+    "type": "true_false",
+    "prompt": "Vrai ou faux : `df.loc[df['marge'] >= 29, 'produit']` sélectionne la colonne `produit` seulement pour les lignes dont `marge` atteint le seuil.",
+    "correct_answer": true,
+    "explanation": "Avec `.loc`, la première partie filtre les lignes et la seconde choisit la colonne à retourner.",
+    "id": "stress_extra_difficile_10_q02",
+    "stage": "stress_extra_difficile_10",
+    "lesson": "Examen blanc stress Extra difficile 10",
+    "topic": "Pandas",
+    "difficulty": 9
+  },
+  {
+    "id": "stress_extra_difficile_10_q03",
+    "stage": "stress_extra_difficile_10",
+    "lesson": "Examen blanc stress Extra difficile 10",
+    "topic": "HTML / BeautifulSoup",
+    "difficulty": 9,
+    "type": "fill_blank",
+    "prompt": "Complète pour construire l'URL de pagination.",
+    "code": "url = base + f'?page={______}'",
+    "correct_answer": "page",
+    "explanation": "La variable de boucle page est insérée dans l'URL paginée."
+  },
+  {
+    "prompt": "Explique une démarche fiable pour traiter un contrôle rapide des résultats avant sauvegarde CSV.",
+    "explanation": "La réponse doit proposer un enchaînement concret et contrôlable, en restant dans les outils vus en cours.",
+    "oral_model_answer": "Je commencerais par identifier la structure HTML ou tabulaire utile, puis je testerais chaque élément avant de l'extraire. Pour un contrôle rapide des résultats avant sauvegarde CSV, je garderais une valeur par défaut quand une information manque, j'ajouterais les résultats dans une liste de dictionnaires, puis je vérifierais quelques lignes avant de créer ou sauvegarder le DataFrame.",
+    "grading_checklist": [
+      "Mentionne une vérification avant extraction",
+      "Prévoit le cas d'une donnée absente",
+      "Organise les résultats dans une structure régulière",
+      "Propose une vérification finale simple"
+    ],
+    "id": "stress_extra_difficile_10_q04",
+    "stage": "stress_extra_difficile_10",
+    "lesson": "Examen blanc stress Extra difficile 10",
+    "topic": "scraping workflow",
+    "difficulty": 9,
+    "type": "short_answer"
+  },
+  {
+    "prompt": "Explique oralement le rôle de ce code dans un mini-pipeline de scraping ou d'analyse.",
+    "code": "df = pd.DataFrame(donnees)\nprint(df.shape)\nprint(df.columns)\nprint(df.head())",
+    "explanation": "Une bonne réponse doit relier les lignes de code à une étape du flux de travail et signaler le point de vigilance principal.",
+    "oral_model_answer": "Le code crée un DataFrame puis vérifie sa forme, ses colonnes et ses premières lignes. C'est un contrôle rapide après extraction.",
+    "grading_checklist": [
+      "Identifie l'étape du pipeline",
+      "Explique les structures Python ou Pandas utilisées",
+      "Mentionne la vérification ou le cas limite"
+    ],
+    "id": "stress_extra_difficile_10_q05",
+    "stage": "stress_extra_difficile_10",
+    "lesson": "Examen blanc stress Extra difficile 10",
+    "topic": "integrated oral/practical reasoning",
+    "difficulty": 9,
+    "type": "oral_explanation"
+  }
+]

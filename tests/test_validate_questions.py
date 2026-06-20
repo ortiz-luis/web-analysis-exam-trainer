@@ -10,6 +10,10 @@ from src.validate_questions import (
     EXAM_V2_STAGE_ORDER,
     EXPECTED_STAGE_COUNTS,
     EXPECTED_TOTAL,
+    STRESS_DIFFICULTY_GROUPS,
+    STRESS_EXPECTED_TOTAL,
+    STRESS_STAGE_COUNTS,
+    STRESS_STAGE_ORDER,
     parse_args,
     validate_question_bank,
 )
@@ -180,6 +184,11 @@ class ValidateQuestionsTests(unittest.TestCase):
 
         self.assertTrue(args.exam_v2)
 
+    def test_stress_argument(self) -> None:
+        args = parse_args(["data/exam_mocks_stress.json", "--stress"])
+
+        self.assertTrue(args.stress)
+
     def test_existing_course_bank_is_valid(self) -> None:
         errors = validate_question_bank(Path("data/questions_course.json"))
 
@@ -212,6 +221,59 @@ class ValidateQuestionsTests(unittest.TestCase):
                     self.assertNotIn("correct_answer", question)
                     self.assertIsInstance(question["oral_model_answer"], str)
                     self.assertTrue(question["grading_checklist"])
+
+    def test_stress_bank_is_valid(self) -> None:
+        errors = validate_question_bank(Path("data/exam_mocks_stress.json"), stress=True)
+
+        self.assertEqual(errors, [])
+
+    def test_stress_stage_counts(self) -> None:
+        questions = read_json(Path("data/exam_mocks_stress.json"))
+
+        self.assertEqual(len(questions), STRESS_EXPECTED_TOTAL)
+        self.assertEqual({question["stage"] for question in questions}, set(STRESS_STAGE_ORDER))
+        for stage in STRESS_STAGE_ORDER:
+            count = sum(1 for question in questions if question["stage"] == stage)
+            self.assertEqual(count, STRESS_STAGE_COUNTS[stage])
+
+    def test_stress_has_ten_mocks_per_difficulty(self) -> None:
+        questions = read_json(Path("data/exam_mocks_stress.json"))
+        stages = {question["stage"] for question in questions}
+
+        for group in STRESS_DIFFICULTY_GROUPS:
+            group_stages = [
+                stage for stage in stages if stage.startswith(f"stress_{group}_")
+            ]
+            self.assertEqual(len(group_stages), 10)
+
+    def test_stress_schema_by_type(self) -> None:
+        questions = read_json(Path("data/exam_mocks_stress.json"))
+
+        for question in questions:
+            with self.subTest(question_id=question["id"]):
+                self.assertIn(question["stage"], STRESS_STAGE_ORDER)
+                self.assertTrue(str(question["prompt"]).strip())
+                self.assertTrue(str(question["explanation"]).strip())
+                if question["type"] == "multiple_choice":
+                    self.assertIn(question["correct_answer"], question["options"])
+                if question["type"] == "true_false":
+                    self.assertIsInstance(question["correct_answer"], bool)
+                if question["type"] in {"fill_blank", "predict_output"}:
+                    self.assertIn("correct_answer", question)
+                if question["type"] in {"short_answer", "oral_explanation"}:
+                    self.assertNotIn("correct_answer", question)
+                    self.assertTrue(str(question["oral_model_answer"]).strip())
+                    self.assertTrue(question["grading_checklist"])
+
+    def test_no_duplicate_ids_across_course_v2_and_stress_banks(self) -> None:
+        questions = (
+            read_json(Path("data/questions_course.json"))
+            + read_json(Path("data/exam_mocks_v2.json"))
+            + read_json(Path("data/exam_mocks_stress.json"))
+        )
+        ids = [question["id"] for question in questions]
+
+        self.assertEqual(len(ids), len(set(ids)))
 
     def write_bank(self, questions: list[dict[str, object]]) -> Path:
         directory = tempfile.TemporaryDirectory()

@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 import random
 import sys
+import time
 from pathlib import Path
 from typing import Any
 
@@ -13,6 +14,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 import streamlit as st
+from streamlit.components.v1 import html as st_html
 
 from src.progress import Progress, STAGE_ORDER, get_pending_stage_questions, get_stage_questions
 from src.question_loader import load_questions
@@ -21,6 +23,7 @@ from src.trainer import AUTOMATIC_TYPES, OPEN_ANSWER_TYPES, check_answer, format
 
 QUESTION_FILE = Path("data/questions_course.json")
 EXAM_V2_QUESTION_FILE = Path("data/exam_mocks_v2.json")
+STRESS_QUESTION_FILE = Path("data/exam_mocks_stress.json")
 PROGRESS_FILE = Path("streamlit_progress.json")
 PROGRESS_MODE_ENV = "WEB_TRAINER_PROGRESS_MODE"
 CLOUD_PROGRESS_MODE = "cloud"
@@ -28,11 +31,24 @@ GUIDED_MODE = "Parcours guidé"
 STAGE_MODE = "Pratique par étape"
 RANDOM_MODE = "Série aléatoire"
 MOCK_MODE = "Examen blanc"
-MODES = [GUIDED_MODE, STAGE_MODE, RANDOM_MODE, MOCK_MODE]
+STRESS_MODE = "Examen blanc stress"
+MODES = [GUIDED_MODE, STAGE_MODE, RANDOM_MODE, MOCK_MODE, STRESS_MODE]
 MOCK_STAGES = [f"exam_mock_{index:02d}" for index in range(1, 11)]
 EXAM_V2_STAGES = [f"exam_v2_{index:02d}" for index in range(1, 21)]
 MOCK_BATTERY_V1 = "Batterie V1"
 MOCK_BATTERY_V2 = "Batterie V2"
+STRESS_DIFFICULTIES = {
+    "Difficile": "difficile",
+    "Très difficile": "tres_difficile",
+    "Extra difficile": "extra_difficile",
+}
+STRESS_MOCK_NUMBERS = [f"{index:02d}" for index in range(1, 11)]
+TIMER_OPTIONS = {
+    "Désactivé": None,
+    "30 secondes": 30,
+    "45 secondes": 45,
+    "60 secondes": 60,
+}
 
 
 def main() -> None:
@@ -41,17 +57,18 @@ def main() -> None:
 
     questions = load_questions(QUESTION_FILE)
     exam_v2_questions = load_questions(EXAM_V2_QUESTION_FILE)
+    stress_questions = load_questions(STRESS_QUESTION_FILE)
     progress = load_streamlit_progress()
     questions_by_id = {
         question["id"]: question
-        for question in questions + exam_v2_questions
+        for question in questions + exam_v2_questions + stress_questions
     }
 
     controls = render_sidebar(questions, progress)
     if controls["reset_progress"]:
         reset_progress()
 
-    context = build_context(questions, exam_v2_questions, progress, controls)
+    context = build_context(questions, exam_v2_questions, stress_questions, progress, controls)
     st.caption(context["label"])
 
     if controls["restart_session"] or should_start_session(context["key"]):
@@ -73,6 +90,7 @@ def main() -> None:
 
     question = questions_by_id[queue[0]]
     render_header(question, context)
+    render_timer(context, question["id"])
     render_question(question)
     render_answer_controls(question, progress, context)
 
@@ -150,6 +168,16 @@ def render_sidebar(
     mock_battery = st.sidebar.radio("Batterie d'examens", [MOCK_BATTERY_V1, MOCK_BATTERY_V2])
     mock_stage_options = EXAM_V2_STAGES if mock_battery == MOCK_BATTERY_V2 else MOCK_STAGES
     selected_mock = st.sidebar.selectbox("Examen blanc", mock_stage_options)
+    stress_difficulty = st.sidebar.selectbox(
+        "Difficulté stress",
+        list(STRESS_DIFFICULTIES.keys()),
+    )
+    stress_mock_number = st.sidebar.selectbox("Mock stress", STRESS_MOCK_NUMBERS)
+    stress_timer_label = st.sidebar.selectbox(
+        "Timer stress",
+        list(TIMER_OPTIONS.keys()),
+        index=2,
+    )
 
     new_random_series = st.sidebar.button("Nouvelle série aléatoire")
     restart_session = st.sidebar.button("Démarrer / redémarrer la session")
@@ -165,6 +193,10 @@ def render_sidebar(
         "random_count": int(random_count),
         "mock_battery": mock_battery,
         "selected_mock": selected_mock,
+        "stress_difficulty": stress_difficulty,
+        "stress_mock_number": stress_mock_number,
+        "stress_timer_label": stress_timer_label,
+        "stress_timer_seconds": TIMER_OPTIONS[stress_timer_label],
         "new_random_series": new_random_series,
         "restart_session": restart_session,
         "reset_progress": reset_progress_button,
@@ -183,6 +215,7 @@ def reset_progress() -> None:
 def build_context(
     questions: list[dict[str, Any]],
     exam_v2_questions: list[dict[str, Any]],
+    stress_questions: list[dict[str, Any]],
     progress: Progress | SessionProgress,
     controls: dict[str, Any],
 ) -> dict[str, Any]:
@@ -234,6 +267,29 @@ def build_context(
             "auto_finish": True,
         }
 
+    if mode == STRESS_MODE:
+        difficulty_label = controls["stress_difficulty"]
+        difficulty_slug = STRESS_DIFFICULTIES[difficulty_label]
+        mock_number = controls["stress_mock_number"]
+        stress_stage = f"stress_{difficulty_slug}_{mock_number}"
+        stress_mock_questions = get_stage_questions(stress_questions, stress_stage)
+        timer_label = controls["stress_timer_label"]
+        return {
+            "key": f"{STRESS_MODE}:{stress_stage}:{timer_label}",
+            "mode": mode,
+            "label": (
+                f"Mode actuel : {mode} | Difficulté : {difficulty_label} | "
+                f"Mock : {mock_number} | Timer : {timer_label}"
+            ),
+            "question_ids": [question["id"] for question in stress_mock_questions],
+            "repeat_wrong": False,
+            "auto_finish": True,
+            "timer_seconds": controls["stress_timer_seconds"],
+            "timer_label": timer_label,
+            "stress_difficulty": difficulty_label,
+            "stress_mock": mock_number,
+        }
+
     mock_stage = controls["selected_mock"]
     mock_battery = controls["mock_battery"]
     mock_bank = exam_v2_questions if mock_battery == MOCK_BATTERY_V2 else questions
@@ -278,6 +334,11 @@ def start_session(context: dict[str, Any]) -> None:
     st.session_state["correct_answers"] = 0
     st.session_state["incorrect_answers"] = 0
     st.session_state["session_finished"] = False
+    st.session_state["timer_seconds"] = context.get("timer_seconds")
+    st.session_state["timer_label"] = context.get("timer_label")
+    st.session_state["stress_difficulty"] = context.get("stress_difficulty")
+    st.session_state["stress_mock"] = context.get("stress_mock")
+    reset_question_timer()
 
 
 def render_session_summary_button() -> None:
@@ -309,11 +370,99 @@ def render_session_grade() -> None:
     score = round(20 * correct / attempted, 1)
     percentage = round(100 * correct / attempted, 1)
     st.subheader("Bilan de session")
+    if st.session_state.get("session_mode") == STRESS_MODE:
+        st.write(f"Difficulté : {st.session_state.get('stress_difficulty')}")
+        st.write(f"Mock sélectionné : {st.session_state.get('stress_mock')}")
+        st.write(f"Timer : {st.session_state.get('timer_label')}")
     st.write(f"Nombre de questions répondues : {attempted}")
     st.write(f"Nombre de réponses correctes : {correct}")
     st.write(f"Nombre de réponses incorrectes : {incorrect}")
     st.write(f"Note finale sur 20 : {score}")
     st.write(f"Percentage score : {percentage}%")
+
+
+def render_timer(context: dict[str, Any], question_id: str) -> None:
+    timer_seconds = context.get("timer_seconds")
+    if not timer_seconds:
+        return
+
+    ensure_question_timer(question_id)
+    deadline = st.session_state["question_started_at"] + timer_seconds
+    remaining = max(0, int(deadline - time.time()))
+    if remaining == 0:
+        st.warning("Temps écoulé.")
+
+    deadline_ms = int(deadline * 1000)
+    st_html(
+        f"""
+        <div id="stress-timer" style="
+            font-size: 42px;
+            font-weight: 800;
+            line-height: 1.1;
+            padding: 10px 0 4px 0;
+            color: #1f2937;
+        "></div>
+        <div id="stress-timeout" style="
+            font-size: 18px;
+            font-weight: 700;
+            color: #b91c1c;
+            min-height: 24px;
+        "></div>
+        <style>
+        @keyframes stressPulse {{
+            0% {{ transform: scale(1); opacity: 1; }}
+            50% {{ transform: scale(1.08); opacity: 0.55; }}
+            100% {{ transform: scale(1); opacity: 1; }}
+        }}
+        .stress-pulse {{
+            color: #b91c1c !important;
+            animation: stressPulse 0.7s infinite;
+        }}
+        </style>
+        <script>
+        const deadline = {deadline_ms};
+        const timer = document.getElementById("stress-timer");
+        const timeout = document.getElementById("stress-timeout");
+        function updateTimer() {{
+            const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+            timer.textContent = remaining + " s";
+            if (remaining <= 5) {{
+                timer.classList.add("stress-pulse");
+            }}
+            if (remaining === 0) {{
+                timeout.textContent = "Temps écoulé";
+            }}
+        }}
+        updateTimer();
+        setInterval(updateTimer, 250);
+        </script>
+        """,
+        height=98,
+    )
+
+
+def ensure_question_timer(question_id: str) -> None:
+    if st.session_state.get("timer_question_id") != question_id:
+        st.session_state["timer_question_id"] = question_id
+        st.session_state["question_started_at"] = time.time()
+
+
+def reset_question_timer() -> None:
+    queue = st.session_state.get("question_queue", [])
+    if queue:
+        st.session_state["timer_question_id"] = queue[0]
+        st.session_state["question_started_at"] = time.time()
+    else:
+        st.session_state.pop("timer_question_id", None)
+        st.session_state.pop("question_started_at", None)
+
+
+def is_question_timed_out(context: dict[str, Any]) -> bool:
+    timer_seconds = context.get("timer_seconds")
+    started_at = st.session_state.get("question_started_at")
+    if not timer_seconds or started_at is None:
+        return False
+    return time.time() >= started_at + timer_seconds
 
 
 def render_header(question: dict[str, Any], context: dict[str, Any]) -> None:
@@ -363,7 +512,10 @@ def render_automatic_question(
     if not submitted:
         return
 
-    is_correct = check_answer(question, answer)
+    timed_out = is_question_timed_out(context)
+    if timed_out:
+        st.warning("Temps écoulé : la réponse est comptée comme incorrecte.")
+    is_correct = False if timed_out else check_answer(question, answer)
     record_answer(question, progress, is_correct)
     render_answer_feedback("correct" if is_correct else "wrong", question)
     advance_queue(is_correct)
@@ -412,14 +564,20 @@ def render_open_question(
     col_correct, col_wrong = st.columns(2)
     with col_correct:
         if st.button("Correct", key=f"correct_{question['id']}"):
-            record_answer(question, progress, True)
-            render_answer_feedback("correct", question)
-            advance_queue(True)
+            timed_out = is_question_timed_out(context)
+            if timed_out:
+                st.warning("Temps écoulé : la réponse est comptée comme incorrecte.")
+            is_correct = not timed_out
+            record_answer(question, progress, is_correct)
+            render_answer_feedback("correct" if is_correct else "wrong", question)
+            advance_queue(is_correct)
             finish_if_needed(context)
             wait_for_next_question()
 
     with col_wrong:
         if st.button("Incorrect", key=f"wrong_{question['id']}"):
+            if is_question_timed_out(context):
+                st.warning("Temps écoulé.")
             record_answer(question, progress, False)
             render_answer_feedback("wrong", question)
             advance_queue(False)
@@ -466,6 +624,7 @@ def render_answer_feedback(result: str, question: dict[str, Any]) -> None:
 def wait_for_next_question() -> None:
     label = "Voir la note" if st.session_state.get("session_finished") else "Question suivante"
     if st.button(label):
+        reset_question_timer()
         st.rerun()
     st.stop()
 
